@@ -28,12 +28,6 @@
         ]
     },
     {
-        "id": "nav-3",
-        "title": "Blogs",
-        "href": "/blogs",
-        "submenu": []
-    },
-    {
         "id": "nav-4",
         "title": "About",
         "href": "/about",
@@ -43,6 +37,12 @@
         "id": "nav-5",
         "title": "Contact",
         "href": "/contact",
+        "submenu": []
+    },
+    {
+        "id": "nav-3",
+        "title": "Blogs",
+        "href": "/blogs",
         "submenu": []
     }
 ]

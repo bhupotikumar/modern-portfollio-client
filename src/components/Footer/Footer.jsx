@@ -1,7 +1,6 @@
-import { Link } from 'react-router';
 import iconPic from '../../assets/my-icon-merged.jpg'
-import { FaFacebook, FaInstagram, FaLinkedin, FaLocationArrow, FaWhatsapp, FaYoutube } from 'react-icons/fa';
-import { FaLocationDot, FaMapLocation } from 'react-icons/fa6';
+import { FaLocationDot } from 'react-icons/fa6';
+import SocialLinks from '../SocialLinks/SocialLinks';
 const Footer = () => {
     return (
         <footer>
@@ -12,13 +11,8 @@ const Footer = () => {
                         <br />
                         <span className='text-sm md:text-base font-normal'>Frontend Developer building modern web experiences.</span>
                     </p>
-                    <nav className='flex flex-wrap text-2xl gap-3 mx-auto md:mx-0'>
-                        <Link><FaLinkedin /></Link>
-                        <Link><FaFacebook /></Link>
-                        <Link><FaInstagram /></Link>
-                        <Link><FaWhatsapp /></Link>
-                        <Link><FaYoutube /></Link>
-                        <Link><FaFacebook /></Link>
+                    <nav className='mx-auto md:mx-0'>
+                        <SocialLinks />
                     </nav>
                     <div className="flex items-center gap-2 mx-auto md:mx-0">
                         <FaLocationDot />

@@ -1,12 +1,11 @@
-import React from 'react';
-import image from '../../assets/my-icon-merged.jpg'
 import Hero from '../../components/Hero/Hero';
+import Skills from '../../components/Skills/Skills';
 
 const HomePage = () => {
     return (
         <div>
             <Hero />
-            <img src={image} alt="" />
+            <Skills />
         </div>
     );
 };
