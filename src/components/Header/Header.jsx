@@ -1,85 +1,127 @@
-import React from 'react';
+import { useEffect, useRef, useState } from 'react';
 import useTheme from '../../utils/useTheme';
+import { Link, NavLink } from 'react-router';
+import { GoSun } from 'react-icons/go';
+import { MdDarkMode } from 'react-icons/md';
 
 const Header = () => {
     const { theme, toggleTheme } = useTheme();
+    const [menuOpen, setMenuOpen] = useState(false);
+    const [links, setLinks] = useState([]);
+    const dropdownRef = useRef(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setMenuOpen(false);
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
+    useEffect(() => {
+        fetch("./navlinks.json")
+            .then(res => res.json())
+            .then(data => setLinks(data))
+            .catch(err => console.log(err))
+    }, []);
 
     return (
         <div className="navbar bg-base-100 shadow-sm">
-            <div className="navbar-start">
-                <div className="dropdown">
-                    <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /> </svg>
-                    </div>
-                    <ul
-                        tabIndex="-1"
-                        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-                        <li><a>Item 1</a></li>
-                        <li>
-                            <a>Parent</a>
-                            <ul className="p-2">
-                                <li><a>Submenu 1</a></li>
-                                <li><a>Submenu 2</a></li>
-                            </ul>
-                        </li>
-                        <li><a>Item 3</a></li>
-                    </ul>
+            <div className="navbar-start md:ml-4">
+                <div className="dropdown relative" ref={dropdownRef}>
+                    {/* Swap Hamburger/Close */}
+                    <button
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            setMenuOpen(!menuOpen);
+                        }}
+                        className="mr-2 lg:hidden"
+                    >
+                        <div className="swap swap-rotate">
+                            <input type="checkbox" checked={menuOpen} readOnly />
+
+                            {/* Hamburger */}
+                            <svg
+                                className="swap-off w-5 h-5 fill-current"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                            >
+                                <path stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h8m-8 6h16" />
+                            </svg>
+
+                            {/* Close */}
+                            <svg
+                                className="swap-on w-5 h-5 fill-current"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                            >
+                                <path stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </div>
+                    </button>
+
+                    {/* Dropdown Menu */}
+                    {menuOpen && (
+                        <div className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 absolute z-50">
+                            {links.map(link => (
+                                <NavLink
+                                    key={link.id}
+                                    to={link.href}
+                                    end={link.href === "/"} // important for home route
+                                    className={({ isActive }) =>
+                                        `nav-link mx-2 font-semibold ${isActive ? "active" : ""}`
+                                    }
+                                >
+                                    {link.title}
+                                </NavLink>
+                            ))}
+                        </div>
+                    )}
                 </div>
-                <a className="btn btn-ghost text-xl">daisyUI</a>
+
+                <Link to={"/"} className="text-sm md:text-xl font-semibold md:font-bold">Bhupoti Kumar Roy</Link>
             </div>
+
+            {/* Navbar Center - Desktop Menu */}
             <div className="navbar-center hidden lg:flex">
-                <ul className="menu menu-horizontal px-1">
-                    <li><a>Item 1</a></li>
-                    <li>
-                        <details>
-                            <summary>Parent</summary>
-                            <ul className="p-2 bg-base-100 w-40 z-1">
-                                <li><a>Submenu 1</a></li>
-                                <li><a>Submenu 2</a></li>
-                            </ul>
-                        </details>
-                    </li>
-                    <li><a>Item 3</a></li>
-                </ul>
+                {links.map(link => (
+                    <NavLink
+                        key={link.id}
+                        to={link.href}
+                        end={link.href === "/"} // important for home route
+                        className={({ isActive }) =>
+                            `nav-link mx-2 font-semibold ${isActive ? "active" : ""}`
+                        }
+                    >
+                        {link.title}
+                    </NavLink>
+                ))}
             </div>
-            <div className="navbar-end">
-                <label className="flex cursor-pointer gap-2">
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round">
-                        <circle cx="12" cy="12" r="5" />
-                        <path
-                            d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4" />
-                    </svg>
+
+            {/* Navbar End - Theme Toggle */}
+            <div className="navbar-end md:mr-4">
+                <label className="flex cursor-pointer gap-1 md:gap-2 items-center">
+                    {/* Sun Icon */}
+                    <GoSun />
+
+                    {/* Toggle */}
                     <input
                         type="checkbox"
-                        value="dark"
                         checked={theme === "dark"}
                         onChange={toggleTheme}
-                        className="toggle theme-controller"
+                        className="toggle"
                     />
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round">
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                    </svg>
+
+                    {/* Moon Icon */}
+                    <MdDarkMode />
                 </label>
             </div>
-        </div>
+        </div >
     );
 };
 

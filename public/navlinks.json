@@ -1,0 +1,48 @@
+[
+    {
+        "id": "nav-1",
+        "title": "Home",
+        "href": "/",
+        "submenu": []
+    },
+    {
+        "id": "nav-2",
+        "title": "Projects",
+        "href": "/projects",
+        "submenu": [
+            {
+                "id": "nav-2-1",
+                "title": "Web Apps",
+                "href": "/projects/web"
+            },
+            {
+                "id": "nav-2-2",
+                "title": "Mobile Apps",
+                "href": "/projects/mobile"
+            },
+            {
+                "id": "nav-2-3",
+                "title": "UI/UX Designs",
+                "href": "/projects/uiux"
+            }
+        ]
+    },
+    {
+        "id": "nav-3",
+        "title": "Blogs",
+        "href": "/blogs",
+        "submenu": []
+    },
+    {
+        "id": "nav-4",
+        "title": "About",
+        "href": "/about",
+        "submenu": []
+    },
+    {
+        "id": "nav-5",
+        "title": "Contact",
+        "href": "/contact",
+        "submenu": []
+    }
+]
