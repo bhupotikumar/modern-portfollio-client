@@ -7,7 +7,7 @@ const Tools = ({ toolsData }) => {
     const { title, skills } = toolsData;
     return (
         <div>
-            <h1 className='text-center font-bold text-3xl my-4'>{title} Skills</h1>
+            <h1 className='text-center font-bold text-xl md:text-2xl lg:text-3xl my-2 md:my-4'>{title} Skills</h1>
             <div className="w-full">
                 <Marquee
                     speed={100}

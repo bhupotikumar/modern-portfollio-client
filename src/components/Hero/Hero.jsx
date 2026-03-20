@@ -22,7 +22,9 @@ const Hero = () => {
                         I build modern, responsive, and user-friendly web applications using React, Tailwind, Firebase, Express, MongoDB.
                     </p>
                     <button className="btn btn-primary mb-6">Download CV</button>
-                    <SocialLinks />
+                    <div className="flex justify-center md:justify-start">
+                        <SocialLinks />
+                    </div>
                 </div>
             </div>
         </div>

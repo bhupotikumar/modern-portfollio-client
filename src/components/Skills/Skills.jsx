@@ -10,7 +10,8 @@ const Skills = () => {
     useEffect(() => {
         fetch("/skills.json")
             .then((res) => res.json())
-            .then((data) => setSkillsData(data));
+            .then((data) => setSkillsData(data))
+            .catch((err) => console.error(err));
     }, []);
 
     const frontendData = skillsData.find((s) => s.id === "frontend");
