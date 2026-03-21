@@ -1,16 +1,19 @@
-import React from 'react';
-import { FaFacebook, FaInstagram, FaLinkedin, FaWhatsapp, FaYoutube } from 'react-icons/fa';
-import { Link } from 'react-router';
+import { FaXTwitter } from 'react-icons/fa6';
+import { FiYoutube } from 'react-icons/fi';
+import { ImWhatsapp } from 'react-icons/im';
+import { LuFacebook } from 'react-icons/lu';
+import { SlSocialInstagram, SlSocialLinkedin } from 'react-icons/sl';
+import AnimatedBtn from '../AnimatedBtn/AnimatedBtn';
 
 const SocialLinks = () => {
     return (
-        <div className='flex flex-wrap text-2xl gap-3'>
-            <Link><FaLinkedin /></Link>
-            <Link><FaFacebook /></Link>
-            <Link><FaInstagram /></Link>
-            <Link><FaWhatsapp /></Link>
-            <Link><FaYoutube /></Link>
-            <Link><FaFacebook /></Link>
+        <div className='flex flex-wrap gap-3'>
+            <AnimatedBtn className="rounded-full w-12 h-12 p-1 text-base-content border-base-content"><SlSocialLinkedin size={20} /></AnimatedBtn>
+            <AnimatedBtn className="rounded-full w-12 h-12 p-1 text-base-content border-base-content"><LuFacebook size={20} /></AnimatedBtn>
+            <AnimatedBtn className="rounded-full w-12 h-12 p-1 text-base-content border-base-content"><SlSocialInstagram size={20} /></AnimatedBtn>
+            <AnimatedBtn className="rounded-full w-12 h-12 p-1 text-base-content border-base-content"><ImWhatsapp size={20} /></AnimatedBtn>
+            <AnimatedBtn className="rounded-full w-12 h-12 p-1 text-base-content border-base-content"><FiYoutube size={20} /></AnimatedBtn>
+            <AnimatedBtn className="rounded-full w-12 h-12 p-1 text-base-content border-base-content"><FaXTwitter size={20} /></AnimatedBtn>
         </div>
     );
 };

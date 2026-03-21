@@ -11,6 +11,7 @@ const Footer = () => {
                         <br />
                         <span className='text-sm md:text-base font-normal'>Frontend Developer building modern web experiences.</span>
                     </p>
+                    <div className="divider"></div>
                     <nav className='mx-auto md:mx-0'>
                         <SocialLinks />
                     </nav>

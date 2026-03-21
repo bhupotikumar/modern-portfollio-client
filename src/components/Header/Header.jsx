@@ -31,7 +31,7 @@ const Header = () => {
     }, []);
 
     return (
-        <div className="navbar shadow-sm sticky top-0 left-0 z-100 bg-transparent backdrop-blur-2xl">
+        <div className="primary-font navbar shadow-sm sticky top-0 left-0 z-100 bg-transparent backdrop-blur-2xl">
             <div className="navbar-start md:ml-4">
                 <div className="dropdown relative" ref={dropdownRef}>
                     {/* Swap Hamburger/Close */}

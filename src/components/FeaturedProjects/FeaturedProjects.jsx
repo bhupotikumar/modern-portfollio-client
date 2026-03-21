@@ -22,7 +22,7 @@ const FeaturedProjects = () => {
                 {featuredProjects.map((project, index) => (
                     <div
                         key={project.id}
-                        className="sticky top-28 border rounded-lg border-gray-200"
+                        className="w-full sticky top-28 rounded-lg hover-3d"
                         style={{
                             top: `${120 + index * 30}px`,
                             transform: `translateX(${index * 10}px)`,
