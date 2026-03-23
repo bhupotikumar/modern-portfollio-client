@@ -5,6 +5,9 @@ import ProjectPage from '../pages/ProjectsPage/ProjectsPage'
 import AboutPage from '../pages/AboutPage/AboutPage'
 import ContactPage from '../pages/ContactPage/ContactPage'
 import BlogsPage from '../pages/BlogsPage/BlogsPage'
+import AdminRoute from './AdminRoute';
+import AdminPanel from '../pages/AdminPanel/AdminPanel';
+import LoginForm from '../components/admin/Form/LoginForm';
 
 export const router = createBrowserRouter([
     {
@@ -30,7 +33,17 @@ export const router = createBrowserRouter([
             {
                 path: "blogs",
                 Component: BlogsPage
-            }
+            },
         ]
+    },
+    {
+        path: "login",
+        Component: LoginForm
+    },
+    {
+        path: "admin",
+        element: <AdminRoute>
+            <AdminPanel />
+        </AdminRoute>
     }
 ]);
