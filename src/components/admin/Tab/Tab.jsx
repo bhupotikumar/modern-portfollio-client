@@ -12,7 +12,7 @@ const Tab = ({ tabs = [], name = "tabs" }) => {
                         aria-label={tabs.label}
                         defaultChecked={index === 0}
                     />
-                    <div className="tab-content bg-base-100 border border-base-content p-6">
+                    <div className="tab-content bg-base-100 border border-base-content p-6 max-h-[80vh] overflow-auto">
                         {tabs.content}
                     </div>
                 </React.Fragment>
