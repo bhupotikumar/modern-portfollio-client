@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import FeaturedProjectCard from './FeaturedProjectCard';
 
 const FeaturedProjects = () => {
     const [featuredProjects, setFeaturedProjects] = useState([]);
     useEffect(() => {
-        fetch("./projects.json")
+        fetch("/projects.json")
             .then(res => res.json())
             .then(data => {
                 const featured = data.filter((project) => project.featured);

@@ -8,6 +8,8 @@ import BlogsPage from '../pages/BlogsPage/BlogsPage'
 import AdminRoute from './AdminRoute';
 import AdminPanel from '../pages/AdminPanel/AdminPanel';
 import LoginForm from '../components/admin/Form/LoginForm';
+import Dashboard from '../pages/AdminPanel/Dashboard/Dashboard';
+import Projects from '../pages/AdminPanel/Projects/Projects';
 
 export const router = createBrowserRouter([
     {
@@ -42,8 +44,26 @@ export const router = createBrowserRouter([
     },
     {
         path: "admin",
-        element: <AdminRoute>
+        element: (<AdminRoute>
             <AdminPanel />
-        </AdminRoute>
+        </AdminRoute>),
+        children: [
+            {
+                index: true,
+                Component: Dashboard
+            },
+            {
+                path: "projects",
+                Component: Projects
+            },
+            {
+                path: "skills",
+                Component: Dashboard
+            },
+            {
+                path: "setting",
+                Component: Dashboard
+            }
+        ]
     }
 ]);
