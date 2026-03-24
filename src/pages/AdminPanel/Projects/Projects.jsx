@@ -39,7 +39,7 @@ const Projects = () => {
                 formData.append("tech", form.techStack.join(","));
             }
 
-            const res = await api.post("/api/projects", formData, {
+            const res = await api.post("/projects", formData, {
                 headers: {
                     "Content-Type": "multipart/form-data", // important for file uploads
                 },
