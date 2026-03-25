@@ -1,127 +1,148 @@
-import { useEffect, useState } from 'react';
-import api from '../../../api/axios';
+import { useEffect, useState } from "react";
+import api from "../../../api/axios.js";
+import FormBlock from "./FormBlock.jsx";
 
 const General = () => {
-    const [title, setTitle] = useState('');
-    const [photo, setPhoto] = useState('');
+    const [user, setUser] = useState(null);
 
-    const [loadingTitle, setLoadingTitle] = useState(false);
-    const [loadingPhoto, setLoadingPhoto] = useState(false);
+    const [name, setName] = useState("");
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
+    const [photo, setPhoto] = useState("");
 
-    const [isFetching, setIsFetching] = useState(true);
+    const [loading, setLoading] = useState(false);
+    const [loadingType, setLoadingType] = useState(null);
 
-    // Fetch existing data on mount
     useEffect(() => {
-        const fetchData = async () => {
+        const fetchUser = async () => {
             try {
-                setIsFetching(true);
-                const [titleRes, photoRes] = await Promise.all([
-                    api.get('/site-title'),
-                    api.get('/site-photo'),
-                ]);
+                const res = await api.get("/user");
+                const data = res.data;
 
-                setTitle(titleRes.data.title || '');
-                setPhoto(photoRes.data.photo || '');
+                setUser(data);
+
+                setName(data?.name?.name || "");
+                setTitle(data?.title?.title || "");
+                setDescription(data?.description?.description || "");
+                setPhoto(data?.photo?.photo || "");
             } catch (error) {
                 console.error(error);
-                alert('Failed to fetch site data');
-            } finally {
-                setIsFetching(false);
             }
         };
 
-        fetchData();
+        fetchUser();
     }, []);
 
-    // Generic update handler
     const handleUpdate = async (type) => {
+        setLoadingType(type); // 🔥 track which field is loading
+
         try {
-            if (type === 'title') setLoadingTitle(true);
-            if (type === 'photo') setLoadingPhoto(true);
+            let payload = {};
+            let endpoint = "";
 
-            const payload = type === 'title' ? { title } : { photo };
-            const endpoint = type === 'title' ? '/site-title' : '/site-photo';
+            switch (type) {
+                case "name":
+                    payload = { name };
+                    endpoint = "/user/user-name";
+                    break;
 
-            const res = await api.put(endpoint, payload);
-            alert(`${type === 'title' ? 'Title' : 'Photo'} updated successfully!`);
-            console.log(`${type} updated:`, res.data);
+                case "title":
+                    payload = { title };
+                    endpoint = "/user/user-title";
+                    break;
+
+                case "description":
+                    payload = { description };
+                    endpoint = "/user/user-description";
+                    break;
+
+                case "photo":
+                    payload = { photo };
+                    endpoint = "/user/user-photo";
+                    break;
+
+                default:
+                    return;
+            }
+
+            const res = await api.patch(endpoint, payload);
+
+            setUser(prev => ({
+                ...prev,
+                [type]: { ...prev[type], ...payload }
+            }));
+
+            alert(`${type} updated successfully`);
+            console.log(res.data);
+
         } catch (error) {
             console.error(error);
             alert(`Failed to update ${type}`);
         } finally {
-            if (type === 'title') setLoadingTitle(false);
-            if (type === 'photo') setLoadingPhoto(false);
+            setLoadingType(null); // ✅ reset
         }
     };
 
-    if (isFetching) return <p className="text-center mt-6">Loading...</p>;
+    if (!user) return <p className="text-center mt-6">Loading...</p>;
 
     return (
-        <div className="space-y-6 max-w-md mx-auto mt-8">
+        <div className="space-y-6 max-w-xl mx-auto mt-8">
 
-            {/* Title Form */}
-            <form
-                onSubmit={(e) => {
-                    e.preventDefault();
-                    handleUpdate('title');
-                }}
-                className="space-y-3 p-4 border rounded shadow"
-            >
-                <h2 className="text-lg font-semibold">Site Title</h2>
-                <input
-                    type="text"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                    placeholder="Enter site title"
-                    className="input input-bordered w-full"
-                    required
-                />
-                <button
-                    type="submit"
-                    className="btn btn-primary w-full"
-                    disabled={loadingTitle}
-                >
-                    {loadingTitle ? 'Saving...' : 'Save Title'}
-                </button>
-            </form>
+            {/* Name */}
+            <FormBlock
+                title="Name"
+                value={name}
+                setValue={setName}
+                onSave={() => handleUpdate("name")}
+                loading={loadingType === "name"}
+            />
 
-            {/* Photo Form */}
-            <form
-                onSubmit={(e) => {
-                    e.preventDefault();
-                    handleUpdate('photo');
-                }}
-                className="space-y-3 p-4 border rounded shadow"
-            >
-                <h2 className="text-lg font-semibold">Site Photo</h2>
+            {/* Title */}
+            <FormBlock
+                title="Title"
+                value={title}
+                setValue={setTitle}
+                onSave={() => handleUpdate("title")}
+                loading={loadingType === "title"}
+            />
+
+            {/* Description */}
+            <FormBlock
+                title="Description"
+                value={description}
+                setValue={setDescription}
+                onSave={() => handleUpdate("description")}
+                loading={loadingType === "description"}
+                textarea
+            />
+
+            {/* Photo */}
+            <div className="p-4 border rounded shadow space-y-3">
+                <h2 className="text-lg font-semibold">Photo</h2>
+
                 <input
                     type="text"
                     value={photo}
                     onChange={(e) => setPhoto(e.target.value)}
-                    placeholder="Enter image URL"
                     className="input input-bordered w-full"
-                    required
                 />
 
                 {photo && (
-                    <div className="mt-2">
-                        <p className="text-sm mb-1">Preview:</p>
-                        <img
-                            src={photo}
-                            alt="Preview"
-                            className="w-32 h-32 object-cover rounded border"
-                        />
-                    </div>
+                    <img
+                        src={photo}
+                        alt="preview"
+                        className="w-32 h-32 object-cover rounded"
+                    />
                 )}
 
                 <button
-                    type="submit"
+                    onClick={() => handleUpdate("photo")}
                     className="btn btn-primary w-full"
-                    disabled={loadingPhoto}
+                    disabled={loading}
                 >
-                    {loadingPhoto ? 'Saving...' : 'Save Photo'}
+                    {loading ? "Saving..." : "Save"}
                 </button>
-            </form>
+            </div>
         </div>
     );
 };
