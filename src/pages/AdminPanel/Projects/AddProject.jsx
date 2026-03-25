@@ -6,9 +6,9 @@ const AddProject = ({ onSubmit }) => {
         slug: "",
         description: "",
         image: null,
-        techStack: [],
-        liveDemo: "",
-        github: "",
+        tech: [],
+        liveLink: "",
+        githubLink: "",
         featured: false,
     });
 
@@ -34,15 +34,15 @@ const AddProject = ({ onSubmit }) => {
     const handleTechKeyDown = (e) => {
         if (e.key === "Enter" && techInput.trim()) {
             e.preventDefault();
-            if (!form.techStack.includes(techInput.trim())) {
-                setForm({ ...form, techStack: [...form.techStack, techInput.trim()] });
+            if (!form.tech.includes(techInput.trim())) {
+                setForm({ ...form, tech: [...form.tech, techInput.trim()] });
             }
             setTechInput("");
         }
     };
 
     const removeTech = (tech) => {
-        setForm({ ...form, techStack: form.techStack.filter(t => t !== tech) });
+        setForm({ ...form, tech: form.tech.filter(t => t !== tech) });
     };
 
     // Handle form submission
@@ -125,7 +125,7 @@ const AddProject = ({ onSubmit }) => {
                     className="input input-bordered w-full"
                 />
                 <div className="flex flex-wrap gap-2 mt-2">
-                    {form.techStack.map((tech) => (
+                    {form.tech.map((tech) => (
                         <span
                             key={tech}
                             className="bg-blue-200 text-blue-800 px-3 py-1 rounded-full flex items-center gap-1"
@@ -150,7 +150,7 @@ const AddProject = ({ onSubmit }) => {
                     <input
                         type="url"
                         name="liveDemo"
-                        value={form.liveDemo}
+                        value={form.liveLink}
                         onChange={handleChange}
                         placeholder="https://example.com"
                         className="input input-bordered w-full"
@@ -161,7 +161,7 @@ const AddProject = ({ onSubmit }) => {
                     <input
                         type="url"
                         name="github"
-                        value={form.github}
+                        value={form.githubLink}
                         onChange={handleChange}
                         placeholder="https://github.com/username/project"
                         className="input input-bordered w-full"

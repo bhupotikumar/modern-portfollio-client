@@ -3,11 +3,16 @@ import Tab from '../../../components/admin/Tab/Tab';
 import ProjectCard from './ProjectCard';
 import AddProject from './AddProject';
 import api from '../../../api/axios';
+import EditProject from './EditProject';
+import DeleteConfirm from './DeleteConfirm';
 
 const Projects = () => {
     const [projects, setProjects] = useState([]);
     const [filter, setFilter] = useState("all");
     const [loading, setLoading] = useState(true);
+    const [selectedProject, setSelectedProject] = useState(null);
+    const [isEditOpen, setIsEditOpen] = useState(false);
+    const [isDeleteOpen, setIsDeleteOpen] = useState(false);
 
     useEffect(() => {
         const fetchProjects = async () => {
@@ -41,11 +46,11 @@ const Projects = () => {
             if (form.slug) formData.append("slug", form.slug); // optional
             if (form.image) formData.append("image", form.image);
             formData.append("featured", form.featured);
-            formData.append("liveLink", form.liveDemo || "");
-            formData.append("githubLink", form.github || "");
+            formData.append("liveLink", form.liveLink || "");
+            formData.append("githubLink", form.githubLink || "");
 
-            if (form.techStack.length > 0) {
-                formData.append("tech", form.techStack.join(","));
+            if (form.tech.length > 0) {
+                formData.append("tech", form.tech.join(","));
             }
 
             const res = await api.post("/projects", formData, {
@@ -59,6 +64,30 @@ const Projects = () => {
         } catch (error) {
             console.error(error);
             alert("Failed to add project");
+        }
+    };
+
+    const handleEdit = (project) => {
+        setSelectedProject(project);
+        setIsEditOpen(true);
+    };
+    const handleDeleteClick = (project) => {
+        setSelectedProject(project);
+        setIsDeleteOpen(true);
+    };
+    const handleDeleteConfirm = async () => {
+        try {
+            await api.delete(`/projects/${selectedProject._id}`);
+
+            // ✅ remove from UI instantly (optimistic update)
+            setProjects(prev =>
+                prev.filter(p => p._id !== selectedProject._id)
+            );
+
+            setIsDeleteOpen(false);
+            setSelectedProject(null);
+        } catch (err) {
+            console.error(err);
         }
     };
 
@@ -86,9 +115,34 @@ const Projects = () => {
                             </button>
                         </div>
                         {filteredProjects.map((project, index) => (
-                            <ProjectCard key={project._id} index={index} project={project} />
+                            <ProjectCard
+                                key={project._id}
+                                index={index}
+                                project={project}
+                                onEdit={handleEdit}
+                                onDelete={handleDeleteClick}
+                            />
                         ))}
+                        <EditProject
+                            isOpen={isEditOpen}
+                            onClose={() => setIsEditOpen(false)}
+                            project={selectedProject}
+                            onUpdate={(updatedProject) => {
+                                setProjects(prev =>
+                                    prev.map(p =>
+                                        p._id === updatedProject._id ? updatedProject : p
+                                    )
+                                );
+                            }}
+                        />
+
+                        <DeleteConfirm
+                            isOpen={isDeleteOpen}
+                            onClose={() => setIsDeleteOpen(false)}
+                            onConfirm={handleDeleteConfirm}
+                        />
                     </div>
+
                 },
                 {
                     label: "Add New",
