@@ -9,7 +9,7 @@ const FeaturedProjectCard = ({ project }) => {
             <figure className='w-2/3 h-full'>
                 <img
                     className='w-full h-full object-cover'
-                    src={image}
+                    src={image || "/"}
                     alt={title} />
             </figure>
             <div className="flex flex-col justify-between w-1/2 h-full">

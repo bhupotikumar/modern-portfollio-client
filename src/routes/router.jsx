@@ -12,6 +12,7 @@ import Dashboard from '../pages/AdminPanel/Dashboard/Dashboard';
 import Projects from '../pages/AdminPanel/Projects/Projects';
 import Skills from '../pages/AdminPanel/Skills/Skills';
 import Settings from '../pages/AdminPanel/Settings/Settings';
+import NotFound from '../components/NotFound/NotFound';
 
 export const router = createBrowserRouter([
     {
@@ -38,6 +39,7 @@ export const router = createBrowserRouter([
                 path: "blogs",
                 Component: BlogsPage
             },
+            { path: "*", Component: NotFound }
         ]
     },
     {
@@ -65,7 +67,9 @@ export const router = createBrowserRouter([
             {
                 path: "settings",
                 Component: Settings
-            }
+            },
+            { path: "*", Component: NotFound }
         ]
-    }
+    },
+    { path: "*", Component: NotFound }
 ]);
