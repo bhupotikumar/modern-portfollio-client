@@ -3,6 +3,7 @@ import useTheme from '../../utils/useTheme';
 import { Link, NavLink } from 'react-router';
 import { GoSun } from 'react-icons/go';
 import { MdDarkMode } from 'react-icons/md';
+import useUser from '../../hooks/useUser';
 
 const Header = () => {
     const { theme, toggleTheme } = useTheme();
@@ -29,6 +30,8 @@ const Header = () => {
             .then(data => setLinks(data))
             .catch(err => console.log(err))
     }, []);
+
+    const { user, loading } = useUser();
 
     return (
         <div className="primary-font navbar shadow-sm sticky top-0 left-0 z-100 bg-transparent backdrop-blur-2xl">
@@ -84,10 +87,14 @@ const Header = () => {
                     )}
                 </div>
 
-                <Link to={"/"} className="text-sm md:text-xl font-semibold md:font-bold">Bhupoti Kumar Roy</Link>
+                <Link to={"/"}
+                    className="text-sm md:text-xl font-semibold md:font-bold"
+                >
+                    {loading ? "Loading..." : user?.name?.name}
+                </Link>
             </div>
 
-            {/* Navbar Center - Desktop Menu */}
+            {/* Navbar Center */}
             <div className="navbar-center hidden lg:flex">
                 {links.map(link => (
                     <NavLink
@@ -103,21 +110,16 @@ const Header = () => {
                 ))}
             </div>
 
-            {/* Navbar End - Theme Toggle */}
+            {/* Navbar End */}
             <div className="navbar-end md:mr-4">
                 <label className="flex cursor-pointer gap-1 md:gap-2 items-center">
-                    {/* Sun Icon */}
                     <GoSun />
-
-                    {/* Toggle */}
                     <input
                         type="checkbox"
                         checked={theme === "dark"}
                         onChange={toggleTheme}
                         className="toggle"
                     />
-
-                    {/* Moon Icon */}
                     <MdDarkMode />
                 </label>
             </div>

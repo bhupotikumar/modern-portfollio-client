@@ -38,13 +38,13 @@ const Sidebar = () => {
                         <GoSkipFill />
                         <span className="is-drawer-close:hidden text-lg">Skills</span>
                     </NavLink>
-                    <NavLink to={"/admin/setting"}
+                    <NavLink to={"/admin/settings"}
                         className={({ isActive }) =>
                             `flex items-center gap-3 text-2xl p-2 rounded-lg transition-all ${isActive ? "bg-primary text-white" : "hover:bg-base-200"
                             }`
                         }>
                         <FiSettings />
-                        <span className="is-drawer-close:hidden text-lg">Setting</span>
+                        <span className="is-drawer-close:hidden text-lg">Settings</span>
                     </NavLink>
                 </div>
             </div>

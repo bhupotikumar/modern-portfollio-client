@@ -11,6 +11,7 @@ import LoginForm from '../components/admin/Form/LoginForm';
 import Dashboard from '../pages/AdminPanel/Dashboard/Dashboard';
 import Projects from '../pages/AdminPanel/Projects/Projects';
 import Skills from '../pages/AdminPanel/Skills/Skills';
+import Settings from '../pages/AdminPanel/Settings/Settings';
 
 export const router = createBrowserRouter([
     {
@@ -62,8 +63,8 @@ export const router = createBrowserRouter([
                 Component: Skills
             },
             {
-                path: "setting",
-                Component: Dashboard
+                path: "settings",
+                Component: Settings
             }
         ]
     }
