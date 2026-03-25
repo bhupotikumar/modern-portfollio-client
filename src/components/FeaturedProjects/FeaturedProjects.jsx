@@ -1,17 +1,31 @@
 import { useEffect, useState } from 'react';
 import FeaturedProjectCard from './FeaturedProjectCard';
+import publicApi from '../../api/publicApi.js';
 
 const FeaturedProjects = () => {
     const [featuredProjects, setFeaturedProjects] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    const fetchFeaturedProjects = async () => {
+        setLoading(true);
+        try {
+            const res = await publicApi.get("/projects");
+
+            // ✅ Make sure res.data is an array
+            setFeaturedProjects(Array.isArray(res.data) ? res.data : []);
+        } catch (err) {
+            console.error("Failed to fetch featured projects:", err);
+            setFeaturedProjects([]); // fallback
+        } finally {
+            setLoading(false);
+        }
+    };
+
     useEffect(() => {
-        fetch("/projects.json")
-            .then(res => res.json())
-            .then(data => {
-                const featured = data.filter((project) => project.featured);
-                setFeaturedProjects(featured);
-            })
-            .catch(err => console.error(err));
+        fetchFeaturedProjects();
     }, []);
+
+    if (loading) return <p>Loading...</p>
     return (
         <div className='my-12'>
             <div className="sticky top-16 mb-2">
@@ -19,14 +33,14 @@ const FeaturedProjects = () => {
                 <p className='text-center mb-6'>A glimpse of my favorite works.</p>
             </div>
             <div className="w-3/5 flex flex-col justify-center items-center gap-12 mx-auto">
-                {featuredProjects.map((project, index) => (
+                {(featuredProjects || []).map((project, index) => (
                     <div
-                        key={project.id}
+                        key={project._id}
                         className="w-full sticky top-28 rounded-lg hover-3d"
                         style={{
                             top: `${120 + index * 30}px`,
                             transform: `translateX(${index * 10}px)`,
-                            zIndex: featuredProjects.length + index
+                            zIndex: (featuredProjects?.length || 0) + index,
                         }}
                     >
                         <FeaturedProjectCard project={project} />
