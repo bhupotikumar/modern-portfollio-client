@@ -7,14 +7,23 @@ import api from '../../../api/axios';
 const Projects = () => {
     const [projects, setProjects] = useState([]);
     const [filter, setFilter] = useState("all");
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch("/projects.json")
-            .then(res => res.json())
-            .then(data => {
-                setProjects(data);
-            })
-            .catch(err => console.error("Fetch error:", err));
+        const fetchProjects = async () => {
+            setLoading(true);
+            try {
+                const res = await api.get("/projects");
+                setProjects(Array.isArray(res.data) ? res.data : []);
+            } catch (error) {
+                console.error("Failed to fetch featured projects:", error);
+                setProjects([]);
+            }
+            finally {
+                setLoading(false);
+            }
+        }
+        fetchProjects();
     }, []);
 
     const filteredProjects = filter === "featured"
@@ -60,6 +69,7 @@ const Projects = () => {
                 {
                     label: "Projects",
                     content: <div>
+                        {loading ? "Loading..." : ""}
                         <div className="flex gap-3 mb-4">
                             <button
                                 onClick={() => setFilter("all")}
@@ -75,8 +85,8 @@ const Projects = () => {
                                 Featured ({featuredCount})
                             </button>
                         </div>
-                        {filteredProjects.map(project => (
-                            <ProjectCard key={project.id} project={project} />
+                        {filteredProjects.map((project, index) => (
+                            <ProjectCard key={project._id} index={index} project={project} />
                         ))}
                     </div>
                 },

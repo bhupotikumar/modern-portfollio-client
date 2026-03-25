@@ -15,7 +15,7 @@ const FeaturedProjects = () => {
             setFeaturedProjects(Array.isArray(res.data) ? res.data : []);
         } catch (err) {
             console.error("Failed to fetch featured projects:", err);
-            setFeaturedProjects([]); // fallback
+            setFeaturedProjects([]);
         } finally {
             setLoading(false);
         }
