@@ -1,6 +1,6 @@
 const FormBlock = ({ title, value, setValue, onSave, loading, textarea }) => {
     return (
-        <div className="p-4 border rounded shadow space-y-3">
+        <div className="p-4 border border-base-content/30 rounded shadow-lg shadow-base-content/30 space-y-3">
             <h2 className="text-lg font-semibold">{title}</h2>
 
             {textarea ? (

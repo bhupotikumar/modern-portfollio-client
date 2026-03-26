@@ -27,7 +27,7 @@ const ProjectCard = ({ project, index, onEdit, onDelete }) => {
                 <div className="flex items-center gap-3">
 
                     {/* Updated time */}
-                    <small className="w-28 text-right text-xs text-gray-500">
+                    <small className="text-right text-sm text-gray-300">
                         {formatDistanceToNow(new Date(project.updatedAt), {
                             addSuffix: true,
                         })}
@@ -36,7 +36,7 @@ const ProjectCard = ({ project, index, onEdit, onDelete }) => {
                     {/* Edit */}
                     <div className="relative group">
                         <button
-                            onClick={() => onEdit(project)} // ✅ important
+                            onClick={() => onEdit(project)}
                             className="btn btn-info p-1 text-2xl"
                         >
                             <BiSolidEdit />
@@ -50,7 +50,7 @@ const ProjectCard = ({ project, index, onEdit, onDelete }) => {
                     {/* Delete */}
                     <div className="relative group">
                         <button
-                            onClick={() => onDelete(project)} // ✅ important
+                            onClick={() => onDelete(project)}
                             className="btn btn-error p-1 text-2xl"
                         >
                             <AiTwotoneDelete />

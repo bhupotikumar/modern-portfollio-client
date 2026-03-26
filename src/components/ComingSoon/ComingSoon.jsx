@@ -1,7 +1,7 @@
 
 const ComingSoon = () => {
     return (
-        <div className="flex items-center justify-center h-screen bg-gradient-to-r from-purple-400 via-pink-500 to-red-400">
+        <div className="flex items-center justify-center w-full h-full p-12 bg-linear-to-r from-purple-400 via-pink-500 to-red-400">
             <div className="text-center p-8 bg-white bg-opacity-90 rounded-2xl shadow-xl max-w-md">
                 <h1 className="text-5xl font-extrabold text-gray-800 mb-4 animate-bounce">
                     🚀 Coming Soon

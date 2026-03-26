@@ -1,10 +1,10 @@
 import Modal from "../Modal/Modal";
 
-const DeleteConfirm = ({ isOpen, onClose, onConfirm }) => {
+const DeleteConfirm = ({ isOpen, onClose, onConfirm, message }) => {
     return (
         <Modal isOpen={isOpen} onClose={onClose} title="Confirm Delete">
             <p className="text-gray-400 mb-6">
-                Are you sure you want to delete this project? This action cannot be undone.
+                {message}
             </p>
 
             <div className="flex justify-end gap-3">

@@ -140,6 +140,7 @@ const Projects = () => {
                             isOpen={isDeleteOpen}
                             onClose={() => setIsDeleteOpen(false)}
                             onConfirm={handleDeleteConfirm}
+                            message="Are you sure you want to delete this project? This action cannot be undone."
                         />
                     </div>
 

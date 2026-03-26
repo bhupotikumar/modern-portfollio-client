@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../../../api/axios.js";
-import FormBlock from "./FormBlock.jsx";
+import FormBlock from "../../../components/admin/FormBlock/FormBlock.jsx";
 
 const General = () => {
     const [user, setUser] = useState(null);
@@ -15,6 +15,7 @@ const General = () => {
 
     useEffect(() => {
         const fetchUser = async () => {
+            setLoading(true);
             try {
                 const res = await api.get("/user");
                 const data = res.data;
@@ -28,13 +29,16 @@ const General = () => {
             } catch (error) {
                 console.error(error);
             }
+            finally {
+                setLoading(false);
+            }
         };
 
         fetchUser();
     }, []);
 
     const handleUpdate = async (type) => {
-        setLoadingType(type); // 🔥 track which field is loading
+        setLoadingType(type);
 
         try {
             let payload = {};
@@ -79,14 +83,14 @@ const General = () => {
             console.error(error);
             alert(`Failed to update ${type}`);
         } finally {
-            setLoadingType(null); // ✅ reset
+            setLoadingType(null);
         }
     };
 
     if (!user) return <p className="text-center mt-6">Loading...</p>;
 
     return (
-        <div className="space-y-6 max-w-xl mx-auto mt-8">
+        <div className="grid grid-cols-2 gap-12">
 
             {/* Name */}
             <FormBlock
