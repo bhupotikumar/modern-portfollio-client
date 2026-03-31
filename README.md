@@ -1,12 +1,12 @@
 # 🚀 Modern Portfolio Frontend (Client)
 
-A **modern, responsive, and fully customizable portfolio web application (frontend)** built to showcase projects, skills, and experience for **full-time and remote job opportunities**.
+A modern, responsive, and fully customizable portfolio web application (frontend + backend) built to showcase projects, skills, and experience.
 
 ---
 
 ## 🌐 Live Demo
 
-🔗 https://your-live-link.com
+🔗 https://my-live-link.com
 
 ---
 

@@ -36,7 +36,7 @@ const EditSkill = ({ isOpen, onClose, skill, onSuccess }) => {
                 formData.append("logo", logo);
             }
 
-            await api.put(`/skills/${skill._id}`, formData, {
+            await api.put(`/api/skills/${skill._id}`, formData, {
                 headers: { "Content-Type": "multipart/form-data" },
             });
 

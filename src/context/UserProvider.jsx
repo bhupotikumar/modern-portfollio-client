@@ -8,7 +8,7 @@ const UserProvider = ({ children }) => {
 
     const fetchUser = async () => {
         try {
-            const res = await publicApi.get("/user");
+            const res = await publicApi.get("/api/user");
             setUser(res.data);
         } catch (err) {
             console.error("Failed to fetch user:", err);

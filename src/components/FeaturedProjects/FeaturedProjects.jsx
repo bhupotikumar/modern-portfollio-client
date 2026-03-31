@@ -9,9 +9,8 @@ const FeaturedProjects = () => {
     const fetchFeaturedProjects = async () => {
         setLoading(true);
         try {
-            const res = await publicApi.get("/projects");
+            const res = await publicApi.get("/api/projects");
 
-            // ✅ Make sure res.data is an array
             setFeaturedProjects(Array.isArray(res.data) ? res.data : []);
         } catch (err) {
             console.error("Failed to fetch featured projects:", err);

@@ -17,7 +17,7 @@ const General = () => {
         const fetchUser = async () => {
             setLoading(true);
             try {
-                const res = await api.get("/user");
+                const res = await api.get("/api/user");
                 const data = res.data;
 
                 setUser(data);

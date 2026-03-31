@@ -25,7 +25,7 @@ const Skills = () => {
     const fetchSkills = async () => {
         setLoading(true);
         try {
-            const res = await api.get("/skills");
+            const res = await api.get("/api/skills");
             setSkillsCategory(res.data || []);
         } catch (error) {
             console.error("Failed to fetch skills:", error);
@@ -37,7 +37,7 @@ const Skills = () => {
     // add skill + refresh
     const handleAddSkill = async (formData) => {
         try {
-            await api.post("/skills", formData, {
+            await api.post("/api/skills", formData, {
                 headers: { "Content-Type": "multipart/form-data" },
             });
 
@@ -83,7 +83,7 @@ const Skills = () => {
 
     const handleDeleteConfirm = async () => {
         try {
-            await api.delete(`/skills/${selectedSkill._id}`);
+            await api.delete(`/api/skills/${selectedSkill._id}`);
 
             // Remove the deleted skill from state
             setSkillsCategory(prevCategories =>

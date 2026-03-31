@@ -1,56 +1,84 @@
 import Clients from './Clients/Clients';
-import ChatBox from './Chats/ChatBox';
+import NewestProjects from '../Projects/NewestProjects';
 
 const Dashboard = () => {
     return (
-        <div className='grid grid-cols-4 w-full h-[90vh]  p-2'>
-            {/* Col-1 */}
-            <div className="h-full flex flex-col gap-4 overflow-hidden">
-                <div className="flex-1 min-h-0 flex flex-col">
-                    <h1 className="pt-3 text-center font-semibold shrink-0">My Clients</h1>
-                    <div className="flex-1 min-h-0 overflow-y-auto no-scrollbar">
-                        <Clients />
-                    </div>
+        <div className='grid grid-cols-4 w-full h-[90vh] overflow-hidden'>
+            {/* col 1 */}
+            <div className="h-[90vh] flex flex-col p-2 gap-6">
+                <div className="h-1/2 border border-base-content/30 rounded-xl shadow-lg shadow-base-content/30 overflow-auto">
+                    <Clients />
                 </div>
-                <div className="flex-1 min-h-0 flex flex-col">
-                    <h1 className="text-center font-semibold shrink-0">Chat Box</h1>
-                    <div className="h-full">
-                        <ChatBox />
+                <div className="h-1/2 border border-base-content/30 rounded-xl shadow-lg shadow-base-content/30 overflow-hidden">
+                    {/* <ChatBox conversationId="public-chat-1" /> */}
+                </div>
+            </div>
+            {/* </div> */}
+
+            {/* col 2 */}
+            <div className="p-2">
+                <div className="w-full h-full grid grid-row-4 gap-8">
+                    <div className="h-full rounded-xl border border-base-content/30 shadow-lg shadow-base-content/30 p-2">
+                        <h1>Unseen Messages</h1>
+                        <div className="ml-4">
+                            <NewestProjects />
+                        </div>
+                    </div>
+                    <div className="h-full rounded-xl border border-base-content/30 shadow-lg shadow-base-content/30 p-2">
+                        <h1>Newest Blogs</h1>
+                        <div className="ml-4">
+                            <NewestProjects />
+                        </div>
+                    </div>
+                    <div className="h-full rounded-xl border border-base-content/30 shadow-lg shadow-base-content/30 p-2">
+                        <h1 className='font-bold mb-2'>Newest Projects</h1>
+                        <div className="ml-4">
+                            <NewestProjects />
+                        </div>
+                    </div>
+                    <div className="h-full rounded-xl border border-base-content/30 shadow-lg shadow-base-content/30 p-2">
+                        <h1>Last Chats</h1>
+                        <div className="ml-4">
+                            <NewestProjects />
+                        </div>
                     </div>
                 </div>
             </div>
 
-            {/* <div className="">
-                <h1 className='w-full text-center font-semibold'>Recents</h1>
-                <div className="w-full grid grid-rows-4">
-                    <div className="">
-                        <h1>Unseen Messages</h1>
+            {/* Col 3 */}
+            <div className="col-span-2">
+                <div className="h-full grid grid-rows-2 gap-6">
+                    <div className="grid grid-cols-4 gap-6">
+                        {/* Graph */}
+                        <div className="col-span-3 p-2">
+                            <div className="h-full border"></div>
+                        </div>
+                        {/* Total */}
+                        <div className="p-2">
+                            <div className="h-full border"></div>
+                        </div>
                     </div>
-                    <div className="">
-                        <h1>Newest Blog</h1>
-                    </div>
-                    <div className="">
-                        <h1>Newest Project</h1>
-                    </div>
-                    <div className="">
-                        <h1>Last Chat</h1>
-                    </div>
-                </div>
-            </div> */}
 
-            {/* <div className=" border">
-                <div className="">Total</div>
-                <div className="">Most Popular
-                    <div className="">Project</div>
-                    <div className="">Blog</div>
-                </div>
-                <div className="">Encluded Socials</div>
-            </div> */}
+                    <div className="h-full grid grid-cols-2 gap-6 p-2">
+                        <div className="h-full grid grid-rows-2 gap-6">
+                            {/* Most popular Project */}
+                            <div className="">
+                                <div className="h-full border"></div>
+                            </div>
 
-            {/* <div className="">
-                <div className="">Graphs</div>
-                <div className="">Analytics</div>
-            </div> */}
+                            {/* Most popular Blogs */}
+                            <div className="border">
+
+                            </div>
+                        </div>
+                        {/* Extra Section */}
+                        <div className="border">
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         </div>
     );
 };

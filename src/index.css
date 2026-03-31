@@ -33,7 +33,6 @@
 /* Navbar custom styles */
 .nav-link {
     border-bottom: 2px solid transparent;
-    /* invisible by default */
     transition: border-color 0.3s ease, color 0.3s ease, padding-bottom 0.3s ease;
     padding-bottom: 2px;
 }
@@ -41,14 +40,12 @@
 .nav-link:hover {
     border-bottom-color: hsl(var(--p));
     padding-bottom: 0;
-    /* creates slight slide-up effect */
 }
 
 .nav-link.active {
     color: hsl(var(--p));
     border-bottom-color: hsl(var(--p));
     padding-bottom: 0;
-    /* underline sits slightly closer to text */
 }
 
 .no-scrollbar::-webkit-scrollbar {
@@ -57,7 +54,5 @@
 
 .no-scrollbar {
     -ms-overflow-style: none;
-    /* IE + Edge */
     scrollbar-width: none;
-    /* Firefox */
 }

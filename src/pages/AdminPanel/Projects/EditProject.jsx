@@ -41,7 +41,7 @@ const EditProject = ({ isOpen, onClose, project, onUpdate }) => {
         setLoading(true);
 
         try {
-            const res = await api.put(`/projects/${project._id}`, form);
+            const res = await api.put(`/api/projects/${project._id}`, form);
 
             onUpdate(res.data);
             onClose();

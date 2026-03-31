@@ -5,17 +5,14 @@ const AdminRoute = ({ children }) => {
     const { user, loading } = useAuth();
     const adminEmail = import.meta.env.VITE_ADMIN_EMAIL;
 
-    // 1️⃣ Wait until Firebase finishes loading
     if (loading) {
-        return <p>Loading...</p>; // or spinner
+        return <p>Loading...</p>;
     }
 
-    // 2️⃣ Redirect if not logged in or not admin
     if (!user || user.email !== adminEmail) {
         return <Navigate to="/login" replace />;
     }
 
-    // 3️⃣ Access granted
     return children;
 };
 

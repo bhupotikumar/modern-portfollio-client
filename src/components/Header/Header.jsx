@@ -28,7 +28,7 @@ const Header = () => {
         fetch("./navlinks.json")
             .then(res => res.json())
             .then(data => setLinks(data))
-            .catch(err => console.log(err))
+            .catch(err => console.error(err));
     }, []);
 
     const { user, loading } = useUser();
@@ -75,7 +75,7 @@ const Header = () => {
                                 <NavLink
                                     key={link.id}
                                     to={link.href}
-                                    end={link.href === "/"} // important for home route
+                                    end={link.href === "/"}
                                     className={({ isActive }) =>
                                         `nav-link mx-2 font-semibold ${isActive ? "active" : ""}`
                                     }
@@ -100,7 +100,7 @@ const Header = () => {
                     <NavLink
                         key={link.id}
                         to={link.href}
-                        end={link.href === "/"} // important for home route
+                        end={link.href === "/"}
                         className={({ isActive }) =>
                             `nav-link mx-2 font-semibold ${isActive ? "active" : ""}`
                         }

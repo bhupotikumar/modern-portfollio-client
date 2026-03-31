@@ -1,6 +1,7 @@
 import FeaturedProjects from '../../components/FeaturedProjects/FeaturedProjects';
 import Hero from '../../components/Hero/Hero';
 import Skills from '../../components/Skills/Skills';
+import ChatBox from '../Chats/ChatBox';
 
 const HomePage = () => {
     return (

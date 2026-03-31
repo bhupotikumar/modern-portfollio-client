@@ -18,7 +18,7 @@ const Projects = () => {
         const fetchProjects = async () => {
             setLoading(true);
             try {
-                const res = await api.get("/projects");
+                const res = await api.get("/api/projects");
                 setProjects(Array.isArray(res.data) ? res.data : []);
             } catch (error) {
                 console.error("Failed to fetch featured projects:", error);
@@ -53,7 +53,7 @@ const Projects = () => {
                 formData.append("tech", form.tech.join(","));
             }
 
-            const res = await api.post("/projects", formData, {
+            const res = await api.post("/api/projects", formData, {
                 headers: {
                     "Content-Type": "multipart/form-data", // important for file uploads
                 },
@@ -77,7 +77,7 @@ const Projects = () => {
     };
     const handleDeleteConfirm = async () => {
         try {
-            await api.delete(`/projects/${selectedProject._id}`);
+            await api.delete(`/api/projects/${selectedProject._id}`);
 
             // ✅ remove from UI instantly (optimistic update)
             setProjects(prev =>
