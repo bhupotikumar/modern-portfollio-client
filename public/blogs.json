@@ -1,0 +1,132 @@
+{
+    "blogs": [
+        {
+            "id": "blog_001",
+            "slug": "how-javascript-works",
+            "title": "How JavaScript Works Under the Hood",
+            "excerpt": "A deep dive into execution context, call stack, and memory.",
+            "content": "<p>Full blog content here...</p>",
+            "coverImage": "/images/blogs/js-engine.png",
+            "category": "Technology",
+            "tags": [
+                "JavaScript",
+                "Programming",
+                "Web"
+            ],
+            "featured": true,
+            "status": "published",
+            "readingTime": 8,
+            "language": "en",
+            "stats": {
+                "views": 1245,
+                "likes": 230,
+                "commentsCount": 12
+            },
+            "seo": {
+                "metaTitle": "How JavaScript Works Internally",
+                "metaDescription": "Learn JavaScript engine and execution context."
+            },
+            "timestamps": {
+                "createdAt": "2026-03-20T10:00:00Z",
+                "updatedAt": "2026-03-22T12:30:00Z",
+                "publishedAt": "2026-03-23T08:00:00Z"
+            }
+        },
+        {
+            "id": "blog_002",
+            "slug": "react-performance-optimization",
+            "title": "React Performance Optimization Tips",
+            "excerpt": "Learn how to optimize React apps using memo, lazy loading, and code splitting.",
+            "content": "<p>React optimization techniques...</p>",
+            "coverImage": "/images/blogs/react-performance.png",
+            "category": "Frontend",
+            "tags": [
+                "React",
+                "Performance",
+                "Optimization"
+            ],
+            "featured": false,
+            "status": "published",
+            "readingTime": 6,
+            "language": "en",
+            "stats": {
+                "views": 980,
+                "likes": 150,
+                "commentsCount": 5
+            },
+            "seo": {
+                "metaTitle": "Improve React App Performance",
+                "metaDescription": "Best practices for optimizing React apps."
+            },
+            "timestamps": {
+                "createdAt": "2026-03-18T09:00:00Z",
+                "updatedAt": "2026-03-19T11:00:00Z",
+                "publishedAt": "2026-03-19T12:00:00Z"
+            }
+        },
+        {
+            "id": "blog_003",
+            "slug": "nodejs-event-loop-explained",
+            "title": "Node.js Event Loop Explained Simply",
+            "excerpt": "Understand how Node.js handles asynchronous operations using the event loop.",
+            "content": "<p>Node.js event loop explanation...</p>",
+            "coverImage": "/images/blogs/node-event-loop.png",
+            "category": "Backend",
+            "tags": [
+                "Node.js",
+                "Event Loop",
+                "Async"
+            ],
+            "featured": true,
+            "status": "published",
+            "readingTime": 7,
+            "language": "en",
+            "stats": {
+                "views": 1500,
+                "likes": 320,
+                "commentsCount": 18
+            },
+            "seo": {
+                "metaTitle": "Node.js Event Loop Guide",
+                "metaDescription": "Learn how Node.js event loop works step by step."
+            },
+            "timestamps": {
+                "createdAt": "2026-03-15T08:00:00Z",
+                "updatedAt": "2026-03-16T10:00:00Z",
+                "publishedAt": "2026-03-16T11:00:00Z"
+            }
+        },
+        {
+            "id": "blog_004",
+            "slug": "tailwind-css-best-practices",
+            "title": "Tailwind CSS Best Practices",
+            "excerpt": "Write clean and maintainable UI using Tailwind CSS.",
+            "content": "<p>Tailwind tips and tricks...</p>",
+            "coverImage": "/images/blogs/tailwind.png",
+            "category": "Frontend",
+            "tags": [
+                "Tailwind",
+                "CSS",
+                "UI"
+            ],
+            "featured": false,
+            "status": "published",
+            "readingTime": 5,
+            "language": "en",
+            "stats": {
+                "views": 760,
+                "likes": 95,
+                "commentsCount": 3
+            },
+            "seo": {
+                "metaTitle": "Tailwind CSS Guide",
+                "metaDescription": "Best practices for using Tailwind CSS."
+            },
+            "timestamps": {
+                "createdAt": "2026-03-10T07:00:00Z",
+                "updatedAt": "2026-03-11T09:00:00Z",
+                "publishedAt": "2026-03-11T10:00:00Z"
+            }
+        }
+    ]
+}

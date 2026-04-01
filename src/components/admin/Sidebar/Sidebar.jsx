@@ -2,6 +2,8 @@ import { ImHome } from 'react-icons/im';
 import { GoProject, GoSidebarExpand, GoSkipFill } from 'react-icons/go';
 import { NavLink } from 'react-router';
 import { FiSettings } from 'react-icons/fi';
+import { ImBlog } from "react-icons/im";
+
 
 const Sidebar = () => {
     return (
@@ -37,6 +39,14 @@ const Sidebar = () => {
                         }>
                         <GoSkipFill />
                         <span className="is-drawer-close:hidden text-lg">Skills</span>
+                    </NavLink>
+                    <NavLink to={"/admin/blogs"}
+                        className={({ isActive }) =>
+                            `flex items-center gap-3 text-2xl p-2 rounded-lg transition-all ${isActive ? "bg-primary text-white" : "hover:bg-base-200"
+                            }`
+                        }>
+                        < ImBlog />
+                        <span className="is-drawer-close:hidden text-lg">Blogs</span>
                     </NavLink>
                     <NavLink to={"/admin/settings"}
                         className={({ isActive }) =>

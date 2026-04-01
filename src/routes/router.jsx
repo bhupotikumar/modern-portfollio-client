@@ -13,6 +13,7 @@ import Projects from '../pages/AdminPanel/Projects/Projects';
 import Skills from '../pages/AdminPanel/Skills/Skills';
 import Settings from '../pages/AdminPanel/Settings/Settings';
 import NotFound from '../components/NotFound/NotFound';
+import Blogs from '../pages/AdminPanel/Blogs/Blogs';
 
 export const router = createBrowserRouter([
     {
@@ -63,6 +64,10 @@ export const router = createBrowserRouter([
             {
                 path: "skills",
                 Component: Skills
+            },
+            {
+                path: "blogs",
+                Component: Blogs
             },
             {
                 path: "settings",

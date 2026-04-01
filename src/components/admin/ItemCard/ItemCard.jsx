@@ -2,24 +2,24 @@ import { BiSolidEdit } from "react-icons/bi";
 import { AiTwotoneDelete } from "react-icons/ai";
 import { formatDistanceToNow } from "date-fns";
 
-const ProjectCard = ({ project, index, onEdit, onDelete }) => {
+const ItemCard = ({ title, description, updatedAt, onEdit, onDelete }) => {
     return (
         <div>
             <div className="flex items-center justify-between shadow-md/20 border border-base-content/20 shadow-base-content rounded p-2 my-4">
 
                 {/* Title */}
                 <h1 className="w-1/2 lg:w-1/3 font-medium">
-                    {index + 1}. {project.title}
+                    {title}
                 </h1>
 
                 {/* Description with tooltip */}
                 <div className="relative group w-xs">
                     <p className="ml-4 truncate text-right">
-                        {project.description}
+                        {description || ""}
                     </p>
 
                     <div className="absolute left-4 top-full mt-2 hidden group-hover:block bg-black text-white text-sm px-3 py-2 rounded shadow-lg z-50 w-64">
-                        {project.description}
+                        {description}
                     </div>
                 </div>
 
@@ -28,7 +28,7 @@ const ProjectCard = ({ project, index, onEdit, onDelete }) => {
 
                     {/* Updated time */}
                     <small className="text-right text-sm text-gray-300">
-                        {formatDistanceToNow(new Date(project.updatedAt), {
+                        {formatDistanceToNow(new Date(updatedAt), {
                             addSuffix: true,
                         })}
                     </small>
@@ -36,7 +36,7 @@ const ProjectCard = ({ project, index, onEdit, onDelete }) => {
                     {/* Edit */}
                     <div className="relative group">
                         <button
-                            onClick={() => onEdit(project)}
+                            onClick={() => onEdit()}
                             className="btn btn-info p-1 text-2xl"
                         >
                             <BiSolidEdit />
@@ -50,7 +50,7 @@ const ProjectCard = ({ project, index, onEdit, onDelete }) => {
                     {/* Delete */}
                     <div className="relative group">
                         <button
-                            onClick={() => onDelete(project)}
+                            onClick={() => onDelete()}
                             className="btn btn-error p-1 text-2xl"
                         >
                             <AiTwotoneDelete />
@@ -66,4 +66,4 @@ const ProjectCard = ({ project, index, onEdit, onDelete }) => {
     );
 };
 
-export default ProjectCard;
+export default ItemCard;

@@ -4,7 +4,7 @@ import Tab from "../../../components/admin/Tab/Tab";
 import AddSkill from "./AddSkill";
 import EditSkill from "./EditSkill";
 import DeleteConfirm from "../Projects/DeleteConfirm";
-import SkillCard from "./SkillCard";
+import ItemCard from "../../../components/admin/ItemCard/ItemCard";
 
 const Skills = () => {
     const [skillsCategory, setSkillsCategory] = useState([]);
@@ -116,7 +116,16 @@ const Skills = () => {
                             <div className="">
                                 {mergedCategories.flatMap((cat) =>
                                     cat.skills.map((skill) => (
-                                        <SkillCard key={skill._id} skill={skill} category={cat} getFileUrl={getFileUrl} handleEdit={handleEdit} handleDelete={handleDelete} />
+                                        <ItemCard
+                                            key={skill._id}
+                                            skill={skill}
+                                            getFileUrl={getFileUrl}
+                                            onEdit={() => handleEdit(skill, cat._id)}
+                                            onDelete={() => handleDelete(skill, cat._id)}
+                                            title={skill.title}
+                                            description={cat.title}
+                                            updatedAt={skill.updatedAt}
+                                        />
                                     ))
                                 )}
                             </div>
@@ -132,7 +141,16 @@ const Skills = () => {
                                     <p>No skills yet</p>
                                 ) : (
                                     category.skills.map((skill) => (
-                                        <SkillCard key={skill._id} skill={skill} category={category} getFileUrl={getFileUrl} handleEdit={handleEdit} handleDelete={handleDelete} />
+                                        <ItemCard
+                                         key={skill._id}
+                                            skill={skill}
+                                            getFileUrl={getFileUrl}
+                                            onEdit={() => handleEdit(skill, category._id)}
+                                            onDelete={() => handleDelete(skill, category._id)}
+                                            title={skill.title}
+                                            description={category.title}
+                                            updatedAt={skill.updatedAt}
+                                        />
                                     ))
                                 )}
                             </div>

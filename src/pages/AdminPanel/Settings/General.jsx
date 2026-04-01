@@ -19,7 +19,7 @@ const General = () => {
             try {
                 const res = await api.get("/api/user");
                 const data = res.data;
-
+                // console.log(data);
                 setUser(data);
 
                 setName(data?.name?.name || "");
@@ -39,7 +39,6 @@ const General = () => {
 
     const handleUpdate = async (type) => {
         setLoadingType(type);
-
         try {
             let payload = {};
             let endpoint = "";
@@ -47,22 +46,22 @@ const General = () => {
             switch (type) {
                 case "name":
                     payload = { name };
-                    endpoint = "/user/user-name";
+                    endpoint = "api/user/user-name";
                     break;
 
                 case "title":
                     payload = { title };
-                    endpoint = "/user/user-title";
+                    endpoint = "api/user/user-title";
                     break;
 
                 case "description":
                     payload = { description };
-                    endpoint = "/user/user-description";
+                    endpoint = "api/user/user-description";
                     break;
 
                 case "photo":
                     payload = { photo };
-                    endpoint = "/user/user-photo";
+                    endpoint = "api/user/user-photo";
                     break;
 
                 default:
@@ -70,6 +69,7 @@ const General = () => {
             }
 
             const res = await api.patch(endpoint, payload);
+            console.log(res.data);
 
             setUser(prev => ({
                 ...prev,
@@ -77,7 +77,7 @@ const General = () => {
             }));
 
             alert(`${type} updated successfully`);
-            console.log(res.data);
+            // console.log(res.data);
 
         } catch (error) {
             console.error(error);

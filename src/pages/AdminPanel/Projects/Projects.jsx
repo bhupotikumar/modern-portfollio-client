@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import Tab from '../../../components/admin/Tab/Tab';
-import ProjectCard from './ProjectCard';
+import ItemCard from '../../../components/admin/ItemCard/ItemCard';
 import AddProject from './AddProject';
 import api from '../../../api/axios';
 import EditProject from './EditProject';
@@ -114,13 +114,15 @@ const Projects = () => {
                                 Featured ({featuredCount})
                             </button>
                         </div>
-                        {filteredProjects.map((project, index) => (
-                            <ProjectCard
+                        {filteredProjects.map((project) => (
+                            <ItemCard
                                 key={project._id}
-                                index={index}
+                                title={project.title}
+                                description={project.description}
+                                updatedAt={project.updatedAt}
                                 project={project}
-                                onEdit={handleEdit}
-                                onDelete={handleDeleteClick}
+                                onEdit={() => handleEdit(project)}
+                                onDelete={() => handleDeleteClick(project)}
                             />
                         ))}
                         <EditProject

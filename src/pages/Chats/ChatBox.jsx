@@ -1,171 +1,117 @@
 import { useEffect, useRef, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 import MessageInput from "./MessageInput";
 import ChatMessage from "./ChatMessage";
 import { initSocket, getSocket, emitTyping } from "../../ai/socket.js";
 import auth from "../../firebase/firebase.auth.js";
 import api from "../../api/axios.js";
 
-const ChatBox = ({ conversationId }) => {
+const ChatBox = () => {
     const chatRef = useRef(null);
     const [messages, setMessages] = useState([]);
     const [typing, setTyping] = useState(false);
     const [userData, setUserData] = useState(null);
     const [userType, setUserType] = useState("loading");
-    const myId = userData?.userId || "Anonymous";
+    const [publicId, setPublicId] = useState(null);
+    const [conversationId, setConversationId] = useState(null);
 
-    // Auto-scroll to bottom
-    const scrollToBottom = () => {
-        chatRef.current?.scrollTo({
-            top: chatRef.current.scrollHeight,
-            behavior: "smooth",
-        });
-    };
+    const myId = userData?.userId || publicId;
 
-    // ✅ Auth listener
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(async (user) => {
             if (user) {
                 const token = await user.getIdToken();
-                setUserData({
-                    token,
-                    userId: user.uid,
-                    name: user.displayName || "Anonymous",
-                });
+                setUserData({ token, userId: user.uid, name: user.displayName || "Anonymous" });
                 setUserType("user");
+                setConversationId(user.uid);
             } else {
                 setUserData(null);
                 setUserType("public");
+
+                // Try to get publicId from localStorage
+                let storedPublicId = localStorage.getItem("publicId");
+                if (!storedPublicId) {
+                    storedPublicId = `public-${uuidv4()}`;
+                    localStorage.setItem("publicId", storedPublicId);
+                }
+
+                setPublicId(storedPublicId);
+                setConversationId(storedPublicId);
             }
         });
         return () => unsubscribe();
     }, []);
 
-    // ✅ Setup socket and fetch messages
+    const scrollToBottom = () => {
+        chatRef.current?.scrollTo({ top: chatRef.current.scrollHeight, behavior: "smooth" });
+    };
+
     useEffect(() => {
-        if (userType === "loading") return;
-        if (userType === "user" && !userData?.token) return;
+        if (userType === "loading" || !conversationId) return;
+        const publicId = userType === "public" ? conversationId : null;
+        const socket = initSocket(userData, publicId);
 
-        const socket = initSocket(userData);
-        let typingTimeout;
-
+        // fetch previous messages
         const fetchMessages = async () => {
             try {
-                const url =
-                    userType === "public"
-                        ? `/api/messages/public/${conversationId}`
-                        : `/api/messages/${conversationId}`;
+                const url = userType === "public"
+                    ? `/api/messages/public/${conversationId}`
+                    : `/api/messages/${conversationId}`;
                 const headers = userType === "user" ? { Authorization: `Bearer ${userData.token}` } : {};
                 const res = await api.get(url, { headers });
-
-                const updatedMessages = res.data.map((msg) => ({
-                    ...msg,
-                    status: msg.seen ? "seen" : "delivered",
-                }));
-
-                setMessages(updatedMessages);
+                setMessages(res.data);
             } catch (err) {
-                console.error("Failed to fetch messages:", err.response?.data?.message || err.message);
+                console.error(err);
             }
         };
-
         fetchMessages();
 
-        // ✅ Incoming messages
-        const handleIncoming = async (msg) => {
-            let status = msg.status || "sending";
+        // remove old listeners
+        socket.off("getMessage");
+        socket.off("typing");
 
-            if (msg.senderId === "AI_BOT") {
-                status = msg.seen ? "seen" : "delivered";
-
-                if (userType === "user" && !msg.seen) {
-                    try {
-                        const headers = { Authorization: `Bearer ${userData.token}` };
-                        const res = await api.patch(`/api/messages/${msg._id}/seen`, {}, { headers });
-                        msg.seen = res.data.seen;
-                        status = msg.seen ? "seen" : "delivered";
-                    } catch (err) {
-                        console.error("Failed to mark AI message as seen:", err);
-                    }
-                }
-            }
-
+        socket.on("getMessage", (msg) => {
             setMessages((prev) => {
-                const exists = prev.find((m) => m._id === msg._id);
-                if (exists) return prev.map((m) => (m._id === msg._id ? { ...m, ...msg, status } : m));
-                return [...prev, { ...msg, status }];
+                if (prev.find((m) => m._id === msg._id)) return prev;
+                return [...prev, msg];
             });
-        };
-
-        socket.on("getMessage", handleIncoming);
-
-        // ✅ Typing
-        socket.on("typing", () => {
-            setTyping(true);
-            if (typingTimeout) clearTimeout(typingTimeout);
-            typingTimeout = setTimeout(() => setTyping(false), 1200);
         });
 
-        return () => {
-            socket?.off("getMessage", handleIncoming);
-            socket?.off("typing");
-        };
+        socket.on("typing", () => {
+            setTyping(true);
+            setTimeout(() => setTyping(false), 1200);
+        });
     }, [conversationId, userType, userData]);
 
-    useEffect(scrollToBottom, [messages, typing]);
+    useEffect(() => {
+        chatRef.current?.scrollTo({ top: chatRef.current.scrollHeight, behavior: "smooth" });
+    }, [messages, typing]);
 
-    // ✅ Send message
     const handleSend = (text) => {
-        if (!text.trim()) return;
-
+        if (!text.trim() || !conversationId) return;
         const socket = getSocket();
-        const receiverId = "AI_BOT";
 
         const tempMsg = {
             _id: Date.now(),
             senderId: myId,
-            receiverId,
+            receiverId: "AI_BOT",
             conversationId,
             text,
-            createdAt: new Date().toISOString(),
             status: "sending",
+            createdAt: new Date(),
             seen: false,
         };
-
         setMessages((prev) => [...prev, tempMsg]);
 
-        // Emit message
-        socket?.emit("sendMessage", { senderId: myId, receiverId, conversationId, text });
-
-        // Send typing when user starts typing
-        emitTyping(receiverId);
-
-        if (userType === "user") {
-            const headers = { Authorization: `Bearer ${userData.token}` };
-            api
-                .post("/api/messages", { conversationId, senderId: myId, receiverId, text }, { headers })
-                .then((res) => {
-                    const savedMsg = res.data.message;
-                    setMessages((prev) =>
-                        prev.map((m) =>
-                            m._id === tempMsg._id
-                                ? { ...m, _id: savedMsg._id, status: "delivered", seen: savedMsg.seen || false }
-                                : m
-                        )
-                    );
-                })
-                .catch(() =>
-                    setMessages((prev) =>
-                        prev.map((m) => (m._id === tempMsg._id ? { ...m, status: "failed" } : m))
-                    )
-                );
-        }
+        socket.emit("sendMessage", { senderId: myId, receiverId: "AI_BOT", conversationId, text });
+        emitTyping("AI_BOT");
     };
 
-    if (userType === "loading") return <div className="p-4 text-center">Loading chat...</div>;
+    if (userType === "loading" || !conversationId) return <div>Loading chat...</div>;
 
     return (
-        <div className="w-full h-full p-2 flex flex-col gap-2">
-            <div ref={chatRef} className="flex-1 min-h-0 overflow-y-auto no-scrollbar flex flex-col gap-2">
+        <div className="w-full hu full flex flex-col h-full gap-2">
+            <div ref={chatRef} className="flex-1 overflow-y-auto flex flex-col gap-2">
                 {messages.map((msg) => (
                     <ChatMessage key={msg._id} message={msg} isMe={msg.senderId === myId} />
                 ))}
@@ -181,10 +127,8 @@ const ChatBox = ({ conversationId }) => {
                     e.target[0].value = "";
                 }}
             >
-                <MessageInput onSend={handleSend} onResize={scrollToBottom} />
-                <button type="submit" className="btn h-10 self-end">
-                    Send
-                </button>
+                <MessageInput onSend={handleSend} onResize={() => scrollToBottom()} />
+                <button type="submit" className="btn h-10 self-end">Send</button>
             </form>
         </div>
     );

@@ -52,7 +52,7 @@ const MessageInput = ({ onSend, onResize }) => {
             onKeyDown={handleKeyDown}
             placeholder="Type your message..."
             rows={1}
-            className="flex-1 resize-none overflow-hidden p-2 px-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/40"
+            className="w-full flex-1 resize-none overflow-hidden p-2 px-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/40"
             style={{ fontSize: value.length < 80 ? 16 : 14 }}
         />
     );
