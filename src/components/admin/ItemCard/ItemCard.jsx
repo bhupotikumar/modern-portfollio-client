@@ -28,9 +28,9 @@ const ItemCard = ({ title, description, updatedAt, onEdit, onDelete }) => {
 
                     {/* Updated time */}
                     <small className="text-right text-sm text-gray-300">
-                        {formatDistanceToNow(new Date(updatedAt), {
+                        {updatedAt? formatDistanceToNow(new Date(updatedAt), {
                             addSuffix: true,
-                        })}
+                        }): null}
                     </small>
 
                     {/* Edit */}

@@ -46,7 +46,7 @@ const AddProject = ({ onSubmit }) => {
     };
 
     // Handle form submission
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         onSubmit(form);
     };

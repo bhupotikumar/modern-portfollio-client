@@ -3,6 +3,7 @@ import { GoProject, GoSidebarExpand, GoSkipFill } from 'react-icons/go';
 import { NavLink } from 'react-router';
 import { FiSettings } from 'react-icons/fi';
 import { ImBlog } from "react-icons/im";
+import { IoMdContacts } from "react-icons/io";
 
 
 const Sidebar = () => {
@@ -47,6 +48,14 @@ const Sidebar = () => {
                         }>
                         < ImBlog />
                         <span className="is-drawer-close:hidden text-lg">Blogs</span>
+                    </NavLink>
+                    <NavLink to={"/admin/contacts"}
+                        className={({ isActive }) =>
+                            `flex items-center gap-3 text-2xl p-2 rounded-lg transition-all ${isActive ? "bg-primary text-white" : "hover:bg-base-200"
+                            }`
+                        }>
+                        < IoMdContacts />
+                        <span className="is-drawer-close:hidden text-lg">Contacts & Socials</span>
                     </NavLink>
                     <NavLink to={"/admin/settings"}
                         className={({ isActive }) =>

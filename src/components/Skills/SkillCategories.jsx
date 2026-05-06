@@ -1,10 +1,12 @@
-import Marquee from 'react-fast-marquee';
 import SkillCard from './SkillCard';
+import Marquee from 'react-fast-marquee';
 
-const Tools = ({ toolsData }) => {
-    if (!toolsData) return null;
+const SkillCategories = ({ category, index }) => {
+    if (!category) return null;
+    const { title, skills } = category;
 
-    const { title, skills } = toolsData;
+    const direction = index % 2 === 0 ? "left" : "right";
+
     return (
         <div>
             <h1 className='text-center font-bold text-xl md:text-2xl lg:text-3xl my-2 md:my-4'>{title} Skills</h1>
@@ -13,9 +15,10 @@ const Tools = ({ toolsData }) => {
                     speed={100}
                     pauseOnHover={true}
                     autoFill={true}
-                    delay={1}>
+                    direction={direction}
+                >
                     {skills.map((skill) => (
-                        <SkillCard skill={skill} />
+                        <SkillCard key={skill._id} skill={skill} />
                     ))}
                 </Marquee>
             </div>
@@ -23,4 +26,4 @@ const Tools = ({ toolsData }) => {
     );
 };
 
-export default Tools;
+export default SkillCategories;

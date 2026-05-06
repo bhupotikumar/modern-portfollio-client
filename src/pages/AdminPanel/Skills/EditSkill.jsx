@@ -3,35 +3,36 @@ import api from "../../../api/axios.js";
 import Modal from "../Modal/Modal";
 
 const EditSkill = ({ isOpen, onClose, skill, onSuccess }) => {
-    const [title, setTitle] = useState("");
-    const [logo, setLogo] = useState("");
-    const [logoType, setLogoType] = useState("url");
+    // Initialize strictly with empty strings
+    const [title, setTitle] = useState(skill?.title || "");
+    const [logo, setLogo] = useState(skill?.logo || "");
+    const [logoType, setLogoType] = useState(skill?.logoType || "url");
     const [file, setFile] = useState(null);
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         if (skill) {
-            setTitle(skill.title || "");
-            setLogo(skill.logo || "");
-            setLogoType(skill.logoType || "url");
+            // Use the || "" fallback here to ensure state never becomes undefined
+            setTitle(skill?.title || "");
+            setLogo(skill?.logo || "");
+            setLogoType(skill?.logoType || "url");
             setFile(null);
         }
     }, [skill]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         if (!title.trim()) return;
 
         try {
             setLoading(true);
-
             const formData = new FormData();
             formData.append("title", title);
             formData.append("logoType", logoType);
 
             if (logoType === "file" && file) {
-                formData.append("file", file);
+                // Ensure this matches your backend upload.array("files")
+                formData.append("files", file);
             } else {
                 formData.append("logo", logo);
             }
@@ -54,13 +55,12 @@ const EditSkill = ({ isOpen, onClose, skill, onSuccess }) => {
     return (
         <Modal isOpen={isOpen} onClose={onClose} title="Edit Skill">
             <form onSubmit={handleSubmit} className="space-y-4">
-
                 {/* Title */}
                 <div>
                     <label className="label">Title</label>
                     <input
                         type="text"
-                        value={title}
+                        value={title || ""}
                         onChange={(e) => setTitle(e.target.value)}
                         className="input input-bordered w-full"
                         placeholder="Enter skill title"
@@ -72,7 +72,14 @@ const EditSkill = ({ isOpen, onClose, skill, onSuccess }) => {
                     <label className="label">Logo Type</label>
                     <select
                         value={logoType}
-                        onChange={(e) => setLogoType(e.target.value)}
+                        onChange={(e) => {
+                            const newType = e.target.value;
+                            setLogoType(newType);
+                            // If switching to URL and current logo is a local file path, 
+                            // you might want to clear it or keep it. 
+                            // But ensuring it's at least an empty string is key:
+                            if (newType === "url" && !logo) setLogo("");
+                        }}
                         className="select select-bordered w-full"
                     >
                         <option value="url">URL</option>
@@ -83,17 +90,18 @@ const EditSkill = ({ isOpen, onClose, skill, onSuccess }) => {
                 {/* Logo Input */}
                 <div>
                     <label className="label">Logo</label>
-
                     {logoType === "url" ? (
                         <input
+                            key="url-input" // Add this key
                             type="text"
-                            value={logo}
+                            value={logo || ""}
                             onChange={(e) => setLogo(e.target.value)}
                             className="input input-bordered w-full"
                             placeholder="Enter image URL"
                         />
                     ) : (
                         <input
+                            key="file-input" // Add this key
                             type="file"
                             onChange={(e) => setFile(e.target.files[0])}
                             className="file-input file-input-bordered w-full"
@@ -103,19 +111,8 @@ const EditSkill = ({ isOpen, onClose, skill, onSuccess }) => {
 
                 {/* Actions */}
                 <div className="flex justify-end gap-3 pt-2">
-                    <button
-                        type="button"
-                        onClick={onClose}
-                        className="btn"
-                    >
-                        Cancel
-                    </button>
-
-                    <button
-                        type="submit"
-                        className="btn btn-primary"
-                        disabled={loading}
-                    >
+                    <button type="button" onClick={onClose} className="btn">Cancel</button>
+                    <button type="submit" className="btn btn-primary" disabled={loading}>
                         {loading ? "Saving..." : "Save"}
                     </button>
                 </div>

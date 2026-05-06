@@ -1,14 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
 import useTheme from '../../utils/useTheme';
-import { Link, NavLink } from 'react-router';
+import { Link } from 'react-router';
 import { GoSun } from 'react-icons/go';
 import { MdDarkMode } from 'react-icons/md';
 import useUser from '../../hooks/useUser';
+import Navbar from '../Navbar/Navbar';
 
 const Header = () => {
     const { theme, toggleTheme } = useTheme();
     const [menuOpen, setMenuOpen] = useState(false);
-    const [links, setLinks] = useState([]);
     const dropdownRef = useRef(null);
 
     useEffect(() => {
@@ -23,12 +23,6 @@ const Header = () => {
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
-    }, []);
-    useEffect(() => {
-        fetch("./navlinks.json")
-            .then(res => res.json())
-            .then(data => setLinks(data))
-            .catch(err => console.error(err));
     }, []);
 
     const { user, loading } = useUser();
@@ -71,18 +65,7 @@ const Header = () => {
                     {/* Dropdown Menu */}
                     {menuOpen && (
                         <div className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 absolute z-50">
-                            {links.map(link => (
-                                <NavLink
-                                    key={link.id}
-                                    to={link.href}
-                                    end={link.href === "/"}
-                                    className={({ isActive }) =>
-                                        `nav-link mx-2 font-semibold ${isActive ? "active" : ""}`
-                                    }
-                                >
-                                    {link.title}
-                                </NavLink>
-                            ))}
+                            <Navbar />
                         </div>
                     )}
                 </div>
@@ -90,24 +73,18 @@ const Header = () => {
                 <Link to={"/"}
                     className="text-sm md:text-xl font-semibold md:font-bold"
                 >
-                    {loading ? "Loading..." : user?.name?.name}
+                    {loading || !user ? <div className="relative h-8 w-32 bg-base-content/20 rounded animate-pulse">
+                        {/* shimmer */}
+                        <div className="absolute inset-0 overflow-hidden">
+                            <div className="w-full h-full bg-linear-to-r from-transparent via-base-content/10 to-transparent animate-[shimmer_1.5s_infinite]"></div>
+                        </div>
+                    </div> : user?.name?.name}
                 </Link>
             </div>
 
             {/* Navbar Center */}
             <div className="navbar-center hidden lg:flex">
-                {links.map(link => (
-                    <NavLink
-                        key={link.id}
-                        to={link.href}
-                        end={link.href === "/"}
-                        className={({ isActive }) =>
-                            `nav-link mx-2 font-semibold ${isActive ? "active" : ""}`
-                        }
-                    >
-                        {link.title}
-                    </NavLink>
-                ))}
+                <Navbar />
             </div>
 
             {/* Navbar End */}

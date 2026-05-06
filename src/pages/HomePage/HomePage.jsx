@@ -7,7 +7,7 @@ const HomePage = () => {
         <div>
             <Hero />
             <Skills />
-            <div className="divider"></div>
+            <div className="divider my-0"></div>
             <FeaturedProjects />
         </div>
     );

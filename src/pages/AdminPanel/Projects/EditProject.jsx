@@ -63,6 +63,7 @@ const EditProject = ({ isOpen, onClose, project, onUpdate }) => {
                     value={form.title}
                     onChange={handleChange}
                     className="input input-bordered w-full"
+                    required
                 />
                 <input
                     type="text"

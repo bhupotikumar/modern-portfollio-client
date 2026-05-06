@@ -3,7 +3,7 @@ import api from "../../../api/axios";
 import Tab from "../../../components/admin/Tab/Tab";
 import AddSkill from "./AddSkill";
 import EditSkill from "./EditSkill";
-import DeleteConfirm from "../Projects/DeleteConfirm";
+import DeleteConfirm from "../../../components/admin/DeleteConfirm/DeleteConfirm";
 import ItemCard from "../../../components/admin/ItemCard/ItemCard";
 
 const Skills = () => {
@@ -142,7 +142,7 @@ const Skills = () => {
                                 ) : (
                                     category.skills.map((skill) => (
                                         <ItemCard
-                                         key={skill._id}
+                                            key={skill._id}
                                             skill={skill}
                                             getFileUrl={getFileUrl}
                                             onEdit={() => handleEdit(skill, category._id)}
@@ -164,13 +164,18 @@ const Skills = () => {
                     },
                 ]}
             />
-            <EditSkill
-                isOpen={editOpen}
-                onClose={() => setEditOpen(false)}
-                skill={selectedSkill}
-                categoryId={selectedCategoryId}
-                onSuccess={fetchSkills}
-            />
+            {selectedSkill && (
+                <EditSkill
+                    isOpen={editOpen}
+                    onClose={() => {
+                        setEditOpen(false);
+                        setSelectedSkill(null); // Clear skill on close
+                    }}
+                    skill={selectedSkill}
+                    categoryId={selectedCategoryId}
+                    onSuccess={fetchSkills}
+                />
+            )}
 
             <DeleteConfirm
                 isOpen={deleteOpen}

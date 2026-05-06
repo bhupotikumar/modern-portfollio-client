@@ -1,6 +1,5 @@
 import { Outlet, useLocation } from "react-router";
 import Sidebar from "../../components/admin/Sidebar/Sidebar";
-import { GoSidebarExpand } from "react-icons/go";
 const AdminPanel = () => {
     const location = useLocation();
 
@@ -10,7 +9,9 @@ const AdminPanel = () => {
         if (path === "/admin") return "Dashboard";
         if (path.includes("/admin/projects")) return "Projects";
         if (path.includes("/admin/skills")) return "Skills";
-        if (path.includes("/admin/setting")) return "Settings";
+        if (path.includes("/admin/blogs")) return "Blogs";
+        if (path.includes("/admin/contacts")) return "Contacts & Socials";
+        if (path.includes("/admin/settings")) return "Settings";
     }
     return (
         <div className="drawer drawer-open">

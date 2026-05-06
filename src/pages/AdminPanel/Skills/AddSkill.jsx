@@ -13,7 +13,7 @@ const AddSkill = ({ onSubmit }) => {
         file: null,
         preview: null,
     });
-
+    
     // Category title change
     const handleCategoryChange = (e) => {
         setForm({ ...form, title: e.target.value });

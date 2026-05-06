@@ -1,4 +1,4 @@
-import Modal from "../Modal/Modal";
+import Modal from "../../../pages/AdminPanel/Modal/Modal";
 
 const DeleteConfirm = ({ isOpen, onClose, onConfirm, message }) => {
     return (

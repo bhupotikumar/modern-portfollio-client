@@ -4,7 +4,7 @@ import ItemCard from '../../../components/admin/ItemCard/ItemCard';
 import AddProject from './AddProject';
 import api from '../../../api/axios';
 import EditProject from './EditProject';
-import DeleteConfirm from './DeleteConfirm';
+import DeleteConfirm from '../../../components/admin/DeleteConfirm/DeleteConfirm';
 
 const Projects = () => {
     const [projects, setProjects] = useState([]);
@@ -120,7 +120,6 @@ const Projects = () => {
                                 title={project.title}
                                 description={project.description}
                                 updatedAt={project.updatedAt}
-                                project={project}
                                 onEdit={() => handleEdit(project)}
                                 onDelete={() => handleDeleteClick(project)}
                             />

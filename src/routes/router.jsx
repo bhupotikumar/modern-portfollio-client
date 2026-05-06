@@ -14,6 +14,8 @@ import Skills from '../pages/AdminPanel/Skills/Skills';
 import Settings from '../pages/AdminPanel/Settings/Settings';
 import NotFound from '../components/NotFound/NotFound';
 import Blogs from '../pages/AdminPanel/Blogs/Blogs';
+import ContactAndSocials from '../pages/AdminPanel/Contact&Socials/ContactAndSocials';
+import OpenSharedBlog from '../pages/OpenSharedBlog/OpenSharedBlog';
 
 export const router = createBrowserRouter([
     {
@@ -38,6 +40,10 @@ export const router = createBrowserRouter([
             },
             {
                 path: "blogs",
+                Component: BlogsPage,
+            },
+            {
+                path: "blogs/:slug",
                 Component: BlogsPage
             },
             { path: "*", Component: NotFound }
@@ -68,6 +74,14 @@ export const router = createBrowserRouter([
             {
                 path: "blogs",
                 Component: Blogs
+            },
+            {
+                path: "blogs",
+                Component: Blogs
+            },
+            {
+                path: "contacts",
+                Component: ContactAndSocials
             },
             {
                 path: "settings",

@@ -1,30 +1,63 @@
 import { useEffect, useState } from "react";
-import Frontend from "./Frontend";
-import Backend from "./Backend";
-import Tools from "./Tools";
-import CurrentLearning from "./CurrentLearning";
+import publicApi from "../../api/publicApi";
+import SkillCategories from "./SkillCategories";
+import SkillSkeleton from "../Skeleton/SkillSkeleton";
 
 const Skills = () => {
-    const [skillsData, setSkillsData] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [skillsCategories, setSkillsCategories] = useState([]);
+
+    const categoryOrder = {
+        "Frontend": 1,
+        "Backend": 2,
+        "Tools": 3,
+        "Others": 4
+    };
+
+    const fetchSkillsCategories = async () => {
+        setLoading(true);
+        try {
+            const res = await publicApi.get("/api/skills");
+            const data = Array.isArray(res.data) ? res.data : [];
+
+            // 2. Sort the data based on the categoryOrder map
+            const sortedData = data.sort((a, b) => {
+                // Get the weight of the category title (default to 99 if not found)
+                const orderA = categoryOrder[a.title] || 99;
+                const orderB = categoryOrder[b.title] || 99;
+
+                return orderA - orderB;
+            });
+
+            setSkillsCategories(sortedData);
+        } catch (err) {
+            console.error("Failed to fetch skills categories:", err);
+            setSkillsCategories([]);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     useEffect(() => {
-        fetch("/skills.json")
-            .then((res) => res.json())
-            .then((data) => setSkillsData(data))
-            .catch((err) => console.error(err));
+        fetchSkillsCategories();
     }, []);
 
-    const frontendData = skillsData.find((s) => s.id === "frontend");
-    const backendData = skillsData.find((s) => s.id === "backend");
-    const toolsData = skillsData.find((s) => s.id === "tools");
-    const currentLearningData = skillsData.find((s) => s.id === "current-learning");
+    if (loading || !skillsCategories) {
+        return (
+            <SkillSkeleton />
+        );
+    }
+
 
     return (
-        <div className="mt-12">
-            <Frontend frontendData={frontendData} />
-            <Backend backendData={backendData} />
-            <Tools toolsData={toolsData} />
-            <CurrentLearning currentLearningData={currentLearningData} />
+        <div className="md:mt-12">
+            {skillsCategories.map((category, index) => {
+                return <SkillCategories
+                    key={category._id}
+                    category={category}
+                    index={index}
+                />;
+            })}
         </div>
     );
 };
