@@ -6,9 +6,9 @@ const HomePage = () => {
     return (
         <div>
             <Hero />
-            <Skills />
-            <div className="divider my-0"></div>
             <FeaturedProjects />
+            <div className="divider my-0"></div>
+            <Skills />
         </div>
     );
 };

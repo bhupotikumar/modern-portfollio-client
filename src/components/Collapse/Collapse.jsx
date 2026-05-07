@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import ChatBox from '../../pages/Chats/ChatBox';
 import { ImCross } from 'react-icons/im';
 import { BsChatRightText } from "react-icons/bs";
+import ChatBox from '../chat/Chatbox';
 
 
 const Collapse = () => {
@@ -18,8 +18,10 @@ const Collapse = () => {
             >
                 {/* Header */}
                 <div className="bg-primary text-primary-content px-4 py-3 flex justify-between items-center">
-                    <span className="font-semibold">PBot | Ask Me</span>
-
+                    <span className="font-semibold flex items-center gap-2">
+                        <h2>PBot | Ask Me</h2>
+                        <div className="w-3 h-3 rounded-full bg-green-500" />
+                    </span>
                     <button
                         onClick={() => setOpen(false)}
                         className="text-lg hover:scale-110 transition"
