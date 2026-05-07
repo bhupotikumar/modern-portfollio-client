@@ -19,8 +19,6 @@ export const connectSocket = ({
   });
 
   socket.on("connect", () => {
-    console.log("✅ Socket Connected");
-
     socket.emit("user:join", {
       userId: user?.uid || publicId,
 

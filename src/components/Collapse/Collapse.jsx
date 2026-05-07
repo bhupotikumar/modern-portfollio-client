@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { ImCross } from 'react-icons/im';
 import { BsChatRightText } from "react-icons/bs";
-import ChatBox from '../chat/Chatbox';
+import ChatBox from '../chat/ChatBox';
 
 
 const Collapse = () => {

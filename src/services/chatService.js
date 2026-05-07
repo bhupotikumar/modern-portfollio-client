@@ -1,6 +1,6 @@
 // import publicApi from "../api/publicApi";
 
-import api from "../api/axios";
+import api from "../api/axios.js";
 
 export const getMessages = async (conversationId) => {
     const res = await api.get(
