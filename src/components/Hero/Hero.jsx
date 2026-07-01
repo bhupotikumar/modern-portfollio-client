@@ -77,7 +77,7 @@ const Hero = () => {
                     />
 
                     {/* gradient */}
-                    <div className="absolute inset-0 bg-linear-to-br from-base-content/10 via-base-100/40 to-base-100"></div>
+                    <div className="absolute inset-0 bg-linear-to-br from-neutral via-accent/20 to-primary/10"></div>
 
                     {/* glow accents */}
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(0,255,255,0.2),transparent_50%),radial-gradient(circle_at_80%_70%,rgba(255,0,255,0.2),transparent_50%)]"></div>
@@ -137,9 +137,9 @@ const Hero = () => {
 
                     <button
                         onClick={toggleMute}
-                        className={`absolute top-6 right-6 z-50 p-4 rounded-full backdrop-blur-xl border border-white/20 transition-all duration-500
+                        className={`absolute top-6 right-6 z-50 p-4 rounded-full backdrop-blur-xl transition-all duration-500
                     ${hovered ? "translate-y-0 opacity-100" : "-translate-y-10 opacity-0"} 
-                    ${isMuted ? "bg-black/40 text-white" : "bg-primary text-white shadow-lg"}`}
+                    ${isMuted ? "bg-secondary/40 text-secondary-content" : "bg-primary text-primary-content shadow-lg"}`}
                     >
                         <span className="text-[10px] font-black uppercase tracking-widest">
                             {isMuted ? "🔈 Unmute" : "🔊 Sound On"}
@@ -149,29 +149,32 @@ const Hero = () => {
 
                 {/* CONTENT SECTION (GLASS) */}
                 <div
-                    className="relative z-10 flex-1 md:w-auto p-4 md:p-6 rounded-2xl
+                    className="relative z-50 flex-1 md:w-auto p-1 md:p-4 lg:p-6 rounded-lg md:rounded-2xl
                 animate-[float_6s_ease-in-out_infinite]"
                 >
                     <div className="w-full">
-                        <div className="font-black leading-none mb-3 md:mb-10 text-center md:text-left">
+                        <div className="font-accent font-extrabold text-neutral leading-none mb-0 md:mb-6 lg:mb-10 text-center md:text-left">
                             <span className="text-2xl md:text-2xl lg:text-3xl">Hi, I'm</span>
 
-                            <h1 className="bg-linear-to-r from-primary to-accent text-transparent bg-clip-text text-4xl md:text-3xl lg:text-6xl p-0 m-0">
-                                <TypingText text={nameValue} speed={70} />
-                            </h1>
-
-                            <h2 className="text-xl md:text-2xl lg:text-3xl text-base-content/80">
-                                <TypingText text={titleValue} speed={70} />
+                            <h2 className="font-heading bg-linear-to-r from-primary to-secondary text-transparent bg-clip-text text-4xl md:text-3xl lg:text-6xl p-0 m-0"
+                                style={{
+                                    WebkitTextStroke: "1px var(--color-neutral)",
+                                }}>
+                                <TypingText text={nameValue} pause={2000} speed={70} />
                             </h2>
+
+                            <h1 className="text-xl md:text-2xl lg:text-3xl text-neutral">
+                                <TypingText text={titleValue} pause={1000} speed={70} />
+                            </h1>
                         </div>
 
-                        <p className="text-center md:text-left text-lg md:text-xl text-base-content/80 leading-relaxed mb-4 md:mb-10 p-2 border border-base-content/20 backdrop-blur-xl shadow-xl rounded-lg">
+                        <p className="text-center md:text-justify text-base md:text-xl text-base-content leading-relaxed mb-4 md:mb-10 p-2 border border-accent/50 backdrop-blur-xl shadow-xl rounded-lg">
                             {descriptionValue}
                         </p>
 
                         <div className="flex items-center justify-center md:justify-start mb-2 md:mb-12">
                             <AnimatedBtn
-                                className="btn-primary btn-lg backdrop-blur-md bg-primary/80 border border-white/20 border-r-0 rounded-r-none"
+                                className="btn-primary btn-md md:btn-lg backdrop-blur-md border border-accent border-r-0 rounded-r-none text-secondary hover:text-primary-content"
                                 as="a"
                                 href={`${import.meta.env.VITE_API_URL}/api/cv`}
                                 rel="noopener noreferrer"
@@ -183,14 +186,14 @@ const Hero = () => {
                                 as={Link}
                                 to="/contact"
                                 direction="rtl"
-                                className="btn-outline btn-lg backdrop-blur-md border-white/20 border-l-0 rounded-l-none"
+                                className="btn-outline btn-md md:btn-lg backdrop-blur-md border border-accent border-l-0 rounded-l-none text-secondary hover:text-primary-content"
                             >
                                 Hire Me
                             </AnimatedBtn>
                         </div>
 
                         <div>
-                            <h1 className="text-center md:text-left text-xl py-2">
+                            <h1 className="font-heading text-center md:text-left text-xl py-2">
                                 Connect with me
                             </h1>
 

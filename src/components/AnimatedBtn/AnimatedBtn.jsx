@@ -17,7 +17,7 @@ const AnimatedBtn = React.forwardRef((props, ref) => {
         children,
         as: Component = "button",
         className = "",
-        gradient = "from-indigo-500 to-blue-500",
+        gradient = "from-primary to-secondary",
         direction = "ltr",
         ...rest
     } = props;
