@@ -5,6 +5,7 @@ import AddSkill from "./AddSkill";
 import EditSkill from "./EditSkill";
 import DeleteConfirm from "../../../components/admin/DeleteConfirm/DeleteConfirm";
 import ItemCard from "../../../components/admin/ItemCard/ItemCard";
+import Categories from "./Categories";
 
 const Skills = () => {
     const [skillsCategory, setSkillsCategory] = useState([]);
@@ -34,23 +35,10 @@ const Skills = () => {
         }
     };
 
-    // add skill + refresh
-    const handleAddSkill = async (formData) => {
-        try {
-            await api.post("/api/skills", formData, {
-                headers: { "Content-Type": "multipart/form-data" },
-            });
-
-            await fetchSkills();
-            alert("Skill category added successfully!");
-        } catch (error) {
-            console.error("Failed to add skill:", error);
-            alert("Failed to add skill");
-        }
-    };
-
     useEffect(() => {
-        fetchSkills();
+        // defer the fetch to avoid setting state synchronously during effect
+        const t = setTimeout(() => fetchSkills(), 0);
+        return () => clearTimeout(t);
     }, []);
 
     // merge duplicate categories (memoized)
@@ -100,6 +88,23 @@ const Skills = () => {
         }
     };
 
+    const handleAddSkill = async (form) => {
+        try {
+            const formData = new FormData();
+            formData.append("title", form.title);
+            formData.append("logo", form.logo);
+            formData.append("logoType", form.logoType);
+            formData.append("categoryId", form.categoryId);
+
+            const res = await api.post("/api/skills", formData);
+            alert("added", res.data.title);
+
+        } catch (error) {
+            console.log("Axios error:", error);
+            alert(error.response?.data?.message || "Failed to add skill");
+        }
+    };
+
     // loading UI
     if (loading) {
         return <div className="p-4">Loading...</div>;
@@ -111,7 +116,7 @@ const Skills = () => {
                 name="skills-tabs"
                 tabs={[
                     {
-                        label: "All",
+                        label: "All Skills",
                         content: (
                             <div className="">
                                 {mergedCategories.flatMap((cat) =>
@@ -132,35 +137,16 @@ const Skills = () => {
                         ),
                     },
 
-                    // dynamic category tabs
-                    ...mergedCategories.map((category) => ({
-                        label: category.title,
-                        content: (
-                            <div className="">
-                                {category.skills.length === 0 ? (
-                                    <p>No skills yet</p>
-                                ) : (
-                                    category.skills.map((skill) => (
-                                        <ItemCard
-                                            key={skill._id}
-                                            skill={skill}
-                                            getFileUrl={getFileUrl}
-                                            onEdit={() => handleEdit(skill, category._id)}
-                                            onDelete={() => handleDelete(skill, category._id)}
-                                            title={skill.title}
-                                            description={category.title}
-                                            updatedAt={skill.updatedAt}
-                                        />
-                                    ))
-                                )}
-                            </div>
-                        ),
-                    })),
-
-                    // add new tab
+                    // add new skill tab
                     {
-                        label: "Add New",
+                        label: "Add New Skill",
                         content: <AddSkill onSubmit={handleAddSkill} />,
+                    },
+
+                    // Categories tab
+                    {
+                        label: "Categories",
+                        content: <Categories />,
                     },
                 ]}
             />

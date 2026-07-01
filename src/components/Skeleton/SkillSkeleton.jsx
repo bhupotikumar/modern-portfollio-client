@@ -7,7 +7,7 @@ const SkillSkeletonCard = () => {
 
             {/* shimmer layer */}
             <div className="absolute inset-0">
-                <div className="w-full h-full bg-gradient-to-r from-transparent via-base-content/10 to-transparent animate-[shimmer_1.6s_infinite]" />
+                <div className="w-full h-full bg-linear-to-r from-transparent via-base-content/10 to-transparent animate-[shimmer_1.6s_infinite]" />
             </div>
 
             <div className="flex flex-col items-center justify-center h-full p-2 md:p-4 space-y-2">

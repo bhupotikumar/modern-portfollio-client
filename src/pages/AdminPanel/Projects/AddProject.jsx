@@ -3,7 +3,6 @@ import { useState } from "react";
 const AddProject = ({ onSubmit }) => {
     const [form, setForm] = useState({
         title: "",
-        slug: "",
         description: "",
         image: null,
         tech: [],
@@ -70,19 +69,6 @@ const AddProject = ({ onSubmit }) => {
             </div>
 
             <div>
-                <label className="block font-medium mb-1">Slug</label>
-                <input
-                    type="text"
-                    name="slug"
-                    value={form.slug}
-                    onChange={handleChange}
-                    placeholder="my-project"
-                    className="input input-bordered w-full"
-                    required
-                />
-            </div>
-
-            <div>
                 <label className="block font-medium mb-1">Description</label>
                 <textarea
                     name="description"
@@ -102,6 +88,7 @@ const AddProject = ({ onSubmit }) => {
                     name="image"
                     accept="image/*"
                     onChange={handleChange}
+                    required
                     className="file-input file-input-bordered w-full"
                 />
                 {imagePreview && (
@@ -149,10 +136,10 @@ const AddProject = ({ onSubmit }) => {
                     <label className="block font-medium mb-1">Live Demo URL</label>
                     <input
                         type="url"
-                        name="liveDemo"
+                        name="liveLink"
                         value={form.liveLink}
                         onChange={handleChange}
-                        placeholder="https://example.com"
+                        placeholder="https://live-demo.com"
                         className="input input-bordered w-full"
                     />
                 </div>
@@ -160,7 +147,7 @@ const AddProject = ({ onSubmit }) => {
                     <label className="block font-medium mb-1">GitHub URL</label>
                     <input
                         type="url"
-                        name="github"
+                        name="githubLink"
                         value={form.githubLink}
                         onChange={handleChange}
                         placeholder="https://github.com/username/project"

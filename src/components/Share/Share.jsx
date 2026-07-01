@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion as Motion, AnimatePresence } from "framer-motion";
 import {
     FaFacebook,
     FaInstagram,
@@ -120,7 +120,7 @@ const Share = ({ blog }) => {
                             const rad = (angle * Math.PI) / 180;
 
                             return (
-                                <motion.button
+                                <Motion.button
                                     key={action.id}
                                     onClick={(e) =>
                                         handleActionClick(action.name, e)
@@ -142,13 +142,13 @@ const Share = ({ blog }) => {
                                     className="absolute btn btn-circle btn-primary text-xl shadow-md"
                                 >
                                     {action.icon}
-                                </motion.button>
+                                </Motion.button>
                             );
                         })}
                 </AnimatePresence>
 
                 {/* 🔥 Main FAB */}
-                <motion.button
+                <Motion.button
                     onClick={(e) => {
                         e.stopPropagation();
 
@@ -161,23 +161,25 @@ const Share = ({ blog }) => {
                     whileTap={{ scale: 0.9 }}
                     className="btn btn-circle bg-primary text-white text-xl shadow-xl"
                 >
-                    <motion.span
+                    <Motion.span
                         animate={{ rotate: open ? 45 : 0 }}
                         transition={{ type: "spring", stiffness: 300 }}
                     >
                         <FaShareAlt />
-                    </motion.span>
-                </motion.button>
+                    </Motion.span>
+                </Motion.button>
 
                 {/* 🔥 Copy Link */}
                 {open && (
-                    <button
+                    <Motion.button
                         onClick={copyLink}
                         className="absolute top-16 left-1/2 -translate-x-1/2 btn btn-sm shadow"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
                     >
                         <FaLink className="mr-1" />
                         Copy Link
-                    </button>
+                    </Motion.button>
                 )}
             </div>
         </div>

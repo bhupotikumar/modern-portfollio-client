@@ -1,15 +1,15 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import api from "../../../api/axios";
 import Modal from "../Modal/Modal";
+
 const EditBlog = ({ isOpen, onClose, blog, onUpdate }) => {
 
-    const [form, setForm] = useState({
+    const [form, setForm] = useState(() => blog || {
         title: "",
         excerpt: "",
         content: "",
         category: "",
         tags: "",
-        image: null,
         featured: false,
         status: "draft",
         seo: {
@@ -18,29 +18,7 @@ const EditBlog = ({ isOpen, onClose, blog, onUpdate }) => {
         }
     });
 
-    const [imagePreview, setImagePreview] = useState(null);
     const [loading, setLoading] = useState(false);
-
-    // 🔥 Fetch blog data
-    useEffect(() => {
-        if (blog) {
-            setForm({
-                title: blog.title || "",
-                excerpt: blog.excerpt || "",
-                content: blog.content || "",
-                category: blog.category || "",
-                tags: blog.tags?.join(", ") || "",
-                image: null,
-                featured: blog.featured || false,
-                status: blog.status || "draft",
-                seo: {
-                    metaTitle: blog.seo?.metaTitle || "",
-                    metaDescription: blog.seo?.metaDescription || ""
-                }
-            });
-            setImagePreview(blog.imageUrl || null);
-        }
-    }, [blog]);
 
     // handle input
     const handleChange = (e) => {
@@ -62,17 +40,18 @@ const EditBlog = ({ isOpen, onClose, blog, onUpdate }) => {
         }));
     };
 
-    // 🔥 Update handler
+    // Update handler
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
 
         try {
-            const res = await api.put(`/api/blogs/${blog._id}`, form);
+            const res = await api.put(`/api/blogs/${blog.id}`, form);
             onUpdate(res.data);
             onClose();
         } catch (error) {
             console.error(error);
+            alert("Failed to update blog.");
         } finally {
             setLoading(false);
         }
@@ -138,20 +117,6 @@ const EditBlog = ({ isOpen, onClose, blog, onUpdate }) => {
                         placeholder="React, JS"
                         className="input input-bordered w-full"
                     />
-                </div>
-
-                {/* Image */}
-                <div>
-                    <input
-                        type="file"
-                        name="image"
-                        accept="image/*"
-                        onChange={handleChange}
-                        className="file-input file-input-bordered w-full"
-                    />
-                    {imagePreview && (
-                        <img src={imagePreview} className="mt-2 h-40 rounded" />
-                    )}
                 </div>
 
                 {/* Featured */}

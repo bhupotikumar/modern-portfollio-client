@@ -8,7 +8,6 @@ const AddBlog = () => {
         content: "",
         category: "",
         tags: "",
-        image: null,
         featured: false,
         status: "draft",
         seo: {
@@ -17,26 +16,12 @@ const AddBlog = () => {
         }
     });
 
-    const [imagePreview, setImagePreview] = useState(null);
     const [loading, setLoading] = useState(false);
 
-    // handle input
+    // handle inputs
     const handleChange = (e) => {
-        const { name, value, files, checked, type } = e.target;
-
-        if (type === "file") {
-            const file = files[0];
-            setForm(prev => ({ ...prev, image: file }));
-
-            if (file) {
-                const reader = new FileReader();
-                reader.onloadend = () => setImagePreview(reader.result);
-                reader.readAsDataURL(file);
-            } else {
-                setImagePreview(null);
-            }
-
-        } else if (type === "checkbox") {
+        const { name, value, checked, type } = e.target;
+        if (type === "checkbox") {
             setForm(prev => ({ ...prev, [name]: checked }));
 
         } else {
@@ -74,12 +59,8 @@ const AddBlog = () => {
             const tagsArray = form.tags.split(",").map(tag => tag.trim());
             tagsArray.forEach(tag => formData.append("tags", tag));
 
-            // ✅ FIXED SEO
+            // FIXED SEO
             formData.append("seo", JSON.stringify(form.seo));
-
-            if (form.image) {
-                formData.append("image", form.image);
-            }
 
             const res = await api.post("/api/blogs", formData);
 
@@ -97,14 +78,10 @@ const AddBlog = () => {
                 content: "",
                 category: "",
                 tags: "",
-                image: null,
                 featured: false,
                 status: "draft",
                 seo: { metaTitle: "", metaDescription: "" }
             });
-
-            setImagePreview(null);
-
         } catch (error) {
             console.error(error);
             alert(error.response?.data?.message || error.message);
@@ -171,20 +148,6 @@ const AddBlog = () => {
                     placeholder="React, JS"
                     className="input input-bordered w-full"
                 />
-            </div>
-
-            {/* Image */}
-            <div>
-                <input
-                    type="file"
-                    name="image"
-                    accept="image/*"
-                    onChange={handleChange}
-                    className="file-input file-input-bordered w-full"
-                />
-                {imagePreview && (
-                    <img src={imagePreview} className="mt-2 h-40 rounded" />
-                )}
             </div>
 
             {/* Featured */}

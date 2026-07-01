@@ -6,7 +6,7 @@ const Navbar = () => {
     const [links, setLinks] = useState([]);
 
     useEffect(() => {
-        fetch("/navlinks.json")   // 🔥 FIXED
+        fetch("/navlinks.json")
             .then(res => {
                 if (!res.ok) {
                     throw new Error("Failed to load navlinks.json");
@@ -18,14 +18,24 @@ const Navbar = () => {
     }, []);
 
     return (
-        <div>
+        <div className="flex flex-col lg:flex-row lg:items-center md:bg-transparent">
             {links.map(link => (
                 <NavLink
                     key={link.id}
                     to={link.href}
                     end={link.href === "/"}
                     className={({ isActive }) =>
-                        `nav-link mx-2 font-semibold ${isActive ? "active" : ""}`
+                        `
+                        px-4 py-2 my-2 lg:my-0
+                        rounded-lg text-neutral
+                        transition-all duration-300
+                        font-semibold
+                        
+                        ${isActive
+                            ? "bg-primary text-primary-content"
+                            : "hover:bg-base-300"
+                        }
+                        `
                     }
                 >
                     {link.title}

@@ -73,7 +73,7 @@ const AddSocial = ({ onsubmit }) => {
             />
 
             <input
-                type="url"
+                type="text"
                 name="url"
                 value={form.url || ""}
                 onChange={handleChange}

@@ -1,9 +1,9 @@
+import React from "react";
 import { useEffect, useState } from 'react';
 import Modal from '../Modal/Modal';
 import api from '../../../api/axios';
 
 const EditSocial = ({ isOpen, onClose, social, onUpdate }) => {
-    // Initializing with empty strings instead of null/undefined
     const [form, setForm] = useState({
         platform: "",
         url: "",
@@ -17,14 +17,20 @@ const EditSocial = ({ isOpen, onClose, social, onUpdate }) => {
 
     useEffect(() => {
         if (social) {
-            setForm({
+            const newForm = {
                 platform: social.platform || "",
                 url: social.url || "",
                 logoType: social.logoType || "file",
                 logo: social.logoType === "url" ? social.logo : "",
                 image: null,
-            });
-            setImagePreview(social.logo || null);
+            };
+            // which can occur when calling setState synchronously inside an effect.
+            const t = setTimeout(() => {
+                setForm(newForm);
+                setImagePreview(social.logo || null);
+            }, 0);
+
+            return () => clearTimeout(t);
         }
     }, [social]);
 
@@ -100,7 +106,7 @@ const EditSocial = ({ isOpen, onClose, social, onUpdate }) => {
                 <div>
                     <label className="block font-medium mb-1">URL</label>
                     <input
-                        type="url"
+                        type="text"
                         name="url"
                         value={form.url || ""} // Ensure string
                         onChange={handleChange}

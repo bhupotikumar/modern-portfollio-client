@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import api from "../../../api/axios.js";
 import Modal from "../Modal/Modal";
 
@@ -9,16 +9,6 @@ const EditSkill = ({ isOpen, onClose, skill, onSuccess }) => {
     const [logoType, setLogoType] = useState(skill?.logoType || "url");
     const [file, setFile] = useState(null);
     const [loading, setLoading] = useState(false);
-
-    useEffect(() => {
-        if (skill) {
-            // Use the || "" fallback here to ensure state never becomes undefined
-            setTitle(skill?.title || "");
-            setLogo(skill?.logo || "");
-            setLogoType(skill?.logoType || "url");
-            setFile(null);
-        }
-    }, [skill]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -32,14 +22,12 @@ const EditSkill = ({ isOpen, onClose, skill, onSuccess }) => {
 
             if (logoType === "file" && file) {
                 // Ensure this matches your backend upload.array("files")
-                formData.append("files", file);
+                formData.append("logo", file);
             } else {
                 formData.append("logo", logo);
             }
 
-            await api.put(`/api/skills/${skill._id}`, formData, {
-                headers: { "Content-Type": "multipart/form-data" },
-            });
+            await api.put(`/api/skills/${skill._id}`, formData);
 
             onSuccess();
             onClose();

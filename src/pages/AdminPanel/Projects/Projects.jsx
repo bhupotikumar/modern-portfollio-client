@@ -43,7 +43,6 @@ const Projects = () => {
 
             formData.append("title", form.title);
             formData.append("description", form.description);
-            if (form.slug) formData.append("slug", form.slug); // optional
             if (form.image) formData.append("image", form.image);
             formData.append("featured", form.featured);
             formData.append("liveLink", form.liveLink || "");
@@ -53,22 +52,35 @@ const Projects = () => {
                 formData.append("tech", form.tech.join(","));
             }
 
-            const res = await api.post("/api/projects", formData, {
-                headers: {
-                    "Content-Type": "multipart/form-data", // important for file uploads
-                },
-            });
+            const res = await api.post("/api/projects", formData);
 
             console.log("Project created:", res.data);
             alert("Project added successfully!");
         } catch (error) {
-            console.error(error);
-            alert("Failed to add project");
+            console.error("Axios Error:", error);
+
+            console.log(error.response?.data);
+
+            alert(
+                error.response?.data?.message ||
+                "Failed to add project"
+            );
         }
     };
 
     const handleEdit = (project) => {
-        setSelectedProject(project);
+        setSelectedProject({
+            id: project._id,
+            title: project.title || "",
+            description: project.description || "",
+            tech: project.tech || [],
+            liveLink: project.liveLink || "",
+            githubLink: project.githubLink || "",
+            featured: project.featured || false,
+            imagePreview: project.image || "",
+            image: null,
+        });
+
         setIsEditOpen(true);
     };
     const handleDeleteClick = (project) => {
@@ -79,7 +91,6 @@ const Projects = () => {
         try {
             await api.delete(`/api/projects/${selectedProject._id}`);
 
-            // ✅ remove from UI instantly (optimistic update)
             setProjects(prev =>
                 prev.filter(p => p._id !== selectedProject._id)
             );
@@ -124,18 +135,20 @@ const Projects = () => {
                                 onDelete={() => handleDeleteClick(project)}
                             />
                         ))}
-                        <EditProject
-                            isOpen={isEditOpen}
-                            onClose={() => setIsEditOpen(false)}
-                            project={selectedProject}
-                            onUpdate={(updatedProject) => {
-                                setProjects(prev =>
-                                    prev.map(p =>
-                                        p._id === updatedProject._id ? updatedProject : p
-                                    )
-                                );
-                            }}
-                        />
+                        {isEditOpen && selectedProject && (
+                            <EditProject
+                                isOpen={isEditOpen}
+                                onClose={() => setIsEditOpen(false)}
+                                project={selectedProject}
+                                onUpdate={(updatedProject) => {
+                                    setProjects(prev =>
+                                        prev.map(p =>
+                                            p._id === updatedProject._id ? updatedProject : p
+                                        )
+                                    );
+                                }}
+                            />
+                        )}
 
                         <DeleteConfirm
                             isOpen={isDeleteOpen}

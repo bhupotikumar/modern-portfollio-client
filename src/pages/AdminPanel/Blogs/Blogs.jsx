@@ -30,7 +30,21 @@ const Blogs = () => {
     }, []);
 
     const handleEdit = (blog) => {
-        setSelectedBlog(blog);
+        setSelectedBlog({
+            id: blog._id,
+            title: blog.title || "",
+            excerpt: blog.excerpt || "",
+            content: blog.content || "",
+            category: blog.category || "",
+            tags: blog.tags?.join(", ") || "",
+            image: null,
+            featured: blog.featured || false,
+            status: blog.status || "draft",
+            seo: {
+                metaTitle: blog.seo?.metaTitle || "",
+                metaDescription: blog.seo?.metaDescription || ""
+            }
+        });
         setIsEditOpen(true);
     };
     const handleDeleteClick = (blog) => {
@@ -69,18 +83,20 @@ const Blogs = () => {
                                 onDelete={() => handleDeleteClick(blog)}
                             />
                         )) : "No blogs found"}
-                        <EditBlog
-                            isOpen={isEditOpen}
-                            onClose={() => setIsEditOpen(false)}
-                            blog={selectedBlog}
-                            onUpdate={(updatedBlog) => {
-                                setBlogs(prev =>
-                                    prev.map(b =>
-                                        b._id === updatedBlog._id ? updatedBlog : b
-                                    )
-                                );
-                            }}
-                        />
+                        {isEditOpen && selectedBlog && (
+                            <EditBlog
+                                isOpen={isEditOpen}
+                                onClose={() => setIsEditOpen(false)}
+                                blog={selectedBlog}
+                                onUpdate={(updatedBlog) => {
+                                    setBlogs(prev =>
+                                        prev.map(b =>
+                                            b._id === updatedBlog._id ? updatedBlog : b
+                                        )
+                                    );
+                                }}
+                            />
+                        )}
 
                         <DeleteConfirm
                             isOpen={isDeleteOpen}

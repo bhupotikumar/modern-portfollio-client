@@ -1,18 +1,26 @@
-const FormBlock = ({ title, value, setValue, onSave, loading, textarea }) => {
+const FormBlock = ({
+    title,
+    value = "",
+    setValue,
+    onSave,
+    loading = false,
+    textarea = false
+}) => {
     return (
         <div className="p-4 border border-base-content/30 rounded shadow-lg shadow-base-content/30 space-y-3">
+
             <h2 className="text-lg font-semibold">{title}</h2>
 
             {textarea ? (
                 <textarea
-                    value={value}
+                    value={value || ""}
                     onChange={(e) => setValue(e.target.value)}
                     className="textarea textarea-bordered w-full"
                 />
             ) : (
                 <input
                     type="text"
-                    value={value}
+                    value={value || ""}
                     onChange={(e) => setValue(e.target.value)}
                     className="input input-bordered w-full"
                 />

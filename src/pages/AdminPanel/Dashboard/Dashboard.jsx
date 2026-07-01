@@ -1,5 +1,4 @@
 import Clients from './Clients/Clients';
-import NewestProjects from '../Projects/NewestProjects';
 
 const Dashboard = () => {
     return (
@@ -21,25 +20,21 @@ const Dashboard = () => {
                     <div className="h-full rounded-xl border border-base-content/30 shadow-lg shadow-base-content/30 p-2">
                         <h1>Unseen Messages</h1>
                         <div className="ml-4">
-                            <NewestProjects />
                         </div>
                     </div>
                     <div className="h-full rounded-xl border border-base-content/30 shadow-lg shadow-base-content/30 p-2">
                         <h1>Newest Blogs</h1>
                         <div className="ml-4">
-                            <NewestProjects />
                         </div>
                     </div>
                     <div className="h-full rounded-xl border border-base-content/30 shadow-lg shadow-base-content/30 p-2">
                         <h1 className='font-bold mb-2'>Newest Projects</h1>
                         <div className="ml-4">
-                            <NewestProjects />
                         </div>
                     </div>
                     <div className="h-full rounded-xl border border-base-content/30 shadow-lg shadow-base-content/30 p-2">
                         <h1>Last Chats</h1>
                         <div className="ml-4">
-                            <NewestProjects />
                         </div>
                     </div>
                 </div>

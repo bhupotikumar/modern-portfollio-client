@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 import { GoSun } from 'react-icons/go';
 import { MdDarkMode } from 'react-icons/md';
 import useUser from '../../hooks/useUser';
-import Navbar from '../Navbar/Navbar';
+import Navbar from './Navbar';
 
 const Header = () => {
     const { theme, toggleTheme } = useTheme();
@@ -44,7 +44,7 @@ const Header = () => {
 
                             {/* Hamburger */}
                             <svg
-                                className="swap-off w-5 h-5 fill-current"
+                                className="swap-off w-5 h-5 fill-current border border-base-content/30 rounded"
                                 xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 24 24"
                             >
@@ -53,7 +53,7 @@ const Header = () => {
 
                             {/* Close */}
                             <svg
-                                className="swap-on w-5 h-5 fill-current"
+                                className="swap-on w-5 h-5 fill-current border border-base-content/30 rounded"
                                 xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 24 24"
                             >
@@ -64,7 +64,7 @@ const Header = () => {
 
                     {/* Dropdown Menu */}
                     {menuOpen && (
-                        <div className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 absolute z-50">
+                        <div className="absolute top-12 left-0 w-52 p-3 rounded-2xl shadow-xl bg-base-100 border z-50 lg:hidden">
                             <Navbar />
                         </div>
                     )}

@@ -1,30 +1,31 @@
 import AnimatedBtn from '../AnimatedBtn/AnimatedBtn';
 import publicApi from '../../api/publicApi';
 import { useEffect, useState } from 'react';
-import { getImageUrl } from '../../utils/getImageUrl';
-import { Link } from 'react-router';
+import { getSocialUrl } from '../../utils/getSocialUrl';
 
 const SocialLinks = () => {
 
     const [loading, setLoading] = useState(true);
     const [socials, setSocials] = useState([]);
 
-    const fetchSocial = async () => {
-        setLoading(true);
-        try {
-            const res = await publicApi.get("/api/socials");
-            setSocials(Array.isArray(res.data) ? res.data : []);
-        } catch (err) {
-            console.error("Failed to fetch social links:", err);
-            setSocials([]);
-        } finally {
-            setLoading(false);
-        }
-    };
+
 
     useEffect(() => {
+        const fetchSocial = async () => {
+            setLoading(true);
+            try {
+                const res = await publicApi.get("/api/socials");
+                setSocials(Array.isArray(res.data) ? res.data : []);
+            } catch (err) {
+                console.error("Failed to fetch social links:", err);
+                setSocials([]);
+            } finally {
+                setLoading(false);
+            }
+        };
         fetchSocial();
     }, []);
+
 
     return (
         <div className='flex flex-wrap gap-3'>
@@ -47,13 +48,14 @@ const SocialLinks = () => {
                             return (
                                 <AnimatedBtn
                                     key={social._id}
-                                    as={Link}
-                                    to={social.url}
+                                    as="a"
+                                    href={getSocialUrl(social)}
                                     target="_blank"
-                                    className="rounded-full w-14 h-14 p-2 text-base-content border-base-content shadow-lg shadow-base-content/50"
+                                    rel="noopener noreferrer"
+                                    className="rounded-full w-14 h-14 p-3 text-base-content border-base-content shadow-lg shadow-base-content/50"
                                 >
                                     <img
-                                        src={social.logoType === 'file' ? getImageUrl(social.logo) : social.logo}
+                                        src={social.logo}
                                         alt={social.platform}
                                     />
                                 </AnimatedBtn>

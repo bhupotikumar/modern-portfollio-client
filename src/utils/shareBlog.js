@@ -12,7 +12,7 @@ export const shareBlog = async ({ title, url }) => {
             return true;
         } catch (err) {
             // user cancelled → not an error
-            console.log("Share cancelled");
+            console.log("Share cancelled", err);
         }
     }
 

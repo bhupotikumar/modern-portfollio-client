@@ -1,136 +1,85 @@
-import { useState } from "react";
-
+import { useEffect, useState } from "react";
+import api from "../../../api/axios";
 const AddSkill = ({ onSubmit }) => {
+    const [categories, setCategories] = useState([]);
+    const [loading, setLoading] = useState(false);
     const [form, setForm] = useState({
         title: "",
-        skills: [],
-    });
-
-    const [currentSkill, setCurrentSkill] = useState({
-        title: "",
-        logoType: "file",
         logo: "",
+        logoType: "file",
+        categoryId: "",
         file: null,
-        preview: null,
     });
-    
-    // Category title change
-    const handleCategoryChange = (e) => {
-        setForm({ ...form, title: e.target.value });
-    };
 
-    // Skill input change
-    const handleSkillChange = (e) => {
-        const { name, value } = e.target;
-        setCurrentSkill({ ...currentSkill, [name]: value });
-    };
-
-    // File upload
-    const handleFileChange = (e) => {
-        const file = e.target.files[0];
-        if (file) {
-            setCurrentSkill({
-                ...currentSkill,
-                file,
-                preview: URL.createObjectURL(file),
-                logoType: "file",
-            });
+    useEffect(() => {
+        const fetchCategories = async () => {
+            setLoading(true);
+            try {
+                const res = await api.get("/api/categories");
+                setCategories(Array.isArray(res.data) ? res.data : []);
+            } catch (error) {
+                console.error("Failed to fetch categories:", error);
+                setCategories([]);
+            } finally {
+                setLoading(false);
+            }
         }
+        fetchCategories();
+    }, []);
+
+    const handleChange = (e) => {
+        const { name, value, files } = e.target;
+
+        if (name === "logoType") {
+            setForm((prev) => ({
+                ...prev,
+                logoType: value,
+                logo: "",
+            }));
+            return;
+        }
+
+        if (name === "logo") {
+            setForm((prev) => ({
+                ...prev,
+                logo: prev.logoType === "file" ? files[0] : value,
+            }));
+            return;
+        }
+
+        setForm((prev) => ({
+            ...prev,
+            [name]: value,
+        }));
     };
 
-    // Add skill to form
-    const addSkill = () => {
-        if (!currentSkill.title) return alert("Skill title is required");
-
-        if (currentSkill.logoType === "url" && !currentSkill.logo) return alert("Skill image URL is required");
-        if (currentSkill.logoType === "file" && !currentSkill.file) return alert("Please upload a file");
-
-        const newSkill = {
-            title: currentSkill.title,
-            logoType: currentSkill.logoType,
-            logo: currentSkill.logoType === "url" ? currentSkill.logo : "",
-            file: currentSkill.file || null,
-        };
-
-        setForm({ ...form, skills: [...form.skills, newSkill] });
-
-        // Reset current skill
-        setCurrentSkill({
-            title: "",
-            logoType: "file",
-            logo: "",
-            file: null,
-            preview: null,
-        });
-    };
-
-    // Remove skill
-    const removeSkill = (index) => {
-        setForm({
-            ...form,
-            skills: form.skills.filter((_, i) => i !== index),
-        });
-    };
 
     // Submit form
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-
-        if (!form.title) return alert("Category title is required");
-        if (!form.skills.length) return alert("Add at least one skill");
-
-        const formData = new FormData();
-        formData.append("title", form.title);
-
-        // Skills JSON without files
-        const skillsJSON = form.skills.map(({ file, ...rest }) => rest);
-        formData.append("skills", JSON.stringify(skillsJSON));
-
-        // Append files
-        form.skills.forEach((skill) => {
-            if (skill.logoType === "file" && skill.file instanceof File) {
-                formData.append("files", skill.file);
-            }
-        });
-
-        // Call parent submit handler
-        onSubmit(formData);
+        onSubmit(form);
     };
 
     return (
         <form onSubmit={handleSubmit} className="space-y-6">
-
-            {/* Category title */}
-            <div>
-                <label className="font-medium">Category Title</label>
-                <input
-                    type="text"
-                    value={form.title}
-                    onChange={handleCategoryChange}
-                    className="input input-bordered w-full"
-                    placeholder="Frontend"
-                    required
-                />
-            </div>
-
-            {/* Add Skill */}
             <div className="border p-4 rounded-xl space-y-3">
                 <h3 className="font-semibold text-lg">Add Skill</h3>
 
                 <input
                     type="text"
                     name="title"
-                    value={currentSkill.title}
-                    onChange={handleSkillChange}
+                    value={form.title}
+                    onChange={handleChange}
                     placeholder="Skill name (React)"
+                    required
                     className="input input-bordered w-full"
                 />
 
                 {/* Toggle File / URL */}
                 <select
                     name="logoType"
-                    value={currentSkill.logoType}
-                    onChange={handleSkillChange}
+                    value={form.logoType}
+                    onChange={handleChange}
                     className="select select-bordered w-full"
                 >
                     <option value="file">Upload Image</option>
@@ -138,67 +87,63 @@ const AddSkill = ({ onSubmit }) => {
                 </select>
 
                 {/* File input */}
-                {currentSkill.logoType === "file" && (
+                {form.logoType === "file" && (
                     <input
                         type="file"
+                        name="logo"
                         accept="image/*"
-                        onChange={handleFileChange}
+                        onChange={handleChange}
                         className="file-input file-input-bordered w-full"
                     />
                 )}
 
                 {/* URL input */}
-                {currentSkill.logoType === "url" && (
+                {form.logoType === "url" && (
                     <input
                         type="text"
                         name="logo"
-                        value={currentSkill.logo}
-                        onChange={handleSkillChange}
+                        value={form.logo}
+                        onChange={handleChange}
                         placeholder="Paste image URL"
                         className="input input-bordered w-full"
                     />
                 )}
 
                 {/* Preview */}
-                {currentSkill.preview && (
+                {form.logo && (
                     <img
-                        src={currentSkill.preview}
+                        src={
+                            form.logoType === "file"
+                                ? URL.createObjectURL(form.logo)
+                                : form.logo
+                        }
                         alt="preview"
                         className="w-16 h-16 object-cover rounded"
                     />
                 )}
 
-                <button type="button" onClick={addSkill} className="btn btn-primary">
-                    Add Skill
-                </button>
-            </div>
+                {/* Category selector */}
+                <label className="text-lg font-semibold mr-4">Select Category</label>
+                <select
+                    name="categoryId"
+                    value={form.categoryId}
+                    onChange={handleChange}
+                    className="select select-bordered w-full"
+                >
+                    <option value="">Select Category</option>
 
-            {/* Skill List */}
-            <div className="space-y-2">
-                {form.skills.map((skill, index) => (
-                    <div
-                        key={index}
-                        className="flex items-center justify-between bg-base-200 p-3 rounded"
-                    >
-                        <div className="flex items-center gap-3">
-                            <span>{skill.title}</span>
-                            {skill.logoType === "url" && skill.logo && (
-                                <img src={skill.logo} className="w-10 h-10" />
-                            )}
-                        </div>
-                        <button
-                            type="button"
-                            onClick={() => removeSkill(index)}
-                            className="btn btn-sm btn-error"
+                    {categories.map((category) => (
+                        <option
+                            key={category._id}
+                            value={category._id}
                         >
-                            Remove
-                        </button>
-                    </div>
-                ))}
+                            {category.title}
+                        </option>
+                    ))}
+                </select>
             </div>
-
             <button type="submit" className="btn btn-primary w-full">
-                Save Category
+                Save Skill
             </button>
         </form>
     );

@@ -1,5 +1,6 @@
-import FeaturedProjects from '../../components/FeaturedProjects/FeaturedProjects';
+import React from 'react';
 import Hero from '../../components/Hero/Hero';
+import FeaturedProjects from '../../components/FeaturedProjects/FeaturedProjects';
 import Skills from '../../components/Skills/Skills';
 
 const HomePage = () => {

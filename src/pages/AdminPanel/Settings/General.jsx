@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../../../api/axios.js";
 import FormBlock from "./FormBlock.jsx";
+import { UploadCV } from "./UploadCV.jsx";
 
 const initialForm = {
     name: "",
@@ -10,21 +11,26 @@ const initialForm = {
     photoFile: null,
     photoType: "url",
     introTitle: "",
-    introVideo: null
+    introVideoUrl: "",
+    videoFile: null,
+    videoType: "url",
+    introVideo: null,
+    cvUrl: "",
+    cvFile: null,
+    cvType: "url"
 };
 
 const General = () => {
-    const [user, setUser] = useState(null);
     const [form, setForm] = useState(initialForm);
 
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [loadingType, setLoadingType] = useState(null);
 
-    // 🔥 SAFE FIELD UPDATE
+    // SAFE FIELD UPDATE
     const updateField = (key, value) => {
         setForm((prev) => ({
             ...prev,
-            [key]: value ?? ""
+            [key]: value
         }));
     };
 
@@ -35,20 +41,18 @@ const General = () => {
                 const res = await api.get("/api/user");
                 const data = res.data;
 
-                setUser(data);
-
-                // 🔥 SINGLE NORMALIZATION LAYER (NO BUG EVER HERE)
+                // SINGLE NORMALIZATION LAYER
                 setForm({
+                    ...initialForm,
+
                     name: data?.name?.name ?? "",
                     title: data?.title?.title ?? "",
                     description: data?.description?.description ?? "",
 
-                    photoUrl: data?.photo?.photo ?? "",
-                    photoFile: null,
-                    photoType: "url",
+                    photoUrl: data?.photo ?? "",
 
                     introTitle: data?.intro?.title ?? "",
-                    introVideo: null
+                    introVideoUrl: data?.intro?.video ?? "",
                 });
 
             } catch (error) {
@@ -76,36 +80,78 @@ const General = () => {
             // PHOTO
             if (type === "photo") {
                 endpoint = "/api/user/user-photo";
+
                 payload = new FormData();
 
-                if (form.photoType === "file" && form.photoFile) {
-                    payload.append("photo", form.photoFile);
+                if (
+                    form.photoType === "file" &&
+                    form.photoFile
+                ) {
+                    payload.append(
+                        "photo",
+                        form.photoFile
+                    );
                 } else {
-                    payload.append("photo", form.photoUrl ?? "");
+                    payload.append(
+                        "photo",
+                        form.photoUrl
+                    );
                 }
             }
 
             // INTRO
             if (type === "intro") {
                 endpoint = "/api/user/user-intro";
+
                 payload = new FormData();
 
-                if (form.introTitle) payload.append("title", form.introTitle);
-                if (form.introVideo) payload.append("video", form.introVideo);
+                payload.append(
+                    "title",
+                    form.introTitle || ""
+                );
+
+                if (
+                    form.videoType === "file" &&
+                    form.videoFile
+                ) {
+                    payload.append(
+                        "video",
+                        form.videoFile
+                    );
+                } else {
+                    payload.append(
+                        "video",
+                        form.introVideoUrl || ""
+                    );
+                }
             }
 
             // ENDPOINTS
             if (type === "name") endpoint = "/api/user/user-name";
             if (type === "title") endpoint = "/api/user/user-title";
             if (type === "description") endpoint = "/api/user/user-description";
+            if (type === "cv") endpoint = "/api/user/user-cv";
 
             const res = await api.patch(endpoint, payload);
 
-            // 🔥 SAFE MERGE (NO STRUCTURE BREAK)
-            setUser((prev) => ({
-                ...prev,
-                ...res.data
-            }));
+            if (type === "photo") {
+                setForm(prev => ({
+                    ...prev,
+                    photoUrl:
+                        res.data?.photo ||
+                        res.data ||
+                        prev.photoUrl,
+                }));
+            }
+
+            if (type === "intro") {
+                setForm(prev => ({
+                    ...prev,
+                    introVideoUrl:
+                        res.data?.video ||
+                        prev.introVideoUrl,
+                }));
+            }
 
         } catch (error) {
             console.error(error);
@@ -114,8 +160,13 @@ const General = () => {
         }
     };
 
-    if (!user) return <p className="text-center mt-6">Loading...</p>;
-
+    if (loading) {
+        return (
+            <p className="text-center mt-6">
+                Loading...
+            </p>
+        );
+    }
     return (
         <div className="grid grid-cols-2 gap-12">
 
@@ -147,41 +198,45 @@ const General = () => {
                 loading={loadingType === "description"}
             />
 
+            {/* Upload CV */}
+            <UploadCV />
+
             {/* PHOTO */}
             <div className="p-4 border rounded shadow space-y-3">
-
                 <h2 className="text-lg font-semibold">Photo</h2>
 
                 <select
                     value={form.photoType}
-                    onChange={(e) => updateField("photoType", e.target.value)}
+                    onChange={(e) =>
+                        updateField("photoType", e.target.value)
+                    }
                     className="select select-bordered w-full"
                 >
                     <option value="url">Paste URL</option>
                     <option value="file">Upload Image</option>
                 </select>
 
-                {form.photoType === "url" ? (
+                {/* Always mounted File Input */}
+                <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => updateField("photoFile", e.target.files?.[0] || null)}
+                    className={`file-input w-full ${form.photoType !== "file" ? "hidden" : ""}`}
+                />
+
+                {/* PREVIEW */}
+                {form.photoType === "url" && (
                     <input
                         type="text"
-                        value={form.photoUrl || ""}
+                        placeholder="Photo URL"
+                        value={form.photoUrl}
                         onChange={(e) =>
                             updateField("photoUrl", e.target.value)
                         }
                         className="input input-bordered w-full"
                     />
-                ) : (
-                    <input
-                        type="file"
-                        accept="image/*"
-                        onChange={(e) =>
-                            updateField("photoFile", e.target.files?.[0] || null)
-                        }
-                        className="file-input w-full"
-                    />
                 )}
 
-                {/* PREVIEW */}
                 {form.photoType === "file" && form.photoFile ? (
                     <img
                         src={URL.createObjectURL(form.photoFile)}
@@ -206,11 +261,19 @@ const General = () => {
                     {loadingType === "photo" ? "Saving..." : "Save"}
                 </button>
             </div>
-
             {/* INTRO */}
             <div className="p-4 border rounded shadow space-y-3">
 
                 <h2 className="text-lg font-semibold">Intro</h2>
+
+                <select
+                    value={form.videoType}
+                    onChange={(e) => updateField("videoType", e.target.value)}
+                    className="select select-bordered w-full"
+                >
+                    <option value="url">Paste URL</option>
+                    <option value="file">Upload Video</option>
+                </select>
 
                 <input
                     type="text"
@@ -222,18 +285,32 @@ const General = () => {
                     className="input input-bordered w-full"
                 />
 
-                <input
-                    type="file"
-                    accept="video/*"
-                    onChange={(e) =>
-                        updateField("introVideo", e.target.files?.[0] || null)
-                    }
-                    className="file-input w-full"
-                />
+                {form.videoType === "file" && (
+                    <input
+                        type="file"
+                        accept="video/*"
+                        onChange={(e) =>
+                            updateField("videoFile", e.target.files?.[0] || null)
+                        }
+                        className="file-input w-full"
+                    />
+                )}
 
-                {form.introVideo && (
+                {form.videoType === "url" && (
+                    <input
+                        type="text"
+                        placeholder="Intro video URL"
+                        value={form.introVideoUrl || ""}
+                        onChange={(e) =>
+                            updateField("introVideoUrl", e.target.value)
+                        }
+                        className="input input-bordered w-full"
+                    />
+                )}
+
+                {form.videoType === "file" && form.videoFile && (
                     <video
-                        src={URL.createObjectURL(form.introVideo)}
+                        src={URL.createObjectURL(form.videoFile)}
                         controls
                         className="w-full rounded"
                     />

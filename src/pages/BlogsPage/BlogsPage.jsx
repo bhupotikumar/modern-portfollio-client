@@ -10,12 +10,14 @@ const BlogsPage = () => {
     const navigate = useNavigate();
 
     const [blogs, setBlogs] = useState([]);
-    const [savedBlogs, setSavedBlogs] = useState([]);
+    const [savedBlogs, setSavedBlogs] = useState(() => {
+        return JSON.parse(localStorage.getItem("savedBlogs")) || [];
+    });
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
 
-    const [isOpen, setIsOpen] = useState(false);
-    const [selectedBlog, setSelectedBlog] = useState(null);
+    // modal state derived from URL slug and loaded blogs to avoid
+    // synchronous setState inside effects which can cause cascading renders
 
     // ✅ Fetch all blogs (ONLY once)
     useEffect(() => {
@@ -40,24 +42,16 @@ const BlogsPage = () => {
         };
 
         fetchBlogs();
-
-        const saved = JSON.parse(localStorage.getItem("savedBlogs")) || [];
-        setSavedBlogs(saved);
     }, []);
 
-    // ✅ Open modal based on URL slug
-    useEffect(() => {
-        if (!slug) return;
 
-        const foundBlog = blogs.find(
-            (b) => b.slug === slug || b._id === slug
-        );
 
-        if (foundBlog) {
-            setSelectedBlog(foundBlog);
-            setIsOpen(true);
-        }
-    }, [slug, blogs]);
+    // derive selected blog from slug and blogs to avoid setState in effect
+    const selectedBlog = (slug && blogs.length)
+        ? blogs.find((b) => b.slug === slug || b._id === slug) || null
+        : null;
+
+    const isOpen = Boolean(selectedBlog);
 
     // ✅ Navigate instead of opening modal directly
     const handleClick = (blog) => {
@@ -66,8 +60,6 @@ const BlogsPage = () => {
 
     // ✅ Close modal → go back
     const handleClose = () => {
-        setIsOpen(false);
-        setSelectedBlog(null);
         navigate("/blogs");
     };
 
@@ -109,7 +101,7 @@ const BlogsPage = () => {
 
     return (
         <div className="mb-2 md:mb-12">
-            <h1 className="text-3xl font-bold my-6 text-center">
+            <h1 className="text-3xl font-bold mt-2 mb-4 text-center">
                 Blogs
             </h1>
 
