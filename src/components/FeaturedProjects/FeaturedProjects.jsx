@@ -33,18 +33,18 @@ const FeaturedProjects = () => {
         );;
 
     return (
-            <div className='md:my-12'>
+            <div className='my-4 md:my-12 text-neutral'>
                 <div className="sticky top-16 mb-2">
-                    <h1 className='text-2xl md:text-3xl lg:text-3xl font-bold p-2 text-center'>Featured Projects</h1>
-                    <p className='text-center mb-6'>A glimpse of my favorite works.</p>
+                    <h1 className='text-xl md:text-2xl lg:text-3xl font-heading font-bold p-2 text-center'>Featured Projects</h1>
+                    <p className='text-center mb-2 md:mb-6'>A glimpse of my favorite works.</p>
                 </div>
-                <div className="w-11/12 lg:w-8/12 flex flex-col justify-center items-center gap-12 mx-auto">
+                <div className="w-11/12 lg:w-8/12 flex flex-col justify-center items-center gap-8 md:gap-12 mx-auto">
                     {(featuredProjects || []).map((project, index) => (
                         <div
                             key={project._id}
                             className="w-full sticky top-28 rounded-lg hover-3d"
                             style={{
-                                top: `${115 + index * 10}px`,
+                                top: `${110 + index * 15}px`,
                                 // transform: `translate(${index * 10}px)`,
                                 zIndex: (featuredProjects?.length || 0) + index,
                             }}

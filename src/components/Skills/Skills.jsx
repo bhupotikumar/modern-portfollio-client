@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import publicApi from "../../api/publicApi";
 import SkillCategories from "./SkillCategories";
 import Skeleton from "../Skeleton/Skeleton";
+import api from "../../api/axios";
 
 const Skills = () => {
     const [loading, setLoading] = useState(true);
@@ -13,7 +13,7 @@ const Skills = () => {
         const loadSkills = async () => {
             setLoading(true);
             try {
-                const res = await publicApi.get("/api/categories");
+                const res = await api.get("/api/categories");
                 const data = Array.isArray(res.data) ? res.data : [];
 
                 if (isMounted) {
@@ -46,7 +46,7 @@ const Skills = () => {
 
 
     return (
-        <div className="md:mt-12">
+        <div className="my-4 md:my-12 text-neutral">
             {skillsCategories.map((category, index) => {
                 return <SkillCategories
                     key={category._id}

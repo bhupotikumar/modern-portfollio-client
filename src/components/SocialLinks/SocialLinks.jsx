@@ -57,6 +57,7 @@ const SocialLinks = () => {
                                     <img
                                         src={social.logo}
                                         alt={social.platform}
+                                        className="w-full h-full object-contain"
                                     />
                                 </AnimatedBtn>
                             );

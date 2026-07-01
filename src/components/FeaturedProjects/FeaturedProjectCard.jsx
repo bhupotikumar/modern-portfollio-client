@@ -9,10 +9,10 @@ const FeaturedProjectCard = ({ project }) => {
 
     return (
         <FadeUp>
-            <div className="relative z-10 mx-auto card bg-base-100 w-full md:h-96 shadow-xl shadow-base-content/20 flex flex-col items-center justify-center md:gap-4 md:flex-row border-2 border-base-content/20">
+            <div className="relative z-10 mx-auto card bg-secondary w-full md:h-96 shadow-xl shadow-base-content/20 flex flex-col items-center justify-center md:gap-4 md:flex-row border-2 border-accent">
 
                 {/* IMAGE SECTION */}
-                <figure className="w-full md:w-2/3 h-full bg-base-300 overflow-hidden">
+                <figure className="w-full md:w-2/3 h-72 md:h-full bg-secondary overflow-hidden">
                     <img
                         className={`w-full h-full object-cover transition-opacity duration-500 ${loaded ? "opacity-100" : "opacity-0"
                             }`}
@@ -25,15 +25,13 @@ const FeaturedProjectCard = ({ project }) => {
                 </figure>
 
                 {/* CONTENT */}
-                <div className="flex flex-col justify-between w-full md:w-1/2 md:h-full text-center md:text-left p-2">
-                    <div className="my-1 md:my-4 text-base-content">
-                        <h2 className="text-base md:text-xl font-bold text-center md:text-left mx-auto">
+                <div className="flex flex-col justify-between w-full md:w-1/2 md:h-full text-center text-neutral md:text-left p-2">
+                    <div className="my-1 md:my-4 text-neutral">
+                        <h2 className="font-heading md:text-xl font-bold text-center md:text-left mx-auto">
                             {title}
                         </h2>
 
                         <p className="text-xs md:text-base">{description}</p>
-
-                        <div className="divider my-0 md:my-4"></div>
 
                         <div className="hidden md:block">
                             <h2 className="font-semibold text-xl">Stack:</h2>
@@ -54,7 +52,7 @@ const FeaturedProjectCard = ({ project }) => {
                     </div>
 
                     {/* BUTTONS */}
-                    <div className="flex justify-center md:justify-end gap-2 md:gap-6 mb-1 md:mr-1 items-center pointer-events-auto">
+                    <div className="flex justify-center md:justify-end gap-2 md:gap-6 mb-1 md:mr-1 font-accent items-center pointer-events-auto z-100">
                         <AnimatedBtn
                             direction="btt"
                             as="a"
@@ -63,7 +61,7 @@ const FeaturedProjectCard = ({ project }) => {
                             onClick={(e) => {
                                 if (!githubLink) e.preventDefault();
                             }}
-                            className={`btn-sm md:btn-md ${!githubLink ? "opacity-50 cursor-not-allowed" : ""}`}
+                            className={`btn-md border-accent text-lg md:text-xl  ${!githubLink ? "opacity-50 cursor-not-allowed" : ""}`}
                         >
                             Github
                         </AnimatedBtn>
@@ -77,7 +75,7 @@ const FeaturedProjectCard = ({ project }) => {
                             }}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className={`btn-sm md:btn-md ${!liveLink ? "opacity-50 cursor-not-allowed" : ""}`}
+                            className={`btn-md border-accent text-lg md:text-xl ${!liveLink ? "opacity-50 cursor-not-allowed" : ""}`}
                         >
                             Live Demo
                         </AnimatedBtn>
