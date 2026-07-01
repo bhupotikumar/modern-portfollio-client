@@ -8,7 +8,7 @@ import Collapse from './components/Collapse/Collapse';
 const App = () => {
 
   return (
-    <div className='secondary-font'>
+    <div className='font-body'>
       <UserProvider>
         <Header />
         <Outlet />
