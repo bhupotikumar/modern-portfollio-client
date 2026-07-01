@@ -49,12 +49,12 @@ const ContactPage = () => {
     return (
         <FadeUp>
             <div className='w-11/12 my-6 md:h-[85vh] mx-auto md:flex flex-col justify-center items-center'>
-                <h1 className='text-center text-xl md:text-2xl font-bold p-2 md:p-4'>
+                <h1 className='font-heading text-center text-xl md:text-2xl font-bold p-2 md:p-4'>
                     Contact Me
                 </h1>
                 <form
                     onSubmit={handleSubmit}
-                    className='flex flex-col items-center gap-4 md:gap-6 p-4 md:p-6 rounded-lg shadow-lg shadow-base-content/40 w-full md:w-1/2 mx-auto'
+                    className='flex flex-col items-center text-neutral gap-4 md:gap-6 p-4 md:p-6 rounded-lg shadow-lg shadow-base-content/40 w-full md:w-1/2 mx-auto'
                 >
                     <input
                         name='name'
@@ -62,7 +62,7 @@ const ContactPage = () => {
                         placeholder='Your Name'
                         value={form.name}
                         required
-                        className='input input-bordered w-full max-w-xs'
+                        className='input input-bordered border-accent w-full max-w-xs focus:outline-none focus:ring-2 focus:ring-primary'
                         onChange={handleInputChange}
                     />
 
@@ -72,7 +72,7 @@ const ContactPage = () => {
                         placeholder='Your Email'
                         value={form.email}
                         required
-                        className='input input-bordered w-full max-w-xs'
+                        className='input input-bordered w-full max-w-xs border-accent focus:outline-none focus:ring-2 focus:ring-primary'
                         onChange={handleInputChange}
                     />
 
@@ -81,7 +81,7 @@ const ContactPage = () => {
                         placeholder='Your Message'
                         value={form.message}
                         required
-                        className='textarea textarea-bordered w-full max-w-xs'
+                        className='textarea textarea-bordered border-accent w-full max-w-xs focus:outline-none focus:ring-2 focus:ring-primary'
                         onChange={handleInputChange}
                     />
 
@@ -89,7 +89,7 @@ const ContactPage = () => {
                         {loading ? "Sending" : "Send Message"}
                     </button>
                 </form>
-                <div className="p-4 md:p-8">
+                <div className="flex items-center justify-center w-full p-4 md:p-8">
                     <SocialLinks />
                 </div>
             </div>

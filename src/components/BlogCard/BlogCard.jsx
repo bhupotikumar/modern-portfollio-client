@@ -15,10 +15,10 @@ const BlogCard = ({ blog, varient, onSave, onUnsave, onClick, shareUrl }) => {
         case 'savedBlogCard':
             return (
                 <div onClick={onClick}
-                    className="flex justify-between items-center p-2 border border-base-content/20 rounded shadow-xl shadow-base-content/20">
+                    className="text-neutral flex justify-between items-center p-2 border border-accent rounded shadow-xl shadow-base-content/20">
                     <h2 className="text-lg font-bold mb-2 p-2 text-wrap">{title}</h2>
                     <div className="flex justify-between items-center mb-2">
-                        <span className="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded hidden lg:block">{category}</span>
+                        <span className="bg-secondary/20 text-primary text-xs font-medium mr-2 px-2.5 py-0.5 rounded hidden lg:block">{category}</span>
                     </div>
                     <div className="flex items-center gap-2">
                         <div className="flex items-center gap-4">
@@ -32,7 +32,7 @@ const BlogCard = ({ blog, varient, onSave, onUnsave, onClick, shareUrl }) => {
                                 e.stopPropagation();
                                 onUnsave(blog._id);
                             }}
-                            className="bg-red-500 hover:bg-red-700 text-xl text-white font-bold p-2 rounded"
+                            className="bg-error hover:bg-error text-xl text-primary-content font-bold p-2 rounded"
                         >
                             <AiTwotoneDelete />
                         </button>
@@ -45,11 +45,11 @@ const BlogCard = ({ blog, varient, onSave, onUnsave, onClick, shareUrl }) => {
                 <FadeUp>
                     <div
                         onClick={onClick}
-                        className="p-4 border border-base-content/20 rounded shadow-xl shadow-base-content/20">
+                        className="p-4 border border-accent rounded shadow-xl shadow-base-content/20">
                         <h2 className="text-xl md:text-2xl font-bold mb-2 text-wrap text-left">{title}</h2>
                         <div className="flex justify-between items-center mb-2">
-                            <span className="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded">{category}</span>
-                            <small className="text-sm text-gray-500">{formatDistanceToNow(new Date(timestamps.createdAt), { addSuffix: true })}</small>
+                            <span className="bg-secondary/20 text-primary text-xs font-medium mr-2 px-2.5 py-0.5 rounded">{category}</span>
+                            <small className="text-sm text-neutral/70">{formatDistanceToNow(new Date(timestamps.createdAt), { addSuffix: true })}</small>
                         </div>
                         <p className="text-base text-left">{excerpt}</p>
                         <div className="flex items-center justify-between mt-4">
@@ -63,7 +63,7 @@ const BlogCard = ({ blog, varient, onSave, onUnsave, onClick, shareUrl }) => {
                                         e.stopPropagation();
                                         onSave(blog);
                                     }}
-                                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold p-2 text-xl rounded"
+                                    className="bg-info hover:bg-info-content text-primary-content font-bold p-2 text-xl rounded"
                                 >
                                     <CiSaveDown2 />
                                 </button>

@@ -2,14 +2,16 @@ import { useState } from "react";
 import AnimatedBtn from "../AnimatedBtn/AnimatedBtn";
 import FadeUp from "../Fade/FadeUp";
 
-const FeaturedProjectCard = ({ project }) => {
+const FeaturedProjectCard = ({ project, onClick }) => {
     const { title, description, tech, image, liveLink, githubLink } = project;
 
     const [loaded, setLoaded] = useState(false);
 
     return (
         <FadeUp>
-            <div className="relative z-10 mx-auto card bg-secondary w-full md:h-96 shadow-xl shadow-base-content/20 flex flex-col items-center justify-center md:gap-4 md:flex-row border-2 border-accent">
+            <div className="relative z-10 mx-auto card bg-secondary w-full md:h-96 shadow-xl shadow-base-content/20 flex flex-col items-center justify-center md:gap-4 md:flex-row border-2 border-accent"
+                onClick={() => onClick(project)}
+            >
 
                 {/* IMAGE SECTION */}
                 <figure className="w-full md:w-2/3 h-72 md:h-full bg-secondary overflow-hidden">
@@ -52,16 +54,24 @@ const FeaturedProjectCard = ({ project }) => {
                     </div>
 
                     {/* BUTTONS */}
-                    <div className="flex justify-center md:justify-end gap-2 md:gap-6 mb-1 md:mr-1 font-accent items-center pointer-events-auto z-100">
+                    {/* BUTTONS */}
+                    <div className="flex justify-center md:justify-end gap-2 md:gap-6 mb-1 md:mr-1 font-accent items-center">
                         <AnimatedBtn
                             direction="btt"
                             as="a"
                             href={githubLink || "#"}
                             target="_blank"
+                            rel="noopener noreferrer"
                             onClick={(e) => {
-                                if (!githubLink) e.preventDefault();
+                                e.stopPropagation(); // Prevent opening the modal
+
+                                if (!githubLink) {
+                                    e.preventDefault();
+                                    alert("This is a private project.");
+                                }
                             }}
-                            className={`btn-md border-accent text-lg md:text-xl  ${!githubLink ? "opacity-50 cursor-not-allowed" : ""}`}
+                            className={`btn-md border-accent text-lg md:text-xl ${!githubLink ? "opacity-50 cursor-not-allowed" : ""
+                                }`}
                         >
                             Github
                         </AnimatedBtn>
@@ -70,12 +80,18 @@ const FeaturedProjectCard = ({ project }) => {
                             direction="btt"
                             as="a"
                             href={liveLink || "#"}
-                            onClick={(e) => {
-                                if (!liveLink) e.preventDefault();
-                            }}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className={`btn-md border-accent text-lg md:text-xl ${!liveLink ? "opacity-50 cursor-not-allowed" : ""}`}
+                            onClick={(e) => {
+                                e.stopPropagation(); // Prevent opening the modal
+
+                                if (!liveLink) {
+                                    e.preventDefault();
+                                    alert("Live demo is not available.");
+                                }
+                            }}
+                            className={`btn-md border-accent text-lg md:text-xl ${!liveLink ? "opacity-50 cursor-not-allowed" : ""
+                                }`}
                         >
                             Live Demo
                         </AnimatedBtn>

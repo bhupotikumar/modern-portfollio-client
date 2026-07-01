@@ -1,6 +1,5 @@
 import { Link } from 'react-router';
 import Modal from '../../components/Modal/Modal';
-import { getImageUrl } from '../../utils/getImageUrl';
 import AnimatedBtn from '../../components/AnimatedBtn/AnimatedBtn';
 
 const ProjectDetails = ({ isOpen, onClose, project, modalTitle }) => {
@@ -12,7 +11,7 @@ const ProjectDetails = ({ isOpen, onClose, project, modalTitle }) => {
             {project ? (
                 <div>
                     <figure className='w-full h-96 border rounded-xl overflow-hidden'>
-                        <img src={getImageUrl(image)} alt={title} className='w-full h-full object-cover mb-4' />
+                        <img src={image} alt={title} className='w-full h-full object-cover mb-4' />
                     </figure>
                     <div className="w-full space-y-3 mt-4">
                         {tech && (

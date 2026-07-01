@@ -16,7 +16,7 @@ const SkillCategories = ({ category, index }) => {
         <FadeUp>
             <div className="mt-6 md:mt-16">
                 <h1 className='mb-2 text-center font-heading font-bold text-xl md:text-2xl lg:text-3xl'>{title} Skills</h1>
-                <div className="border-b border-base-content/40">
+                <div className="border-b border-accent">
                     <MarqueeComponent
                         speed={100}
                         pauseOnHover={true}

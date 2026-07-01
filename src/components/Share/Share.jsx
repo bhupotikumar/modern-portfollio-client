@@ -21,14 +21,14 @@ const Share = ({ blog }) => {
     const [open, setOpen] = useState(false);
     const ref = useRef(null);
 
-    // ✅ safer URL generation
+    // safer URL generation
     const url = blog
         ? `${window.location.origin}/blogs/${blog.slug || blog._id}`
         : "";
 
     const text = blog ? `${blog.title} ${url}` : "";
 
-    // ✅ Native share (mobile)
+    // Native share (mobile)
     const handleShare = async (e) => {
         e.stopPropagation();
 
@@ -44,20 +44,20 @@ const Share = ({ blog }) => {
         }
     };
 
-    // ✅ Copy link (better UX)
+    // Copy link (better UX)
     const copyLink = async (e) => {
         e.stopPropagation();
 
         try {
             await navigator.clipboard.writeText(url);
-            // 👉 replace later with toast
-            console.log("✅ Link copied");
+            // replace later with toast
+            console.log(" Link copied");
         } catch (err) {
             console.error("Copy failed:", err);
         }
     };
 
-    // ✅ Social share (fixed)
+    // Social share (fixed)
     const handleActionClick = (name, e) => {
         e.stopPropagation();
 
@@ -93,7 +93,7 @@ const Share = ({ blog }) => {
         window.open(shareUrl, "_blank", "noopener,noreferrer");
     };
 
-    // ✅ Close outside
+    // Close outside
     useEffect(() => {
         const handleClickOutside = (e) => {
             if (ref.current && !ref.current.contains(e.target)) {
@@ -112,7 +112,7 @@ const Share = ({ blog }) => {
         <div className="relative" onClick={(e) => e.stopPropagation()}>
             <div ref={ref} className="relative">
 
-                {/* 🔥 Floating Actions */}
+                {/* Floating Actions */}
                 <AnimatePresence>
                     {open &&
                         actions.map((action, i) => {
@@ -147,7 +147,7 @@ const Share = ({ blog }) => {
                         })}
                 </AnimatePresence>
 
-                {/* 🔥 Main FAB */}
+                {/* Main FAB */}
                 <Motion.button
                     onClick={(e) => {
                         e.stopPropagation();
@@ -159,7 +159,7 @@ const Share = ({ blog }) => {
                         }
                     }}
                     whileTap={{ scale: 0.9 }}
-                    className="btn btn-circle bg-primary text-white text-xl shadow-xl"
+                    className="btn btn-circle bg-primary text-primary-content text-xl shadow-xl"
                 >
                     <Motion.span
                         animate={{ rotate: open ? 45 : 0 }}
@@ -169,7 +169,7 @@ const Share = ({ blog }) => {
                     </Motion.span>
                 </Motion.button>
 
-                {/* 🔥 Copy Link */}
+                {/* Copy Link */}
                 {open && (
                     <Motion.button
                         onClick={copyLink}

@@ -2,13 +2,14 @@ import React from 'react';
 import Hero from '../../components/Hero/Hero';
 import FeaturedProjects from '../../components/FeaturedProjects/FeaturedProjects';
 import Skills from '../../components/Skills/Skills';
+import { Divider } from '../../components/Divider/Divider';
 
 const HomePage = () => {
     return (
         <div>
             <Hero />
             <FeaturedProjects />
-            <div className="divider my-0"></div>
+            <Divider />
             <Skills />
         </div>
     );

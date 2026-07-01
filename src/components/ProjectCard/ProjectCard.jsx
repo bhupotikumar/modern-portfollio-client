@@ -4,11 +4,12 @@ import FadeUp from '../Fade/FadeUp';
 const ProjectCard = ({ project, onClick }) => {
     const { title, description, image } = project || {};
     const [loaded, setLoaded] = useState(false);
+    console.log(image);
 
     return (
         <FadeUp>
             <div
-                className="card bg-base-100 shadow-xl overflow-hidden cursor-pointer border border-base-content/20"
+                className="card bg-secondary shadow-xl overflow-hidden cursor-pointer border border-accent"
                 onClick={() => onClick(project)}
             >
                 <figure className="group relative w-full h-72 overflow-hidden bg-base-300">
@@ -19,8 +20,8 @@ const ProjectCard = ({ project, onClick }) => {
                         loading="lazy"
                         decoding="async"
                         onLoad={() => setLoaded(true)}
-                        className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-out
-        ${loaded ? "opacity-100 scale-100" : "opacity-0 scale-105"}
+                        className={`bg-primary absolute inset-0 w-full h-full object-cover transition-all duration-600 ease-out
+        ${loaded ? "opacity-100 scale-100" : "opacity-100 scale-105"}
         group-hover:scale-110
     `}
                     />
@@ -41,7 +42,7 @@ const ProjectCard = ({ project, onClick }) => {
                         group-hover:opacity-100 group-hover:translate-y-0
                         transition-all duration-500 ease-out
                     ">
-                        <p className="text-white text-sm md:text-base line-clamp-4">
+                        <p className="text-secondary-content text-sm md:text-base line-clamp-4">
                             {description}
                         </p>
                     </div>
@@ -49,7 +50,9 @@ const ProjectCard = ({ project, onClick }) => {
                 </figure>
 
                 <div className="card-body m-0 p-4">
-                    <h2 className="card-title mx-auto text-center">{title}</h2>
+                    <h2 className="card-title mx-auto text-center text-neutral">
+                        {title}
+                    </h2>
                 </div>
             </div>
         </FadeUp>

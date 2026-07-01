@@ -100,21 +100,21 @@ const BlogsPage = () => {
     }
 
     return (
-        <div className="mb-2 md:mb-12">
-            <h1 className="text-3xl font-bold mt-2 mb-4 text-center">
+        <div className="mb-2 md:mb-12 text-neutral">
+            <h1 className="font-heading text-3xl font-bold mt-2 mb-4 text-center">
                 Blogs
             </h1>
 
             {/* Empty state */}
             {blogs.length === 0 ? (
-                <p className="text-center text-gray-500">
+                <p className="text-center text-neutral/70">
                     No blogs found.
                 </p>
             ) : (
                 <div className="w-11/12 mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
 
                     {/* Blog list */}
-                    <div className="col-span-1 md:col-span-2 text-center mb-6 md:grid md:grid-cols-2 gap-4 md:gap-6">
+                    <div className="col-span-1 space-y-6 md:space-y-0 md:col-span-2 text-center mb-6 md:grid md:grid-cols-2 md:gap-6">
                         {blogs.map((blog) => (
                             <BlogCard
                                 key={blog._id}
@@ -134,7 +134,7 @@ const BlogsPage = () => {
 
                         <div className="grid gap-4">
                             {savedBlogs.length === 0 ? (
-                                <p className="text-gray-500">
+                                <p className="text-neutral/70">
                                     No saved blogs.
                                 </p>
                             ) : (

@@ -163,12 +163,12 @@ const Hero = () => {
                                 <TypingText text={nameValue} pause={2000} speed={70} />
                             </h2>
 
-                            <h1 className="text-xl md:text-2xl lg:text-3xl text-neutral">
+                            <h1 className="md:mt-3 text-xl md:text-2xl lg:text-3xl text-neutral">
                                 <TypingText text={titleValue} pause={1000} speed={70} />
                             </h1>
                         </div>
 
-                        <p className="text-center md:text-justify text-base md:text-xl text-base-content leading-relaxed mb-4 md:mb-10 p-2 border border-accent/50 backdrop-blur-xl shadow-xl rounded-lg">
+                        <p className="text-center md:text-justify text-base md:text-xl text-base-content leading-relaxed mb-4 md:mb-10 p-2 border border-accent backdrop-blur-xl shadow-xl rounded-lg">
                             {descriptionValue}
                         </p>
 
@@ -197,7 +197,7 @@ const Hero = () => {
                                 Connect with me
                             </h1>
 
-                            <div className="flex justify-center md:justify-start gap-4">
+                            <div className="p-4 md:p-0 flex justify-center md:justify-start gap-4">
                                 <SocialLinks />
                             </div>
                         </div>

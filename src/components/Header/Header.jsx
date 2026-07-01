@@ -50,7 +50,7 @@ const Header = () => {
 
                     {/* Dropdown Menu */}
                     {menuOpen && (
-                        <div className="absolute top-12 left-0 w-52 p-3 rounded-2xl shadow-xl bg-base-100 border z-50 lg:hidden">
+                        <div className="absolute top-12 left-0 w-52 p-3 rounded-2xl shadow-xl bg-base-100 z-50 lg:hidden">
                             <Navbar />
                         </div>
                     )}
