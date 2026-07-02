@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import SocialLinks from "../SocialLinks/SocialLinks";
 import AnimatedBtn from "../AnimatedBtn/AnimatedBtn";
 import TypingText from "../TypingText/TypingText";
@@ -11,6 +11,7 @@ import FadeUp from "../Fade/FadeUp";
 const Hero = () => {
     const { user, loading } = useUser();
     const videoRef = useRef(null);
+    const heroRef = useRef(null);
 
     const [hovered, setHovered] = useState(false);
     const [isMuted, setIsMuted] = useState(false);
@@ -56,6 +57,27 @@ const Hero = () => {
         }
     };
 
+    useEffect(() => {
+        if (!heroRef.current || !videoRef.current) return;
+
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (!entry.isIntersecting && videoRef.current) {
+                    videoRef.current.pause();
+                    videoRef.current.currentTime = 0;
+                    setHovered(false);
+                }
+            },
+            {
+                threshold: 0.2, // pause when less than 20% visible
+            }
+        );
+
+        observer.observe(heroRef.current);
+
+        return () => observer.disconnect();
+    }, []);
+
     // Skeleton loader while fetching user data
     if (loading || !user) {
         return (
@@ -66,6 +88,7 @@ const Hero = () => {
     return (
         <FadeUp>
             <section
+                ref={heroRef}
                 className="relative min-h-[94vh] md:h-[90vh] w-full mx-auto flex flex-col md:flex-row items-center overflow-hidden"
             >
                 {/* BACKGROUND */}
