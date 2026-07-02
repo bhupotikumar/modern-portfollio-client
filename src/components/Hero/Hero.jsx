@@ -168,13 +168,13 @@ const Hero = () => {
                             </h1>
                         </div>
 
-                        <p className="text-center md:text-justify text-base md:text-xl text-base-content leading-relaxed mb-4 md:mb-10 p-2 border border-accent backdrop-blur-xl shadow-xl rounded-lg">
+                        <p className="text-center md:text-justify text-base md:text-xl text-base-content leading-relaxed mb-4 md:mb-10 p-2 backdrop-blur-xl shadow-xl rounded-lg">
                             {descriptionValue}
                         </p>
 
                         <div className="flex items-center justify-center md:justify-start mb-2 md:mb-12">
                             <AnimatedBtn
-                                className="btn-primary btn-md md:btn-lg backdrop-blur-md border border-accent border-r-0 rounded-r-none text-secondary hover:text-primary-content"
+                                className="btn-primary btn-md md:btn-lg backdrop-blur-md border-none rounded-r-none text-secondary hover:text-primary-content"
                                 as="a"
                                 href={`${import.meta.env.VITE_API_URL}/api/cv`}
                                 rel="noopener noreferrer"
@@ -186,7 +186,7 @@ const Hero = () => {
                                 as={Link}
                                 to="/contact"
                                 direction="rtl"
-                                className="btn-outline btn-md md:btn-lg backdrop-blur-md border border-accent border-l-0 rounded-l-none text-secondary hover:text-primary-content"
+                                className="btn-outline btn-md md:btn-lg backdrop-blur-md border-none rounded-l-none text-secondary hover:text-primary-content"
                             >
                                 Hire Me
                             </AnimatedBtn>

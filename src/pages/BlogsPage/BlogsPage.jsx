@@ -101,7 +101,7 @@ const BlogsPage = () => {
 
     return (
         <div className="mb-2 md:mb-12 text-neutral">
-            <h1 className="font-heading text-3xl font-bold mt-2 mb-4 text-center">
+            <h1 className="font-heading text-xl md:text-2xl lg:text-3xl font-bold mt-2 mb-2 md:mb-4 text-center">
                 Blogs
             </h1>
 
@@ -111,10 +111,10 @@ const BlogsPage = () => {
                     No blogs found.
                 </p>
             ) : (
-                <div className="w-11/12 mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="w-11/12 h-[85vh] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
                     {/* Blog list */}
-                    <div className="col-span-1 space-y-6 md:space-y-0 md:col-span-2 text-center mb-6 md:grid md:grid-cols-2 md:gap-6">
+                    <div className="col-span-1 space-y-6 lg:space-y-0 lg:col-span-2 text-center mb-6 lg:grid lg:grid-cols-2 lg:gap-6 overflow-y-scroll">
                         {blogs.map((blog) => (
                             <BlogCard
                                 key={blog._id}
@@ -128,7 +128,7 @@ const BlogsPage = () => {
 
                     {/* Saved Blogs */}
                     <div className="hidden md:block">
-                        <h2 className="text-xl font-semibold mb-4">
+                        <h2 className="text-base lg:text-lg font-semibold mb-4">
                             Saved Blogs
                         </h2>
 

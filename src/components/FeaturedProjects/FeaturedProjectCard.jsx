@@ -1,6 +1,7 @@
 import { useState } from "react";
 import AnimatedBtn from "../AnimatedBtn/AnimatedBtn";
 import FadeUp from "../Fade/FadeUp";
+import { Divider } from "../Divider/Divider";
 
 const FeaturedProjectCard = ({ project, onClick }) => {
     const { title, description, tech, image, liveLink, githubLink } = project;
@@ -9,7 +10,7 @@ const FeaturedProjectCard = ({ project, onClick }) => {
 
     return (
         <FadeUp>
-            <div className="relative z-10 mx-auto card bg-secondary w-full md:h-96 shadow-xl shadow-base-content/20 flex flex-col items-center justify-center md:gap-4 md:flex-row border-2 border-accent"
+            <div className="relative z-10 mx-auto card bg-secondary w-full md:h-96 shadow-xl shadow-base-content/20 flex flex-col items-center justify-center md:gap-4 md:flex-row overflow-hidden"
                 onClick={() => onClick(project)}
             >
 
@@ -35,7 +36,7 @@ const FeaturedProjectCard = ({ project, onClick }) => {
 
                         <p className="text-xs md:text-base">{description}</p>
 
-                        <div className="hidden md:block">
+                        <div className="hidden mb-4 md:block">
                             <h2 className="font-semibold text-xl">Stack:</h2>
 
                             <div className="mt-2">
@@ -50,7 +51,7 @@ const FeaturedProjectCard = ({ project, onClick }) => {
                             </div>
                         </div>
 
-                        <div className="divider my-0 md:my-4"></div>
+                        <Divider />
                     </div>
 
                     {/* BUTTONS */}

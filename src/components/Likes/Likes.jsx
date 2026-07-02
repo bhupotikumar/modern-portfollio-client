@@ -17,12 +17,12 @@ const Likes = ({ likes = 0 }) => {
         <div className="flex items-center">
             <button onClick={handleLike}>
                 {liked ? (
-                    <AiFillLike className="text-2xl text-primary" />
+                    <AiFillLike className="text-xl text-primary" />
                 ) : (
-                    <AiOutlineLike className="text-2xl" />
+                    <AiOutlineLike className="text-xl" />
                 )}
             </button>
-            <span className="mx-1 mt-1">{likesCount}</span>
+            <span className="mx-1 mt-1 text-xs md:text-sm lg:text-base">{likesCount}</span>
         </div>
     );
 };

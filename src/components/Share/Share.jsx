@@ -159,13 +159,13 @@ const Share = ({ blog }) => {
                         }
                     }}
                     whileTap={{ scale: 0.9 }}
-                    className="btn btn-circle bg-primary text-primary-content text-xl shadow-xl"
+                    className="btn btn-xs lg:btn-sm btn-circle bg-primary text-primary-content text-base shadow-xl"
                 >
                     <Motion.span
                         animate={{ rotate: open ? 45 : 0 }}
                         transition={{ type: "spring", stiffness: 300 }}
                     >
-                        <FaShareAlt />
+                        <FaShareAlt className="text-sm lg:text-lg" />
                     </Motion.span>
                 </Motion.button>
 
