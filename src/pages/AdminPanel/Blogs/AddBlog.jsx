@@ -95,37 +95,37 @@ const AddBlog = () => {
 
             {/* Title */}
             <div>
-                <label className="block text-sm font-medium">Blog Title</label>
+                <label className="block text-sm font-medium text-primary-content">Blog Title</label>
                 <input
                     type="text"
                     name="title"
                     value={form.title}
                     onChange={handleChange}
-                    className="input input-bordered w-full"
+                    className="input input-info input-bordered w-full text-primary-content"
                     required
                 />
             </div>
 
             {/* Excerpt */}
             <div>
-                <label className="block text-sm font-medium">Excerpt</label>
+                <label className="block text-sm font-medium text-primary-content">Excerpt</label>
                 <input
                     type="text"
                     name="excerpt"
                     value={form.excerpt}
                     onChange={handleChange}
-                    className="input input-bordered w-full"
+                    className="input input-info input-bordered w-full text-primary-content"
                 />
             </div>
 
             {/* Content */}
             <div>
-                <label className="block text-sm font-medium">Content</label>
+                <label className="block text-sm font-medium text-primary-content">Content</label>
                 <textarea
                     name="content"
                     value={form.content}
                     onChange={handleChange}
-                    className="textarea textarea-bordered w-full"
+                    className="textarea textarea-info textarea-bordered w-full text-primary-content"
                     rows="8"
                 />
             </div>
@@ -138,7 +138,7 @@ const AddBlog = () => {
                     value={form.category}
                     onChange={handleChange}
                     placeholder="Category"
-                    className="input input-bordered w-full"
+                    className="input input-info input-bordered w-full text-primary-content"
                 />
                 <input
                     type="text"
@@ -146,7 +146,7 @@ const AddBlog = () => {
                     value={form.tags}
                     onChange={handleChange}
                     placeholder="React, JS"
-                    className="input input-bordered w-full"
+                    className="input input-info input-bordered w-full text-primary-content"
                 />
             </div>
 
@@ -157,9 +157,9 @@ const AddBlog = () => {
                     name="featured"
                     checked={form.featured}
                     onChange={handleChange}
-                    className="checkbox"
+                    className="checkbox checkbox-info"
                 />
-                <span>Featured</span>
+                <span className="text-primary-content">Featured</span>
             </div>
 
             {/* SEO */}
@@ -170,7 +170,7 @@ const AddBlog = () => {
                     value={form.seo.metaTitle}
                     onChange={handleSeoChange}
                     placeholder="SEO Title"
-                    className="input input-bordered"
+                    className="input input-info input-bordered text-primary-content"
                 />
                 <input
                     type="text"
@@ -178,7 +178,7 @@ const AddBlog = () => {
                     value={form.seo.metaDescription}
                     onChange={handleSeoChange}
                     placeholder="SEO Description"
-                    className="input input-bordered"
+                    className="input input-info input-bordered text-primary-content"
                 />
             </div>
 

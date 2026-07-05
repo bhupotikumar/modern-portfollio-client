@@ -63,7 +63,7 @@ const AddSkill = ({ onSubmit }) => {
     return (
         <form onSubmit={handleSubmit} className="space-y-6">
             <div className="border p-4 rounded-xl space-y-3">
-                <h3 className="font-semibold text-lg">Add Skill</h3>
+                <h3 className="font-semibold text-lg text-primary-content">Add Skill</h3>
 
                 <input
                     type="text"
@@ -72,7 +72,7 @@ const AddSkill = ({ onSubmit }) => {
                     onChange={handleChange}
                     placeholder="Skill name (React)"
                     required
-                    className="input input-bordered w-full"
+                    className="input input-info input-bordered w-full"
                 />
 
                 {/* Toggle File / URL */}
@@ -80,7 +80,7 @@ const AddSkill = ({ onSubmit }) => {
                     name="logoType"
                     value={form.logoType}
                     onChange={handleChange}
-                    className="select select-bordered w-full"
+                    className="select select-info select-bordered w-full"
                 >
                     <option value="file">Upload Image</option>
                     <option value="url">Image URL</option>
@@ -93,7 +93,7 @@ const AddSkill = ({ onSubmit }) => {
                         name="logo"
                         accept="image/*"
                         onChange={handleChange}
-                        className="file-input file-input-bordered w-full"
+                        className="file-input input-info file-input-bordered w-full"
                     />
                 )}
 
@@ -105,7 +105,7 @@ const AddSkill = ({ onSubmit }) => {
                         value={form.logo}
                         onChange={handleChange}
                         placeholder="Paste image URL"
-                        className="input input-bordered w-full"
+                        className="input input-info input-bordered w-full"
                     />
                 )}
 
@@ -128,7 +128,7 @@ const AddSkill = ({ onSubmit }) => {
                     name="categoryId"
                     value={form.categoryId}
                     onChange={handleChange}
-                    className="select select-bordered w-full"
+                    className="select select-info select-bordered w-full"
                 >
                     <option value="">Select Category</option>
 

@@ -44,7 +44,7 @@ const FeaturedProjects = () => {
             <div className="rounded-xl shadow bg-gray-800 animate-pulse">
                 <Skeleton varient="featuredProjects" />
             </div>
-        );;
+        );
 
     return (
         <div className='my-4 md:my-12 text-primary-content'>

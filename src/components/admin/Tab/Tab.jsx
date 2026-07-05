@@ -8,7 +8,7 @@ const Tab = ({ tabs = [], name = "tabs" }) => {
                     <input
                         type="radio"
                         name={name}
-                        className="tab [--tab-border-color:var(--color-base-content)] text-base font-semibold"
+                        className="tab text-primary-content text-base font-semibold"
                         aria-label={tabs.label}
                         defaultChecked={index === 0}
                     />

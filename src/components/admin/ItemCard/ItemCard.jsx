@@ -8,13 +8,13 @@ const ItemCard = ({ title, description, updatedAt, onEdit, onDelete }) => {
             <div className="flex items-center justify-between shadow-md/20 border border-base-content/20 shadow-base-content rounded p-2 my-4">
 
                 {/* Title */}
-                <h1 className="w-1/2 lg:w-1/3 font-medium">
+                <h1 className="w-1/2 lg:w-1/3 font-medium text-primary-content">
                     {title}
                 </h1>
 
                 {/* Description with tooltip */}
                 <div className="relative group w-xs">
-                    <p className="ml-4 truncate text-right">
+                    <p className="ml-4 truncate text-right text-primary-content/80">
                         {description || ""}
                     </p>
 
@@ -27,7 +27,7 @@ const ItemCard = ({ title, description, updatedAt, onEdit, onDelete }) => {
                 <div className="flex items-center gap-3">
 
                     {/* Updated time */}
-                    <small className="text-right text-sm text-gray-300">
+                    <small className="text-right text-sm text-accent-content/80">
                         {updatedAt? formatDistanceToNow(new Date(updatedAt), {
                             addSuffix: true,
                         }): null}

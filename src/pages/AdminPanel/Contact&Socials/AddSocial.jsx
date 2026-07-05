@@ -69,7 +69,7 @@ const AddSocial = ({ onsubmit }) => {
                 value={form.platform || ""}
                 onChange={handleChange}
                 placeholder="Platform (e.g. GitHub)"
-                className="border p-2 rounded"
+                className="border p-2 rounded input-info text-primary-content"
             />
 
             <input
@@ -78,14 +78,14 @@ const AddSocial = ({ onsubmit }) => {
                 value={form.url || ""}
                 onChange={handleChange}
                 placeholder="https://..."
-                className="border p-2 rounded w-64"
+                className="border p-2 rounded w-64 input-info text-primary-content"
             />
 
             <select
                 name="logoType"
                 value={form.logoType || "file"}
                 onChange={handleChange}
-                className="border p-2 rounded"
+                className="border p-2 rounded select-info text-primary-content"
             >
                 <option value="file">Upload File</option>
                 <option value="url">Image URL</option>
@@ -107,7 +107,7 @@ const AddSocial = ({ onsubmit }) => {
                     value={form.logo || ""}
                     onChange={handleChange}
                     placeholder="Logo URL"
-                    className="border p-2 rounded"
+                    className="border p-2 rounded input input-info text-primary-content"
                 />
             )}
 

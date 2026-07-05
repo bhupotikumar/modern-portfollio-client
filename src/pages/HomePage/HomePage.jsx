@@ -11,6 +11,7 @@ const HomePage = () => {
             <FeaturedProjects />
             <Divider />
             <Skills />
+            <Divider />
         </div>
     );
 };

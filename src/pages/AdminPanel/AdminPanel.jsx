@@ -18,8 +18,7 @@ const AdminPanel = () => {
             <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content">
                 <nav className="navbar w-full bg-base-300">
-
-                    <div className="px-4 text-xl">{getTitle()}</div>
+                    <div className="px-4 text-xl text-primary-content">{getTitle()}</div>
                 </nav>
                 <Outlet />
             </div>

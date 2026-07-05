@@ -56,40 +56,40 @@ const AddProject = ({ onSubmit }) => {
             className="space-y-6"
         >
             <div>
-                <label className="block font-medium mb-1">Project Title</label>
+                <label className="block font-medium mb-1 text-primary-content">Project Title</label>
                 <input
                     type="text"
                     name="title"
                     value={form.title}
                     onChange={handleChange}
                     placeholder="My Project"
-                    className="input input-bordered w-full"
+                    className="input input-info text-primary-content input-bordered w-full"
                     required
                 />
             </div>
 
             <div>
-                <label className="block font-medium mb-1">Description</label>
+                <label className="block font-medium mb-1 text-primary-content">Description</label>
                 <textarea
                     name="description"
                     value={form.description}
                     onChange={handleChange}
                     placeholder="Project description..."
-                    className="textarea textarea-bordered w-full"
+                    className="textarea textarea-info text-primary-content textarea-bordered w-full"
                     rows={4}
                     required
                 />
             </div>
 
             <div>
-                <label className="block font-medium mb-1">Project Image</label>
+                <label className="block font-medium mb-1 text-primary-content">Project Image</label>
                 <input
                     type="file"
                     name="image"
                     accept="image/*"
                     onChange={handleChange}
                     required
-                    className="file-input file-input-bordered w-full"
+                    className="file-input input-info text-primary-content file-input-bordered w-full"
                 />
                 {imagePreview && (
                     <img
@@ -102,14 +102,14 @@ const AddProject = ({ onSubmit }) => {
 
             {/* Tech Stack */}
             <div>
-                <label className="block font-medium mb-1">Tech Stack</label>
+                <label className="block font-medium mb-1 text-primary-content">Tech Stack</label>
                 <input
                     type="text"
                     value={techInput}
                     onChange={(e) => setTechInput(e.target.value)}
                     onKeyDown={handleTechKeyDown}
                     placeholder="Type and press Enter"
-                    className="input input-bordered w-full"
+                    className="input input-info text-primary-content input-bordered w-full"
                 />
                 <div className="flex flex-wrap gap-2 mt-2">
                     {form.tech.map((tech) => (
@@ -133,25 +133,25 @@ const AddProject = ({ onSubmit }) => {
             {/* Live Demo & GitHub */}
             <div className="grid md:grid-cols-2 gap-4">
                 <div>
-                    <label className="block font-medium mb-1">Live Demo URL</label>
+                    <label className="block font-medium mb-1 text-primary-content">Live Demo URL</label>
                     <input
                         type="url"
                         name="liveLink"
                         value={form.liveLink}
                         onChange={handleChange}
                         placeholder="https://live-demo.com"
-                        className="input input-bordered w-full"
+                        className="input input-bordered input-info text-primary-content w-full"
                     />
                 </div>
                 <div>
-                    <label className="block font-medium mb-1">GitHub URL</label>
+                    <label className="block font-medium mb-1 text-primary-content">GitHub URL</label>
                     <input
                         type="url"
                         name="githubLink"
                         value={form.githubLink}
                         onChange={handleChange}
                         placeholder="https://github.com/username/project"
-                        className="input input-bordered w-full"
+                        className="input input-bordered input-info text-primary-content w-full"
                     />
                 </div>
             </div>
@@ -163,7 +163,7 @@ const AddProject = ({ onSubmit }) => {
                     name="featured"
                     checked={form.featured}
                     onChange={handleChange}
-                    className="checkbox checkbox-primary"
+                    className="checkbox checkbox-info"
                     id="featured"
                 />
                 <label htmlFor="featured" className="font-medium">

@@ -12,14 +12,14 @@ const Sidebar = () => {
             <label htmlFor="my-drawer-4" aria-label="close sidebar" className="drawer-overlay"></label>
             <div className="flex min-h-full flex-col items-start bg-base-200 is-drawer-close:w-14 is-drawer-open:w-64">
                 <div className="menu w-full grow gap-3">
-                    <label htmlFor="my-drawer-4" aria-label="open sidebar" className="btn btn-square text-2xl">
+                    <label htmlFor="my-drawer-4" aria-label="open sidebar" className="btn btn-secondary btn-square text-2xl">
                         <GoSidebarExpand />
                     </label>
                     <NavLink to={"/admin"}
                         end
                         data-tip="Homepage"
                         className={({ isActive }) =>
-                            `flex items-center gap-3 text-2xl p-2 rounded-lg transition-all ${isActive ? "bg-primary text-white" : "hover:bg-base-200"
+                            `flex items-center gap-3 text-2xl p-2 rounded-lg transition-all ${isActive ? "bg-secondary text-white" : "hover:bg-base-200"
                             }`
                         }>
                         <ImHome />
@@ -27,7 +27,7 @@ const Sidebar = () => {
                     </NavLink>
                     <NavLink to={"/admin/projects"}
                         className={({ isActive }) =>
-                            `flex items-center gap-3 text-2xl p-2 rounded-lg transition-all ${isActive ? "bg-primary text-white" : "hover:bg-base-200"
+                            `flex items-center gap-3 text-2xl p-2 rounded-lg transition-all ${isActive ? "bg-secondary text-white" : "hover:bg-base-200"
                             }`
                         }>
                         <GoProject />
@@ -35,7 +35,7 @@ const Sidebar = () => {
                     </NavLink>
                     <NavLink to={"/admin/skills"}
                         className={({ isActive }) =>
-                            `flex items-center gap-3 text-2xl p-2 rounded-lg transition-all ${isActive ? "bg-primary text-white" : "hover:bg-base-200"
+                            `flex items-center gap-3 text-2xl p-2 rounded-lg transition-all ${isActive ? "bg-secondary text-white" : "hover:bg-base-200"
                             }`
                         }>
                         <GoSkipFill />
@@ -43,7 +43,7 @@ const Sidebar = () => {
                     </NavLink>
                     <NavLink to={"/admin/blogs"}
                         className={({ isActive }) =>
-                            `flex items-center gap-3 text-2xl p-2 rounded-lg transition-all ${isActive ? "bg-primary text-white" : "hover:bg-base-200"
+                            `flex items-center gap-3 text-2xl p-2 rounded-lg transition-all ${isActive ? "bg-secondary text-white" : "hover:bg-base-200"
                             }`
                         }>
                         < ImBlog />
@@ -51,7 +51,7 @@ const Sidebar = () => {
                     </NavLink>
                     <NavLink to={"/admin/contacts"}
                         className={({ isActive }) =>
-                            `flex items-center gap-3 text-2xl p-2 rounded-lg transition-all ${isActive ? "bg-primary text-white" : "hover:bg-base-200"
+                            `flex items-center gap-3 text-2xl p-2 rounded-lg transition-all ${isActive ? "bg-secondary text-white" : "hover:bg-base-200"
                             }`
                         }>
                         < IoMdContacts />
@@ -59,7 +59,7 @@ const Sidebar = () => {
                     </NavLink>
                     <NavLink to={"/admin/settings"}
                         className={({ isActive }) =>
-                            `flex items-center gap-3 text-2xl p-2 rounded-lg transition-all ${isActive ? "bg-primary text-white" : "hover:bg-base-200"
+                            `flex items-center gap-3 text-2xl p-2 rounded-lg transition-all ${isActive ? "bg-secondary text-white" : "hover:bg-base-200"
                             }`
                         }>
                         <FiSettings />
