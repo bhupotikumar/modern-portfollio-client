@@ -30,7 +30,7 @@ const Header = () => {
     const { user, loading } = useUser();
 
     return (
-        <div className="font-heading navbar shadow-sm sticky top-0 left-0 z-100 bg-transparent backdrop-blur-2xl">
+        <div className="font-heading navbar shadow-sm shadow-base-content sticky top-0 left-0 z-100 bg-base-100/20 backdrop-blur-2xl">
             <div className="navbar-start md:ml-4">
                 <div className="dropdown relative" ref={dropdownRef}>
                     {/* Swap Hamburger/Close */}
@@ -57,12 +57,12 @@ const Header = () => {
                 </div>
 
                 <Link to={"/"}
-                    className="font-accent text-lg md:text-xl font-bold text-neutral"
+                    className="font-accent text-lg md:text-xl font-bold text-primary-content hover:text-accent transition-colors duration-300 w-full"
                 >
-                    {loading || !user ? <div className="relative h-8 w-32 bg-base-content/20 rounded animate-pulse">
+                    {loading || !user ? <div className="relative h-8 w-32 bg-base-100/20 rounded animate-pulse">
                         {/* shimmer */}
                         <div className="absolute inset-0 overflow-hidden">
-                            <div className="w-full h-full bg-linear-to-r from-transparent via-base-content/10 to-transparent animate-[shimmer_1.5s_infinite]"></div>
+                            <div className="w-full h-full bg-linear-to-r from-transparent via-base-content/10 to-transparent"></div>
                         </div>
                     </div> : user?.name?.name}
                 </Link>
@@ -82,7 +82,7 @@ const Header = () => {
                         type="checkbox"
                         checked={theme === "dark"}
                         onChange={toggleTheme}
-                        className="toggle toggle-sm sm:toggle md:toggle-md"
+                        className="toggle toggle-accent toggle-sm sm:toggle md:toggle-md"
                         aria-label="Toggle dark mode"
                     />
 

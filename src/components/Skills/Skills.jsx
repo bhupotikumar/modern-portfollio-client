@@ -46,7 +46,7 @@ const Skills = () => {
 
 
     return (
-        <div className="my-4 md:my-12 text-neutral">
+        <div className="my-4 md:my-12">
             {skillsCategories.map((category, index) => {
                 return <SkillCategories
                     key={category._id}

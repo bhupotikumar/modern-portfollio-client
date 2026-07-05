@@ -10,7 +10,7 @@ const FeaturedProjectCard = ({ project, onClick }) => {
 
     return (
         <FadeUp>
-            <div className="relative z-10 mx-auto card bg-secondary w-full md:h-96 shadow-xl shadow-base-content/20 flex flex-col items-center justify-center md:gap-4 md:flex-row overflow-hidden"
+            <div className="relative z-10 mx-auto card bg-primary text-primary-content w-full md:h-96 flex flex-col items-center justify-center md:gap-4 md:flex-row overflow-hidden border border-base-content"
                 onClick={() => onClick(project)}
             >
 
@@ -28,22 +28,22 @@ const FeaturedProjectCard = ({ project, onClick }) => {
                 </figure>
 
                 {/* CONTENT */}
-                <div className="flex flex-col justify-between w-full md:w-1/2 md:h-full text-center text-neutral md:text-left p-2">
-                    <div className="my-1 md:my-4 text-neutral">
+                <div className="flex flex-col justify-between w-full md:w-1/2 md:h-full text-center md:text-left p-2">
+                    <div className="my-1 md:my-4">
                         <h2 className="font-heading md:text-xl font-bold text-center md:text-left mx-auto">
                             {title}
                         </h2>
 
-                        <p className="text-xs md:text-base">{description}</p>
+                        <p className="text-xs md:text-sm">{description}</p>
 
-                        <div className="hidden mb-4 md:block">
+                        <div className="hidden my-4 md:block">
                             <h2 className="font-semibold text-xl">Stack:</h2>
 
                             <div className="mt-2">
                                 {tech.map((t) => (
                                     <div
                                         key={t}
-                                        className="badge badge-outline badge-primary text-base-content border-primary mr-4"
+                                        className="badge badge-outline badge-secondary border-base-content mr-4"
                                     >
                                         {t}
                                     </div>
@@ -54,7 +54,6 @@ const FeaturedProjectCard = ({ project, onClick }) => {
                         <Divider />
                     </div>
 
-                    {/* BUTTONS */}
                     {/* BUTTONS */}
                     <div className="flex justify-center md:justify-end gap-2 md:gap-6 mb-1 md:mr-1 font-accent items-center">
                         <AnimatedBtn
@@ -71,7 +70,7 @@ const FeaturedProjectCard = ({ project, onClick }) => {
                                     alert("This is a private project.");
                                 }
                             }}
-                            className={`btn-md border-accent text-lg md:text-xl ${!githubLink ? "opacity-50 cursor-not-allowed" : ""
+                            className={`btn btn-md btn-secondary text-lg md:text-xl ${!githubLink ? "opacity-50 cursor-not-allowed" : ""
                                 }`}
                         >
                             Github
@@ -91,7 +90,7 @@ const FeaturedProjectCard = ({ project, onClick }) => {
                                     alert("Live demo is not available.");
                                 }
                             }}
-                            className={`btn-md border-accent text-lg md:text-xl ${!liveLink ? "opacity-50 cursor-not-allowed" : ""
+                            className={`btn btn-md btn-secondary text-lg md:text-xl ${!liveLink ? "opacity-50 cursor-not-allowed" : ""
                                 }`}
                         >
                             Live Demo

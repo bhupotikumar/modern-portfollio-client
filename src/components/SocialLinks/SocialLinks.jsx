@@ -52,7 +52,7 @@ const SocialLinks = () => {
                                     href={getSocialUrl(social)}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="rounded-full w-12 md:w-14 h-12 md:h-14 p-2 text-base-content border-2 border-accent shadow-lg shadow-base-content/50"
+                                    className="rounded-full w-12 md:w-14 h-12 md:h-14 p-2 border-2 border-secondary shadow-lg shadow-base-content/50"
                                 >
                                     <img
                                         src={social.logo}

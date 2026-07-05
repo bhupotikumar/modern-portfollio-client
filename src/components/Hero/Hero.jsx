@@ -26,7 +26,13 @@ const Hero = () => {
             ? rawVideo
             : null;
 
+    // Helper function to check if the viewport is 'lg' (1024px) or greater
+    const isLargeDevice = () => typeof window !== "undefined" && window.innerWidth >= 1024;
+
     const handleEnter = async () => {
+        // Skip hover logic entirely on mobile/tablet devices
+        if (!isLargeDevice()) return;
+
         setHovered(true);
         if (videoRef.current) {
             try {
@@ -40,6 +46,9 @@ const Hero = () => {
     };
 
     const handleLeave = () => {
+        // Skip reset logic entirely on mobile/tablet devices
+        if (!isLargeDevice()) return;
+
         setHovered(false);
         if (videoRef.current) {
             videoRef.current.pause();
@@ -89,18 +98,18 @@ const Hero = () => {
         <FadeUp>
             <section
                 ref={heroRef}
-                className="relative min-h-[94vh] md:h-[90vh] w-full mx-auto flex flex-col md:flex-row items-center overflow-hidden"
+                className="relative max-h-[90vh] md:h-[90vh] w-full mx-auto flex flex-col md:flex-row items-center overflow-hidden"
             >
                 {/* BACKGROUND */}
                 <div className="absolute inset-0 z-10 blur-xs">
                     <img
                         src={heroBg}
                         alt="bg"
-                        className="w-full h-full object-cover opacity-50 scale-100 blur-none animate-[float_20s_linear_infinite]"
+                        className="w-full h-full object-cover opacity-80 scale-100 blur-none animate-[float_20s_linear_infinite]"
                     />
 
                     {/* gradient */}
-                    <div className="absolute inset-0 bg-linear-to-br from-neutral via-accent/20 to-primary/10"></div>
+                    <div className="absolute inset-0 bg-linear-to-br from-base-100 via-secondary/10 to-base-300/20"></div>
 
                     {/* glow accents */}
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(0,255,255,0.2),transparent_50%),radial-gradient(circle_at_80%_70%,rgba(255,0,255,0.2),transparent_50%)]"></div>
@@ -108,23 +117,22 @@ const Hero = () => {
 
                 {/* MEDIA SECTION (GLASS) */}
                 <div
-                    className="relative z-10 w-full md:flex-1 h-96 md:h-[70vh] overflow-hidden group rounded-xl 
-                cursor-pointer animate-[float_6s_ease-in-out_infinite]"
+                    className="relative z-100 w-full md:flex-1 h-96 md:h-[70vh] overflow-hidden group rounded-xl cursor-pointer"
                     onMouseEnter={handleEnter}
                     onMouseLeave={handleLeave}
                 >
                     <img
                         src={photoValue}
                         alt="Profile"
-                        className={`absolute inset-0 w-full h-full object-cover object-center transition-all duration-1000 ease-in-out rounded-xl
+                        className={`absolute inset-0 w-full h-full object-cover object-center transition-all duration-500 ease-in-out rounded-xl
     
-    ${introSrc
+                        ${introSrc
                                 ? hovered
                                     ? "scale-110 opacity-0 blur-lg"
                                     : "scale-100 opacity-100 blur-0"
                                 : "scale-100 opacity-100 blur-0"
                             }
-    `}
+                        `}
                         style={{
                             WebkitMaskImage:
                                 "linear-gradient(to bottom, black 80%, transparent 100%)",
@@ -139,13 +147,13 @@ const Hero = () => {
                         <video
                             ref={videoRef}
                             src={introSrc}
-                            className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-in-out rounded-xl
+                            className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-in-out rounded-xl hidden lg:block
         
-        ${hovered
+                            ${hovered
                                     ? "opacity-100 scale-100"
                                     : "opacity-0 scale-105"
                                 }
-        `}
+                            `}
                             playsInline
                             loop
                             muted={isMuted}
@@ -158,9 +166,10 @@ const Hero = () => {
                         />
                     )}
 
+                    {/* Button hidden on small/medium devices by adding 'hidden lg:block' */}
                     <button
                         onClick={toggleMute}
-                        className={`absolute top-6 right-6 z-50 p-4 rounded-full backdrop-blur-xl transition-all duration-500
+                        className={`absolute top-6 right-6 z-50 p-4 rounded-full backdrop-blur-xl transition-all duration-500 hidden lg:block
                     ${hovered ? "translate-y-0 opacity-100" : "-translate-y-10 opacity-0"} 
                     ${isMuted ? "bg-secondary/40 text-secondary-content" : "bg-primary text-primary-content shadow-lg"}`}
                     >
@@ -173,16 +182,12 @@ const Hero = () => {
                 {/* CONTENT SECTION (GLASS) */}
                 <div
                     className="relative z-50 flex-1 md:w-auto p-1 md:p-4 lg:p-6 rounded-lg md:rounded-2xl
-                animate-[float_6s_ease-in-out_infinite]"
+                "
                 >
                     <div className="w-full">
-                        <div className="font-accent font-extrabold text-neutral leading-none mb-0 md:mb-6 lg:mb-10 text-center md:text-left">
-                            <span className="text-2xl md:text-2xl lg:text-3xl">Hi, I'm</span>
-
-                            <h2 className="font-heading bg-linear-to-r from-primary to-secondary text-transparent bg-clip-text text-4xl md:text-3xl lg:text-6xl p-0 m-0"
-                                style={{
-                                    WebkitTextStroke: "1px var(--color-neutral)",
-                                }}>
+                        <div className="font-accent font-extrabold leading-none mb-0 md:mb-6 lg:mb-10 text-center md:text-left">
+                            <span className="text-accent text-2xl md:text-2xl lg:text-3xl">Hi, I'm</span>
+                            <h2 className="font-heading bg-linear-to-r from-secondary via-neutral to-secondary text-transparent bg-clip-text text-4xl md:text-3xl lg:text-6xl p-0 m-0">
                                 <TypingText text={nameValue} pause={2000} speed={70} />
                             </h2>
 
@@ -191,13 +196,13 @@ const Hero = () => {
                             </h1>
                         </div>
 
-                        <p className="text-center md:text-justify text-base md:text-xl text-base-content leading-relaxed mb-4 md:mb-10 p-2 backdrop-blur-xl shadow-xl rounded-lg">
+                        <p className="w-11/12 mx-auto md:mx-0 bg-secondary/20 text-secondary-content text-center md:text-justify text-base md:text-xl leading-relaxed mb-4 md:mb-10 p-2 backdrop-blur-xl shadow-xl shadow-base-content rounded-lg border border-base-content">
                             {descriptionValue}
                         </p>
 
                         <div className="flex items-center justify-center md:justify-start mb-2 md:mb-12">
                             <AnimatedBtn
-                                className="btn-primary btn-md md:btn-lg backdrop-blur-md border-none rounded-r-none text-secondary hover:text-primary-content"
+                                className="btn btn-md md:btn-lg backdrop-blur-md rounded-r-none border border-r-0 border-base-content"
                                 as="a"
                                 href={`${import.meta.env.VITE_API_URL}/api/cv`}
                                 rel="noopener noreferrer"
@@ -209,14 +214,14 @@ const Hero = () => {
                                 as={Link}
                                 to="/contact"
                                 direction="rtl"
-                                className="btn-outline btn-md md:btn-lg backdrop-blur-md border-none rounded-l-none text-secondary hover:text-primary-content"
+                                className="btn btn-md md:btn-lg backdrop-blur-md border rounded-l-none border-l-0 border-base-content"
                             >
                                 Hire Me
                             </AnimatedBtn>
                         </div>
 
                         <div>
-                            <h1 className="font-heading text-center md:text-left text-xl py-2">
+                            <h1 className="font-heading text-accent text-center md:text-left text-xl py-2">
                                 Connect with me
                             </h1>
 

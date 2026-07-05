@@ -32,8 +32,8 @@ const Navbar = () => {
                         font-semibold
                         
                         ${isActive
-                            ? "bg-primary text-primary-content"
-                            : "hover:bg-base-300"
+                            ? "bg-secondary text-secondary-content"
+                            : "hover:bg-base-content/20 hover:text-accent"
                         }
                         `
                     }

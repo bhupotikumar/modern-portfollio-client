@@ -9,7 +9,7 @@ const ProjectCard = ({ project, onClick }) => {
     return (
         <FadeUp>
             <div
-                className="card bg-secondary shadow-xl overflow-hidden cursor-pointer"
+                className="card bg-primary shadow-xl shadow-base-content overflow-hidden cursor-pointer"
                 onClick={() => onClick(project)}
             >
                 <figure className="group relative w-full h-72 overflow-hidden bg-base-300">
@@ -29,7 +29,7 @@ const ProjectCard = ({ project, onClick }) => {
                     {/* DARK OVERLAY */}
                     <div className="
                         absolute inset-0 
-                        bg-linear-to-t from-secondary/60 via-secondary/20 to-transparent
+                        bg-linear-to-t from-base-300 to-transparent
                         opacity-0 group-hover:opacity-100
                         transition duration-500
                     " />
@@ -37,12 +37,11 @@ const ProjectCard = ({ project, onClick }) => {
                     {/* DESCRIPTION */}
                     <div className="
                         absolute inset-0 flex items-end
-                        p-4
-                        opacity-0 translate-y-6
+                        p-4 opacity-0 translate-y-6
                         group-hover:opacity-100 group-hover:translate-y-0
                         transition-all duration-500 ease-out
                     ">
-                        <p className="text-secondary-content text-sm md:text-base line-clamp-4">
+                        <p className="text-accent text-sm md:text-base line-clamp-4">
                             {description}
                         </p>
                     </div>
@@ -50,7 +49,7 @@ const ProjectCard = ({ project, onClick }) => {
                 </figure>
 
                 <div className="card-body m-0 p-4">
-                    <h2 className="card-title mx-auto text-center text-neutral">
+                    <h2 className="card-title mx-auto text-center text-primary-content">
                         {title}
                     </h2>
                 </div>

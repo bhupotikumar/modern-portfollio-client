@@ -100,8 +100,8 @@ const BlogsPage = () => {
     }
 
     return (
-        <div className="mb-2 md:mb-12 text-neutral">
-            <h1 className="font-heading text-xl md:text-2xl lg:text-3xl font-bold mt-2 mb-2 md:mb-4 text-center">
+        <div className="mb-2 md:mb-12 text-primary-content">
+            <h1 className="font-heading text-accent text-xl md:text-2xl lg:text-3xl font-bold mt-2 mb-2 md:mb-4 text-center">
                 Blogs
             </h1>
 
@@ -128,7 +128,7 @@ const BlogsPage = () => {
 
                     {/* Saved Blogs */}
                     <div className="hidden md:block">
-                        <h2 className="text-base lg:text-lg font-semibold mb-4">
+                        <h2 className="text-accent lg:text-lg font-semibold mb-4">
                             Saved Blogs
                         </h2>
 

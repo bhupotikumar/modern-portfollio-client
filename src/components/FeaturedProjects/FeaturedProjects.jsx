@@ -47,16 +47,16 @@ const FeaturedProjects = () => {
         );;
 
     return (
-        <div className='my-4 md:my-12 text-neutral'>
+        <div className='my-4 md:my-12 text-primary-content'>
             <div className="sticky top-16 mb-2">
-                <h1 className='text-xl md:text-2xl lg:text-3xl font-heading font-bold p-2 text-center'>Featured Projects</h1>
+                <h1 className='text-xl md:text-2xl lg:text-3xl font-heading font-bold p-2 text-center text-accent'>Featured Projects</h1>
                 <p className='text-center mb-2 md:mb-6'>A glimpse of my favorite works.</p>
             </div>
             <div className="w-11/12 lg:w-8/12 flex flex-col justify-center items-center gap-8 md:gap-12 mx-auto">
                 {(featuredProjects || []).map((project, index) => (
                     <div
                         key={project._id}
-                        className="w-full sticky top-28 hover-3d"
+                        className="w-full sticky top-28 hover-3d shadow-xl shadow-base-content"
                         style={{
                             top: `${110 + index * 15}px`,
                             // transform: `translate(${index * 10}px)`,

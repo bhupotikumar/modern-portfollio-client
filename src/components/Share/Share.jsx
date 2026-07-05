@@ -139,7 +139,7 @@ const Share = ({ blog }) => {
                                         damping: 20,
                                         delay: i * 0.05,
                                     }}
-                                    className="absolute btn btn-circle btn-primary text-xl shadow-md"
+                                    className="absolute btn btn-circle btn-primary text-xl shadow-md shadow-base-content"
                                 >
                                     {action.icon}
                                 </Motion.button>
@@ -159,7 +159,7 @@ const Share = ({ blog }) => {
                         }
                     }}
                     whileTap={{ scale: 0.9 }}
-                    className="btn btn-xs lg:btn-sm btn-circle bg-primary text-primary-content text-base shadow-xl"
+                    className="btn btn-xs lg:btn-sm btn-circle bg-secondary text-primary-content shadow-xl selection:shadow-base-content"
                 >
                     <Motion.span
                         animate={{ rotate: open ? 45 : 0 }}
