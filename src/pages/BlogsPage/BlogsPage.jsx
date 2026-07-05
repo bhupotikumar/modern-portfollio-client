@@ -132,7 +132,7 @@ const BlogsPage = () => {
                             Saved Blogs
                         </h2>
 
-                        <div className="grid gap-4">
+                        <div className="grid gap-4 overflow-y-auto h-[70vh]">
                             {savedBlogs.length === 0 ? (
                                 <p className="text-neutral/70">
                                     No saved blogs.
