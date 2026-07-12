@@ -159,7 +159,7 @@ const Share = ({ blog }) => {
                         }
                     }}
                     whileTap={{ scale: 0.9 }}
-                    className="btn btn-xs lg:btn-sm btn-circle bg-secondary text-primary-content shadow-xl selection:shadow-base-content"
+                    className="btn btn-primary btn-xs lg:btn-sm btn-circle shadow-xl selection:shadow-base-content"
                 >
                     <Motion.span
                         animate={{ rotate: open ? 45 : 0 }}

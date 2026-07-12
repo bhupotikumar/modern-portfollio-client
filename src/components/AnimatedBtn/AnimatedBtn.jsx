@@ -17,7 +17,7 @@ const AnimatedBtn = React.forwardRef((props, ref) => {
         children,
         as: Component = "button",
         className = "",
-        gradient = "from-secondary to-primary",
+        gradient = "from-primary to-secondary",
         direction = "ltr",
         ...rest
     } = props;
@@ -65,7 +65,7 @@ const AnimatedBtn = React.forwardRef((props, ref) => {
                 className={`absolute ${current.position} ${current.gradientDirection} ${gradient} transition-all duration-500 ease-out ${current.grow}`}
             />
             {/* Button text */}
-            <span className="relative z-10 transition-colors duration-300 text-secondary-content group-hover:text-primary-content">
+            <span className="relative z-10 transition-all duration-300 group-hover:text-primary-content">
                 {children}
             </span>
         </Component>

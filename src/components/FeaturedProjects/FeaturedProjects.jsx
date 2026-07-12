@@ -3,6 +3,7 @@ import FeaturedProjectCard from './FeaturedProjectCard';
 import publicApi from '../../api/publicApi.js';
 import Skeleton from '../Skeleton/Skeleton.jsx';
 import ProjectDetails from '../../pages/ProjectsPage/ProjectDetails.jsx';
+import { Divider } from '../Divider/Divider.jsx';
 
 const FeaturedProjects = () => {
     const [featuredProjects, setFeaturedProjects] = useState([]);
@@ -47,7 +48,7 @@ const FeaturedProjects = () => {
         );
 
     return (
-        <div className='my-4 md:my-12 text-primary-content'>
+        <div className='my-12 md:my-12'>
             <div className="sticky top-16 mb-2">
                 <h1 className='text-xl md:text-2xl lg:text-3xl font-heading font-bold p-2 text-center text-accent'>Featured Projects</h1>
                 <p className='text-center mb-2 md:mb-6'>A glimpse of my favorite works.</p>
@@ -56,7 +57,7 @@ const FeaturedProjects = () => {
                 {(featuredProjects || []).map((project, index) => (
                     <div
                         key={project._id}
-                        className="w-full sticky top-28 hover-3d shadow-xl shadow-base-content"
+                        className="w-full sticky top-28 hover-3d shadow-lg shadow-base-content/50 rounded-xl"
                         style={{
                             top: `${110 + index * 15}px`,
                             // transform: `translate(${index * 10}px)`,

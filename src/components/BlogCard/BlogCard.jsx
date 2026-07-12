@@ -15,10 +15,10 @@ const BlogCard = ({ blog, varient, onSave, onUnsave, onClick, shareUrl }) => {
         case 'savedBlogCard':
             return (
                 <div onClick={onClick}
-                    className="text-primary-content bg-primary flex justify-between items-center p-2 rounded shadow-xl shadow-base-content border border-base-content">
-                    <h2 className="text-sm lg:text-lg text-primary-content font-bold mb-2 p-2 text-wrap">{title}</h2>
+                    className="bg-base-200 flex justify-between items-center p-2 rounded shadow-lg shadow-base-content/50 border border-base-300">
+                    <h2 className="text-sm lg:text-lg font-bold mb-2 p-2 text-wrap">{title}</h2>
                     <div className="flex justify-between items-center mb-2">
-                        <span className="bg-secondary/20 text-accent text-xs font-medium mr-2 px-2.5 py-0.5 rounded hidden lg:block">{category}</span>
+                        <span className="bg-primary text-primary-content text-xs font-medium mr-2 px-2.5 py-0.5 rounded hidden lg:block">{category}</span>
                     </div>
                     <div className="flex items-center gap-2">
                         <div className="flex items-center gap-2 lg:gap-4">
@@ -32,7 +32,7 @@ const BlogCard = ({ blog, varient, onSave, onUnsave, onClick, shareUrl }) => {
                                 e.stopPropagation();
                                 onUnsave(blog._id);
                             }}
-                            className="hover:bg-error text-lg btn btn-error btn-xs lg:btn-sm"
+                            className="text-base btn btn-error btn-xs lg:btn-sm"
                         >
                             <AiTwotoneDelete />
                         </button>
@@ -45,13 +45,13 @@ const BlogCard = ({ blog, varient, onSave, onUnsave, onClick, shareUrl }) => {
                 <FadeUp>
                     <div
                         onClick={onClick}
-                        className="bg-primary p-2 md:p-4 rounded shadow-xl shadow-base-content border border-base-content">
-                        <h2 className="text-primary-content lg:text-lg font-bold mb-1 md:mb-2 text-wrap text-left">{title}</h2>
+                        className="bg-base-200 p-2 md:p-4 rounded shadow-lg shadow-base-content/50 border border-base-300">
+                        <h2 className="lg:text-lg font-bold mb-1 md:mb-2 text-wrap text-left">{title}</h2>
                         <div className="flex justify-between items-center mb-2">
-                            <span className="bg-secondary/20 text-accent text-xs font-medium mr-2 px-2.5 py-0.5 rounded">{category}</span>
-                            <small className="text-xs md:text-sm text-accent">{formatDistanceToNow(new Date(timestamps.createdAt), { addSuffix: true })}</small>
+                            <span className="bg-primary text-primary-content text-xs font-medium mr-2 px-2.5 py-0.5 rounded">{category}</span>
+                            <small className="text-xs md:text-sm text-secondary">{formatDistanceToNow(new Date(timestamps.createdAt), { addSuffix: true })}</small>
                         </div>
-                        <p className="text-xs md:text-sm text-primary-content text-left">{excerpt}</p>
+                        <p className="text-xs md:text-sm text-left">{excerpt}</p>
                         <div className="flex items-center justify-between mt-4">
                             <div className="flex items-center gap-2 md:gap-4">
                                 <Likes likes={stats?.likes} />
@@ -63,9 +63,9 @@ const BlogCard = ({ blog, varient, onSave, onUnsave, onClick, shareUrl }) => {
                                         e.stopPropagation();
                                         onSave(blog);
                                     }}
-                                    className="bg-info hover:bg-primary text-primary-content text-xs md:text-base btn btn-xs lg:btn-sm"
+                                    className="btn btn-primary btn-xs lg:btn-sm text-base"
                                 >
-                                    <CiSaveDown2 className='invert' />
+                                    <CiSaveDown2 />
                                 </button>
                                 <Share blog={blog} url={shareUrl} />
                             </div>

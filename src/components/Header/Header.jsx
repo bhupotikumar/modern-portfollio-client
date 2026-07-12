@@ -30,7 +30,7 @@ const Header = () => {
     const { user, loading } = useUser();
 
     return (
-        <div className="font-heading navbar shadow-sm shadow-base-content sticky top-0 left-0 z-100 bg-base-100/20 backdrop-blur-2xl">
+        <div className="font-heading navbar shadow-sm shadow-base-content/50 sticky top-0 left-0 z-100 bg-base-100/20 backdrop-blur-2xl">
             <div className="navbar-start md:ml-4 flex-1">
                 <div className="dropdown relative" ref={dropdownRef}>
                     {/* Swap Hamburger/Close */}
@@ -57,7 +57,7 @@ const Header = () => {
                 </div>
 
                 <Link to={"/"}
-                    className="font-accent text-lg md:text-xl font-bold text-primary-content hover:text-accent transition-colors duration-300"
+                    className="font-accent text-lg md:text-xl font-bold text-primary hover:text-accent transition-colors duration-300"
                 >
                     {loading || !user ? <div className="relative h-8 w-32 bg-base-100/20 rounded animate-pulse">
                         {/* shimmer */}

@@ -4,6 +4,7 @@ import ProjectCard from '../../components/ProjectCard/ProjectCard';
 import Modal from '../../components/Modal/Modal';
 import ProjectDetails from './ProjectDetails';
 import Skeleton from '../../components/Skeleton/Skeleton';
+import { Divider } from '../../components/Divider/Divider';
 
 const ProjectsPage = () => {
 
@@ -53,9 +54,9 @@ const ProjectsPage = () => {
 
 
     return (
-        <div className='w-11/12 mx-auto px-4 py-2'>
+        <div className='mx-auto py-2'>
             <h1 className='font-heading text-accent text-center text-xl md:text-2xl lg:text-3xl font-bold mt-0 mb-4'>Projects</h1>
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch'>
+            <div className='mb-12 p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch'>
                 {projects.map((project) => (
                     <ProjectCard
                         key={project._id}
@@ -69,6 +70,7 @@ const ProjectsPage = () => {
                 project={selectedProject}
                 modalTitle={selectedProject ? selectedProject.title : "Project Details"}
             />
+            <Divider />
         </div>
     );
 };

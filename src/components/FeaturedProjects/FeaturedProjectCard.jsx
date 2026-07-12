@@ -10,7 +10,7 @@ const FeaturedProjectCard = ({ project, onClick }) => {
 
     return (
         <FadeUp>
-            <div className="relative z-10 mx-auto card bg-primary text-primary-content w-full md:h-96 flex flex-col items-center justify-center md:gap-4 md:flex-row overflow-hidden border border-base-content"
+            <div className="relative bg-base-200 z-10 mx-auto card w-full md:h-96 flex flex-col items-center justify-center md:gap-4 md:flex-row overflow-hidden border border-base-300"
                 onClick={() => onClick(project)}
             >
 

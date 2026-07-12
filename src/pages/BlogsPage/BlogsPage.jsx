@@ -4,6 +4,7 @@ import BlogCard from "../../components/BlogCard/BlogCard";
 import publicApi from "../../api/publicApi";
 import BlogDetails from "./BlogDetails";
 import Skeleton from "../../components/Skeleton/Skeleton";
+import { Divider } from "../../components/Divider/Divider";
 
 const BlogsPage = () => {
     const { slug } = useParams();
@@ -19,7 +20,7 @@ const BlogsPage = () => {
     // modal state derived from URL slug and loaded blogs to avoid
     // synchronous setState inside effects which can cause cascading renders
 
-    // ✅ Fetch all blogs (ONLY once)
+    // Fetch all blogs (ONLY once)
     useEffect(() => {
         const fetchBlogs = async () => {
             try {
@@ -53,12 +54,12 @@ const BlogsPage = () => {
 
     const isOpen = Boolean(selectedBlog);
 
-    // ✅ Navigate instead of opening modal directly
+    // Navigate instead of opening modal directly
     const handleClick = (blog) => {
         navigate(`/blogs/${blog.slug || blog._id}`);
     };
 
-    // ✅ Close modal → go back
+    // Close modal → go back
     const handleClose = () => {
         navigate("/blogs");
     };
@@ -85,12 +86,10 @@ const BlogsPage = () => {
         return `${window.location.origin}/blogs/${blog.slug || blog._id}`;
     };
 
-    // ✅ Loading
     if (loading) {
         return <Skeleton varient={"blogs"} />;
     }
 
-    // ✅ Error
     if (error) {
         return (
             <div className="text-center py-20 text-red-500">
@@ -100,7 +99,7 @@ const BlogsPage = () => {
     }
 
     return (
-        <div className="mb-2 md:mb-12 text-primary-content">
+        <div className="mb-2 md:mb-12">
             <h1 className="font-heading text-accent text-xl md:text-2xl lg:text-3xl font-bold mt-2 mb-2 md:mb-4 text-center">
                 Blogs
             </h1>
@@ -111,17 +110,17 @@ const BlogsPage = () => {
                     No blogs found.
                 </p>
             ) : (
-                <div className="w-11/12 h-[85vh] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="w-11/12 md:h-[85vh] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
                     {/* Blog list */}
-                    <div className="col-span-1 space-y-6 lg:space-y-0 lg:col-span-2 text-center mb-6 lg:grid lg:grid-cols-2 lg:gap-6 overflow-y-scroll">
+                    <div className="col-span-1 space-y-10 lg:space-y-0 lg:col-span-2 text-center mb-6 lg:grid lg:grid-cols-2 lg:gap-6 overflow-y-scroll">
                         {blogs.map((blog) => (
                             <BlogCard
                                 key={blog._id}
                                 blog={blog}
                                 shareUrl={getShareUrl(blog)}
                                 onSave={handleSaveBlog}
-                                onClick={() => handleClick(blog)} // 🔥 navigate
+                                onClick={() => handleClick(blog)}
                             />
                         ))}
                     </div>
@@ -132,7 +131,7 @@ const BlogsPage = () => {
                             Saved Blogs
                         </h2>
 
-                        <div className="grid gap-4 overflow-y-auto h-[70vh]">
+                        <div className="grid gap-10 overflow-y-auto h-[70vh]">
                             {savedBlogs.length === 0 ? (
                                 <p className="text-neutral/70">
                                     No saved blogs.
@@ -156,7 +155,6 @@ const BlogsPage = () => {
                 </div>
             )}
 
-            {/* 🔥 Modal (URL-controlled) */}
             <BlogDetails
                 isOpen={isOpen}
                 onClose={handleClose}
@@ -165,6 +163,8 @@ const BlogsPage = () => {
                 modalTitle={selectedBlog?.title || "Blog Details"}
                 onSave={handleSaveBlog}
             />
+
+            <Divider />
         </div>
     );
 };

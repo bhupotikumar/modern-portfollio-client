@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import publicApi from '../../api/publicApi';
 import SocialLinks from '../../components/SocialLinks/SocialLinks';
 import FadeUp from '../../components/Fade/FadeUp';
+import { Divider } from '../../components/Divider/Divider';
 
 const ContactPage = () => {
     const [loading, setLoading] = useState(false);
@@ -48,13 +49,13 @@ const ContactPage = () => {
 
     return (
         <FadeUp>
-            <div className='w-11/12 my-6 md:h-[85vh] mx-auto md:flex flex-col justify-center items-center'>
-                <h1 className='font-heading text-accent text-center text-xl md:text-2xl font-bold p-2 md:p-4'>
+            <div className='p-4 h-screen flex flex-col justify-center items-center'>
+                <h1 className='font-heading text-accent text-center text-xl md:text-2xl font-bold p-4 md:p-4'>
                     Contact Me
                 </h1>
                 <form
                     onSubmit={handleSubmit}
-                    className='flex flex-col items-center bg-primary text-primary-content gap-4 md:gap-6 p-4 md:p-6 rounded-lg shadow-lg shadow-base-content w-full md:w-1/2 mx-auto'
+                    className='flex flex-col items-center bg-base-200 gap-6 p-12 rounded-lg shadow-lg shadow-base-content/60 w-full md:w-1/2 mx-auto mb-6'
                 >
                     <input
                         name='name'
@@ -93,6 +94,7 @@ const ContactPage = () => {
                     <SocialLinks />
                 </div>
             </div>
+            <Divider />
         </FadeUp>
     );
 };

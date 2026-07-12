@@ -16,27 +16,31 @@
 @plugin "daisyui/theme" {
     name: "light";
     default: true;
-    --color-primary: #dbdbd9;
-    --color-primary-content: #293A80;
 
-    --color-secondary: #2e1180;
+    --color-primary: #293A80;
+    --color-primary-content: #FFFFFF;
+
+    --color-secondary: #4F46E5;
     --color-secondary-content: #FFFFFF;
 
-    --color-accent: #241663;
-    --color-accent-content: #1F2937;
+    --color-accent: #06B6D4;
+    --color-accent-content: #FFFFFF;
 
-    --color-neutral: #1F2937;
+    --color-neutral: #111827;
     --color-neutral-content: #FFFFFF;
 
-    --color-info: #3ABFF8;
+    --color-base-100: #FFFFFF;
+    /* Page BG */
+    --color-base-200: #F8FAFC;
+    /* Card/Section */
+    --color-base-300: #E2E8F0;
+    /* Border/Divider */
+    --color-base-content: #1F2937;
+
+    --color-info: #0EA5E9;
     --color-success: #22C55E;
     --color-warning: #F59E0B;
     --color-error: #EF4444;
-
-    --color-base-100: #dce2e8;
-    --color-base-200: #EEF2F7;
-    --color-base-300: #bcbfc2;
-    --color-base-content: #828282;
 }
 
 /* ---------- Dark Theme ---------- */
@@ -44,25 +48,33 @@
     name: "dark";
     prefersdark: true;
 
-    --color-primary: #111844;
+    /* Brand */
+    --color-primary: #3B82F6;
     --color-primary-content: #FFFFFF;
 
-    --color-secondary: #38BDF8;
-    --color-secondary-content: #00131D;
+    /* Secondary */
+    --color-secondary: #6366F1;
+    --color-secondary-content: #FFFFFF;
 
-    --color-accent: #2DD4BF;
-    --color-accent-content: #0A91AB;
+    /* Accent */
+    --color-accent: #22D3EE;
+    --color-accent-content: #06202B;
 
-    --color-neutral: #FFFFFA;
-    --color-neutral-content: #F9FAFB;
+    /* Neutral */
+    --color-neutral: #CBD5E1;
+    --color-neutral-content: #0F172A;
 
-    --color-base-content: #2F578A;
-    --color-base-100: #06202B;
-    --color-base-200: #111827;
-    --color-base-300: #1F2937;
+    /* Background hierarchy */
+    --color-base-100: #020817;
+    --color-base-200: #0F172A;
+    --color-base-300: #1E293B;
 
+    /* Main text */
+    --color-base-content: #F8FAFC;
+
+    /* Status */
     --color-info: #38BDF8;
-    --color-success: #4ADE80;
-    --color-warning: #FBBF24;
-    --color-error: #F87171;
+    --color-success: #22C55E;
+    --color-warning: #F59E0B;
+    --color-error: #EF4444;
 }

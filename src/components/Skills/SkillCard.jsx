@@ -9,7 +9,7 @@ const SkillCard = ({ skill }) => {
                         className="w-full h-full object-contain"
                     />
                 </figure>
-                <h3 className="md:text-xl font-semibold text-center text-accent-content">{skill?.title}</h3>
+                <h3 className="md:text-xl font-semibold text-center font-accent">{skill?.title}</h3>
             </div>
         </div>
     );

@@ -9,7 +9,7 @@ const ProjectCard = ({ project, onClick }) => {
     return (
         <FadeUp>
             <div
-                className="card bg-primary shadow-xl shadow-base-content overflow-hidden cursor-pointer"
+                className="card bg-base-200 shadow-lg shadow-base-content overflow-hidden cursor-pointer"
                 onClick={() => onClick(project)}
             >
                 <figure className="group relative w-full h-72 overflow-hidden bg-base-300">
@@ -29,7 +29,7 @@ const ProjectCard = ({ project, onClick }) => {
                     {/* DARK OVERLAY */}
                     <div className="
                         absolute inset-0 
-                        bg-linear-to-t from-base-300 to-transparent
+                        bg-linear-to-t from-neutral/60 to-transparent
                         opacity-0 group-hover:opacity-100
                         transition duration-500
                     " />
@@ -49,7 +49,7 @@ const ProjectCard = ({ project, onClick }) => {
                 </figure>
 
                 <div className="card-body m-0 p-4">
-                    <h2 className="card-title mx-auto text-center text-primary-content">
+                    <h2 className="card-title mx-auto text-center">
                         {title}
                     </h2>
                 </div>
