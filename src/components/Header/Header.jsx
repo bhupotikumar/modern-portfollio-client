@@ -31,7 +31,7 @@ const Header = () => {
 
     return (
         <div className="font-heading navbar shadow-sm shadow-base-content sticky top-0 left-0 z-100 bg-base-100/20 backdrop-blur-2xl">
-            <div className="navbar-start md:ml-4">
+            <div className="navbar-start md:ml-4 flex-1">
                 <div className="dropdown relative" ref={dropdownRef}>
                     {/* Swap Hamburger/Close */}
                     <button
@@ -57,7 +57,7 @@ const Header = () => {
                 </div>
 
                 <Link to={"/"}
-                    className="font-accent text-lg md:text-xl font-bold text-primary-content hover:text-accent transition-colors duration-300 w-full"
+                    className="font-accent text-lg md:text-xl font-bold text-primary-content hover:text-accent transition-colors duration-300"
                 >
                     {loading || !user ? <div className="relative h-8 w-32 bg-base-100/20 rounded animate-pulse">
                         {/* shimmer */}
@@ -74,7 +74,7 @@ const Header = () => {
             </div>
 
             {/* Navbar End */}
-            <div className="navbar-end flex items-center gap-2 sm:gap-3 md:gap-4">
+            <div className="navbar-end ml-auto md:mr-4 w-22 flex justify-center items-center float-right">
                 <label className="flex cursor-pointer items-center gap-1.5 sm:gap-2">
                     <GoSun className="size-4 sm:size-5" />
 
