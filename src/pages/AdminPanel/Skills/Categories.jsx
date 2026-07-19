@@ -39,14 +39,14 @@ const Categories = () => {
     return (
         <div>
             <div className="">
-                <h1 className="mb-2 text-2xl font-semi-bold text-primary-content">Create new category :</h1>
+                <h1 className="mb-2 text-2xl font-semi-bold">Create new category :</h1>
                 <form className="space-y-4" onSubmit={handleAddCategory}>
                     <input
                         type="text"
                         name="title"
                         required
                         placeholder="Category name (e.g. Frontend)"
-                        className="input input-info text-primary-content input-bordered w-full"
+                        className="input input-info w-full"
                         value={form.title}
                         onChange={handleChange}
                     />
@@ -54,7 +54,7 @@ const Categories = () => {
                         type="text"
                         name="description"
                         placeholder="Description (optional)"
-                        className="input input-info text-primary-content input-bordered w-full"
+                        className="input input-info w-full"
                         value={form.description}
                         onChange={handleChange}
                     />

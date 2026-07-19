@@ -98,7 +98,7 @@ const Hero = () => {
         <FadeUp>
             <section
                 ref={heroRef}
-                className="relative max-h-screen md:h-[90vh] w-full mx-auto flex flex-col md:flex-row items-center overflow-hidden"
+                className="relative max-h-[92vh] md:h-[90vh] w-full mx-auto flex flex-col lg:flex-row items-center overflow-hidden"
             >
                 {/* BACKGROUND */}
                 <div className="absolute inset-0 z-10 blur-xs">
@@ -124,7 +124,7 @@ const Hero = () => {
                     <img
                         src={photoValue}
                         alt="Profile"
-                        className={`absolute inset-0 w-full h-full object-cover object-center transition-all duration-500 ease-in-out rounded-xl
+                        className={`absolute inset-0 w-full md:w-1/2 lg:w-full mx-auto lg:mx-0 h-full object-cover object-center transition-all duration-500 ease-in-out rounded-xl
     
                         ${introSrc
                                 ? hovered
@@ -185,24 +185,24 @@ const Hero = () => {
                 "
                 >
                     <div className="w-full">
-                        <div className="font-accent font-extrabold leading-none mb-0 md:mb-6 lg:mb-10 text-center md:text-left">
-                            <span className="text-accent text-2xl md:text-2xl lg:text-3xl">Hi, I'm</span>
-                            <h2 className="font-heading bg-linear-to-r from-primary via-neutral to-primary text-transparent bg-clip-text text-4xl md:text-3xl lg:text-6xl p-0 m-0">
+                        <div className="font-accent font-extrabold leading-none mb-0 md:mb-6 lg:mb-10 text-center lg:text-left">
+                            <span className="text-accent text-base md:text-xl lg:text-3xl">Hi, I'm</span>
+                            <h2 className="font-heading bg-linear-to-r from-primary via-neutral to-primary text-transparent bg-clip-text text-2xl md:text-3xl lg:text-6xl p-0 m-0">
                                 <TypingText text={nameValue} pause={2000} speed={70} />
                             </h2>
 
-                            <h1 className="md:mt-3 text-xl md:text-2xl lg:text-3xl text-neutral">
+                            <h1 className="md:mt-3 text-base md:text-xl lg:text-3xl text-neutral">
                                 <TypingText text={titleValue} pause={1000} speed={70} />
                             </h1>
                         </div>
 
-                        <p className="w-11/12 mx-auto md:mx-0 bg-secondary/20 text-secondary-content text-center md:text-justify text-base md:text-xl leading-relaxed mb-4 md:mb-10 p-2 backdrop-blur-xl shadow-lg shadow-base-content/30 rounded-lg border border-base-300">
+                        <p className="w-11/12 mx-auto lg:mx-0 bg-secondary/20 text-secondary-content text-center md:text-justify text-xs md:text-base leading-relaxed mb-4 lg:mb-10 p-2 backdrop-blur-xl shadow-lg shadow-base-content/30 rounded-lg border border-base-300">
                             {descriptionValue}
                         </p>
 
-                        <div className="flex items-center justify-center md:justify-start mb-2 md:mb-12">
+                        <div className="flex items-center justify-center lg:justify-start mb-1 lg:mb-12">
                             <AnimatedBtn
-                                className="btn btn-secondary btn-md md:btn-lg backdrop-blur-md rounded-r-none border-r-0"
+                                className="btn btn-secondary btn-sm lg:btn-lg backdrop-blur-md rounded-r-none border-r-0"
                                 as="a"
                                 href={`${import.meta.env.VITE_API_URL}/api/cv`}
                                 rel="noopener noreferrer"
@@ -214,18 +214,18 @@ const Hero = () => {
                                 as={Link}
                                 to="/contact"
                                 direction="rtl"
-                                className="btn btn-secondary btn-md md:btn-lg backdrop-blur-md rounded-l-none border-l-0"
+                                className="btn btn-secondary btn-sm lg:btn-lg backdrop-blur-md rounded-l-none border-l-0"
                             >
                                 Hire Me
                             </AnimatedBtn>
                         </div>
 
                         <div>
-                            <h1 className="font-heading text-accent text-center md:text-left text-xl py-2">
+                            <h1 className="font-heading text-accent text-center lg:text-left text-base lg:text-2xl mt-4">
                                 Connect with me
                             </h1>
 
-                            <div className="p-4 md:p-0 flex justify-center md:justify-start gap-4">
+                            <div className="p-4 md:p-0 flex justify-center lg:justify-start gap-4">
                                 <SocialLinks />
                             </div>
                         </div>

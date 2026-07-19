@@ -28,7 +28,7 @@ export const UploadCV = () => {
     };
 
     return (
-        <div className="p-4 border rounded">
+        <div className="p-4 border border-base-300 rounded">
             <input type="file" accept=".pdf,.doc,.docx" onChange={handleFileChange} className="file-input" />
             <button onClick={handleUpload} disabled={uploading} className="btn btn-primary mt-2">
                 {uploading ? "Uploading..." : "Replace Live CV"}

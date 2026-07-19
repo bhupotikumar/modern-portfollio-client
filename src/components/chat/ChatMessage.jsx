@@ -3,11 +3,11 @@ const ChatMessage = ({ message, isMe }) => {
         if (!isMe) return "";
 
         switch (message.status) {
-            case "sent":
-                return "✓ Sent";
+            case "sending":
+                return "Sending...";
 
             case "delivered":
-                return "✓✓ Delivered";
+                return "✓ Delivered";
 
             case "seen":
                 return "Seen";
@@ -20,39 +20,38 @@ const ChatMessage = ({ message, isMe }) => {
         }
     };
 
-    const senderName = isMe
-        ? "You"
-        : "PBot";
+    const senderName = isMe ? "You" : "PBot";
 
     return (
         <div
-            className={`flex ${isMe
-                ? "justify-end"
-                : "justify-start"
+            className={`flex ${isMe ? "justify-end" : "justify-start"
                 }`}
         >
-            <div className={`max-w-[80%] rounded-2xl px-4 py-3 shadow-lg shadow-base-content/30
-                ${isMe
-                    ? "bg-primary text-white rounded-br-sm"
-                    : "bg-base-200 text-base-content rounded-bl-sm"
-                }
-            `}>
-                <div className="text-sm opacity-70 mb-1">
+            <div
+                className={`max-w-[80%] rounded-xl px-3 py-2 shadow-lg shadow-base-content/40
+                    ${isMe
+                        ? "bg-base-200 text-base-content rounded-br-sm"
+                        : "bg-primary text-primary-content rounded-bl-sm"
+                    }`}
+            >
+                <div className="text-sm opacity-70">
                     {senderName}
                 </div>
 
-                <p className="whitespace-pre-wrap wrap-break-word text-sm md:text-base leading-relaxed">
+                <p className="whitespace-pre-wrap break-words text-sm leading-relaxed">
                     {message.text}
                 </p>
 
-                <div className={`mt-2 flex items-center justify-end gap-2 text-xs opacity-70`}>
+                <div className="mt-2 flex items-center justify-end gap-2 text-xs opacity-70">
                     <span>
-                        {new Date(
-                            message.createdAt
-                        ).toLocaleTimeString([], {
-                            hour: "2-digit",
-                            minute: "2-digit",
-                        })}
+                        {message.createdAt
+                            ? new Date(
+                                message.createdAt
+                            ).toLocaleTimeString([], {
+                                hour: "2-digit",
+                                minute: "2-digit",
+                            })
+                            : ""}
                     </span>
 
                     {isMe && (
@@ -62,7 +61,6 @@ const ChatMessage = ({ message, isMe }) => {
             </div>
         </div>
     );
-
 };
 
 export default ChatMessage;

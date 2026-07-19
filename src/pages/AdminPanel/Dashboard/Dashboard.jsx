@@ -3,9 +3,9 @@ import Clients from './Clients/Clients';
 const Dashboard = () => {
     return (
         <div className='grid grid-cols-4 w-full h-[90vh] overflow-hidden'>
-            {/* col 1 */}
-            <div className="h-[90vh] flex flex-col p-2 gap-6">
-                <div className="h-1/2 border border-base-content/30 rounded-xl shadow-lg shadow-base-content/30 overflow-auto">
+            {/* Messages */}
+            <div className="h-[90vh] col-span-2 flex flex-col p-2 gap-6">
+                <div className="h-1/2 border border-base-300 rounded-lg shadow-lg shadow-base-content/30 overflow-auto p-2">
                     <Clients />
                 </div>
                 <div className="h-1/2 border border-base-content/30 rounded-xl shadow-lg shadow-base-content/30 overflow-hidden">
@@ -17,16 +17,6 @@ const Dashboard = () => {
             {/* col 2 */}
             <div className="p-2">
                 <div className="w-full h-full grid grid-row-4 gap-8">
-                    <div className="h-full rounded-xl border border-base-content/30 shadow-lg shadow-base-content/30 p-2">
-                        <h1>Unseen Messages</h1>
-                        <div className="ml-4">
-                        </div>
-                    </div>
-                    <div className="h-full rounded-xl border border-base-content/30 shadow-lg shadow-base-content/30 p-2">
-                        <h1>Newest Blogs</h1>
-                        <div className="ml-4">
-                        </div>
-                    </div>
                     <div className="h-full rounded-xl border border-base-content/30 shadow-lg shadow-base-content/30 p-2">
                         <h1 className='font-bold mb-2'>Newest Projects</h1>
                         <div className="ml-4">

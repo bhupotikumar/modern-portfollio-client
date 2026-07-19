@@ -2,56 +2,60 @@ import { io } from "socket.io-client";
 
 let socket = null;
 
-export const connectSocket = ({
-  token = null,
-  publicId = null,
-  user = null,
-}) => {
+// Get or create a persistent visitor ID
+const getVisitorId = () => {
+  let visitorId = localStorage.getItem("visitorId");
+
+  if (!visitorId) {
+    visitorId = crypto.randomUUID();
+    localStorage.setItem("visitorId", visitorId);
+  }
+
+  return visitorId;
+};
+
+export const connectSocket = (conversationId) => {
   if (socket?.connected) return socket;
 
+  const visitorId = getVisitorId();
 
   socket = io(import.meta.env.VITE_API_URL, {
     transports: ["websocket"],
     auth: {
-      token,
-      publicId,
+      visitorId,
     },
+    reconnection: true,
+    reconnectionAttempts: 5,
+    reconnectionDelay: 1000,
   });
 
   socket.on("connect", () => {
-    socket.emit("user:join", {
-      userId: user?.uid || publicId,
+    // console.log("Socket Connected");
 
-      conversationId:
-        user?.uid || publicId,
-
-      name:
-        user?.displayName ||
-        "Anonymous",
-
-      type: token
-        ? "user"
-        : "public",
+    socket.emit("conversation:join", {
+      conversationId,
     });
   });
 
-  socket.on("disconnect", () => {
-    console.log("❌ Socket Disconnected");
+  socket.on("disconnect", (reason) => {
+    // console.log("Socket Disconnected:", reason);
   });
 
-  socket.on("connect_error", (err) => {
-    console.error("Socket Error:", err.message);
+  socket.on("connect_error", (error) => {
+    console.error(
+      "Socket Connection Error:",
+      error.message
+    );
   });
 
   return socket;
-
 };
 
 export const getSocket = () => socket;
 
 export const disconnectSocket = () => {
-  if (socket) {
-    socket.disconnect();
-    socket = null;
-  }
+  if (!socket) return;
+
+  socket.disconnect();
+  socket = null;
 };

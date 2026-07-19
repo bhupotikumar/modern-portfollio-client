@@ -7,22 +7,22 @@ const FormBlock = ({
     textarea = false
 }) => {
     return (
-        <div className="p-4 border border-base-content/30 rounded shadow-lg shadow-base-content/30 space-y-3">
+        <div className="p-4 border border-base-300 rounded shadow-lg shadow-base-content/30 space-y-3">
 
-            <h2 className="text-lg font-semibold text-primary-content">{title}</h2>
+            <h2 className="text-lg font-semibold">{title}</h2>
 
             {textarea ? (
                 <textarea
                     value={value || ""}
                     onChange={(e) => setValue(e.target.value)}
-                    className="textarea textarea-info text-primary-content textarea-bordered w-full"
+                    className="textarea textarea-info w-full"
                 />
             ) : (
                 <input
                     type="text"
                     value={value || ""}
                     onChange={(e) => setValue(e.target.value)}
-                    className="input input-info text-primary-content input-bordered w-full"
+                    className="input input-info w-full"
                 />
             )}
 

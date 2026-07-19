@@ -5,89 +5,202 @@ import {
     getSocket,
 } from "../ai/socket.js";
 
+
 const useChatSocket = ({
-    authState,
     conversationId,
     setMessages,
 }) => {
-    const [aiTyping, setAiTyping] = useState(false);
+
+    const [aiTyping, setAiTyping] =
+        useState(false);
+
 
     useEffect(() => {
+
         if (!conversationId) return;
 
-        const socket = connectSocket({
-            token: authState.token,
-            publicId: authState.publicId,
-            user: authState.user,
-        });
+
+        const socket =
+            connectSocket(conversationId);
+
+
 
         // NEW MESSAGE
-        socket.on("message:new", (message) => {
+        const handleNewMessage = (message) => {
+
             setMessages((prev) => {
-                const exists = prev.some(
-                    (m) => m._id === message._id
-                );
+
+                const exists =
+                    prev.some(
+                        (m) =>
+                            m._id === message._id
+                    );
+
 
                 if (exists) return prev;
 
-                return [...prev, message];
+
+                return [
+                    ...prev,
+                    message
+                ];
+
             });
-        });
 
-        // DELIVERED
-        socket.on(
-            "message:delivered",
-            ({ tempId, messageId }) => {
-                setMessages((prev) =>
-                    prev.map((msg) =>
-                        msg.tempId === tempId
-                            ? {
-                                ...msg,
-                                _id: messageId,
-                                status: "delivered",
-                            }
-                            : msg
-                    )
-                );
-            }
-        );
+        };
 
-        // FAILED
-        socket.on("message:failed", ({ tempId }) => {
+
+
+        // MESSAGE DELIVERED
+        const handleDelivered = ({
+            tempId,
+            messageId,
+        }) => {
+
             setMessages((prev) =>
                 prev.map((msg) =>
                     msg.tempId === tempId
                         ? {
                             ...msg,
-                            status: "failed",
+                            _id: messageId,
+                            status:
+                                "delivered",
                         }
                         : msg
                 )
             );
-        });
+
+        };
+
+
+
+        // MESSAGE SEEN
+        const handleSeen = () => {
+
+            setMessages((prev) =>
+                prev.map((msg) =>
+                    msg.sender === "visitor"
+                        ? {
+                            ...msg,
+                            seen: true,
+                            status:
+                                "seen",
+                        }
+                        : msg
+                )
+            );
+
+        };
+
+
+
+        // FAILED
+        const handleFailed = ({
+            tempId
+        }) => {
+
+            setMessages((prev) =>
+                prev.map((msg) =>
+                    msg.tempId === tempId
+                        ? {
+                            ...msg,
+                            status:
+                                "failed",
+                        }
+                        : msg
+                )
+            );
+
+        };
+
+
 
         // AI TYPING
-        socket.on("ai:typing", () => {
+        const handleTyping = () => {
             setAiTyping(true);
-        });
+        };
 
-        // AI STOP TYPING
-        socket.on("ai:stopTyping", () => {
+
+        const handleStopTyping = () => {
             setAiTyping(false);
-        });
+        };
+
+
+
+
+        socket.on(
+            "message:new",
+            handleNewMessage
+        );
+
+        socket.on(
+            "message:delivered",
+            handleDelivered
+        );
+
+        socket.on(
+            "messages:seen",
+            handleSeen
+        );
+
+        socket.on(
+            "message:failed",
+            handleFailed
+        );
+
+        socket.on(
+            "ai:typing",
+            handleTyping
+        );
+
+        socket.on(
+            "ai:stopTyping",
+            handleStopTyping
+        );
+
+
 
         return () => {
-            socket.off("message:new");
-            socket.off("message:delivered");
-            socket.off("message:failed");
-            socket.off("ai:typing");
-            socket.off("ai:stopTyping");
+
+            socket.off(
+                "message:new",
+                handleNewMessage
+            );
+
+            socket.off(
+                "message:delivered",
+                handleDelivered
+            );
+
+            socket.off(
+                "messages:seen",
+                handleSeen
+            );
+
+            socket.off(
+                "message:failed",
+                handleFailed
+            );
+
+            socket.off(
+                "ai:typing",
+                handleTyping
+            );
+
+            socket.off(
+                "ai:stopTyping",
+                handleStopTyping
+            );
+
         };
+
+
     }, [
-        authState,
         conversationId,
         setMessages,
     ]);
+
+
 
     return {
         socket: getSocket(),
@@ -95,5 +208,6 @@ const useChatSocket = ({
     };
 
 };
+
 
 export default useChatSocket;

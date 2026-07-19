@@ -58,12 +58,12 @@ const MessageInput = ({ onSend }) => {
                     setValue(e.target.value)
                 }
                 onKeyDown={handleKeyDown}
-                placeholder="Ask PBot..."
-                className=" w-full resize-none rounded-2xl border bg-base-100 px-4 py-3 outline-none focus:ring-2 focus:ring-primary/30"/>
+                placeholder="Ask me..."
+                className="w-full resize-none rounded-2xl border bg-base-100 text-base-content px-4 py-3 outline-none focus:ring-2 focus:ring-primary/30"/>
 
             <button
                 onClick={handleSend}
-                className=" h-12 px-5 rounded-xl bg-primary text-white font-medium hover:opacity-90 transition">
+                className=" h-12 px-5 rounded-xl btn bg-base-200 font-medium hover:opacity-90 transition">
                 Send
             </button>
         </div>

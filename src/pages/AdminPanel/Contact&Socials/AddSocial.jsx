@@ -61,7 +61,7 @@ const AddSocial = ({ onsubmit }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="flex gap-4 items-center flex-wrap p-4 bg-gray-100/10 rounded">
+        <form onSubmit={handleSubmit} className="flex gap-4 items-center flex-wrap p-4 rounded">
             {/* Added || "" to all values to prevent uncontrolled input error */}
             <input
                 type="text"
@@ -69,7 +69,7 @@ const AddSocial = ({ onsubmit }) => {
                 value={form.platform || ""}
                 onChange={handleChange}
                 placeholder="Platform (e.g. GitHub)"
-                className="border p-2 rounded input-info text-primary-content"
+                className="border p-2 rounded input input-info w-full"
             />
 
             <input
@@ -78,14 +78,14 @@ const AddSocial = ({ onsubmit }) => {
                 value={form.url || ""}
                 onChange={handleChange}
                 placeholder="https://..."
-                className="border p-2 rounded w-64 input-info text-primary-content"
+                className="border p-2 rounded input input-info w-full"
             />
 
             <select
                 name="logoType"
                 value={form.logoType || "file"}
                 onChange={handleChange}
-                className="border p-2 rounded select-info text-primary-content"
+                className="border p-2 rounded select select-info w-full"
             >
                 <option value="file">Upload File</option>
                 <option value="url">Image URL</option>
@@ -107,13 +107,13 @@ const AddSocial = ({ onsubmit }) => {
                     value={form.logo || ""}
                     onChange={handleChange}
                     placeholder="Logo URL"
-                    className="border p-2 rounded input input-info text-primary-content"
+                    className="border p-2 rounded input input-info w-full"
                 />
             )}
 
             {preview && <img src={preview} alt="preview" className="w-10 h-10 object-contain" />}
 
-            <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded">
+            <button type="submit" className="btn btn-primary px-4 py-2 rounded">
                 Add Social
             </button>
         </form>

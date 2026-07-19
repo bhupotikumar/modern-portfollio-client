@@ -202,15 +202,15 @@ const General = () => {
             <UploadCV />
 
             {/* PHOTO */}
-            <div className="p-4 border rounded shadow space-y-3">
-                <h2 className="text-lg font-semibold text-primary-content">Photo</h2>
+            <div className="p-4 border border-base-300 rounded shadow space-y-3">
+                <h2 className="text-lg font-semibold">Photo</h2>
 
                 <select
                     value={form.photoType}
                     onChange={(e) =>
                         updateField("photoType", e.target.value)
                     }
-                    className="select select-info select-bordered w-full"
+                    className="select select-info w-full"
                 >
                     <option value="url">Paste URL</option>
                     <option value="file">Upload Image</option>
@@ -233,7 +233,7 @@ const General = () => {
                         onChange={(e) =>
                             updateField("photoUrl", e.target.value)
                         }
-                        className="input input-bordered w-full"
+                        className="input input-info w-full"
                     />
                 )}
 
@@ -262,14 +262,14 @@ const General = () => {
                 </button>
             </div>
             {/* INTRO */}
-            <div className="p-4 border rounded shadow space-y-3">
+            <div className="p-4 border border-base-300 rounded shadow space-y-3">
 
-                <h2 className="text-lg font-semibold text-primary-content">Intro</h2>
+                <h2 className="text-lg font-semibold">Intro</h2>
 
                 <select
                     value={form.videoType}
                     onChange={(e) => updateField("videoType", e.target.value)}
-                    className="select select-info select-bordered w-full"
+                    className="select select-info w-full"
                 >
                     <option value="url">Paste URL</option>
                     <option value="file">Upload Video</option>
@@ -282,7 +282,7 @@ const General = () => {
                     onChange={(e) =>
                         updateField("introTitle", e.target.value)
                     }
-                    className="input input-info text-primary-content input-bordered w-full"
+                    className="input input-info w-full"
                 />
 
                 {form.videoType === "file" && (
@@ -304,7 +304,7 @@ const General = () => {
                         onChange={(e) =>
                             updateField("introVideoUrl", e.target.value)
                         }
-                        className="input input-info input-bordered w-full"
+                        className="input input-info w-full"
                     />
                 )}
 
