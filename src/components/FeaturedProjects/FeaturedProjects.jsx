@@ -40,9 +40,9 @@ const FeaturedProjects = () => {
     };
 
 
-    if (loading || !featuredProjects)
+    if (loading)
         return (
-            <div className="rounded-xl shadow bg-gray-800 animate-pulse">
+            <div className=" animate-pulse">
                 <Skeleton varient="featuredProjects" />
             </div>
         );

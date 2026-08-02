@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router';
 
-const Navbar = () => {
+const Navbar = ({ closeMenu }) => {
 
     const [links, setLinks] = useState([]);
 
@@ -18,9 +18,10 @@ const Navbar = () => {
     }, []);
 
     return (
-        <div className="flex flex-col lg:flex-row lg:items-center md:bg-transparent">
+        <div className="flex flex-col lg:flex-row lg:items-center md:bg-transparent w-full">
             {links.map(link => (
                 <NavLink
+                    onClick={closeMenu}
                     key={link.id}
                     to={link.href}
                     end={link.href === "/"}

@@ -13,6 +13,7 @@ const Header = () => {
     const [menuOpen, setMenuOpen] = useState(false);
     const dropdownRef = useRef(null);
 
+    const closeMenu = () => setMenuOpen(false);
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -51,7 +52,7 @@ const Header = () => {
                     {/* Dropdown Menu */}
                     {menuOpen && (
                         <div className="absolute top-12 left-0 w-52 p-3 rounded-2xl shadow-xl bg-base-100 z-50 lg:hidden">
-                            <Navbar />
+                            <Navbar closeMenu={closeMenu} />
                         </div>
                     )}
                 </div>
