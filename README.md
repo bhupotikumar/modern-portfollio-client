@@ -6,7 +6,7 @@ A modern, responsive, and fully customizable portfolio web application (frontend
 
 ## 🌐 Live Demo
 
-🔗 https://my-live-link.com
+🔗 https://bhupoti.onrender.com
 
 ---
 
