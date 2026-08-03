@@ -4,7 +4,7 @@ const Modal = ({
     onClose,
     title,
     children,
-    width = "max-w-1/2"
+    width = "max-w-lg"
 }) => {
     if (!isOpen) return null;
 
@@ -17,20 +17,20 @@ const Modal = ({
             />
             {/* Modal */}
             <div
-                className={`relative z-100 rounded-xl overflow-hidden bg-base-200/80 shadow-2xl shadow-base-content/40 w-full ${width} animate-fadeIn`}
+                className={`relative z-100 rounded-xl overflow-hidden bg-base-200/80 shadow-2xl shadow-base-content/40 ${width} animate-fadeIn w-full`}
             >
                 {/* Header */}
                 <div className='flex items-center'>
-                    <h2 className='w-full text-xl text-center font-bold'>{title}</h2>
+                    <h2 className='w-full text-base md:text-xl text-center font-bold p-2'>{title}</h2>
                     <button
                         onClick={onClose}
-                        className='p-4 text-gray-500 text-2xl hover:text-base-content'
+                        className='p-2 md:p-4 text- text-2xl text-primary-content hover:text-base-content'
                     >
                         ✕
                     </button>
                 </div>
                 {/* Body */}
-                <div>{children}</div>
+                <div className="overflow-auto">{children}</div>
 
             </div>
 

@@ -11,7 +11,7 @@ const Sidebar = () => {
     return (
         <div className="drawer-side is-drawer-close:overflow-visible z-50">
             <label htmlFor="my-drawer-4" aria-label="close sidebar" className="drawer-overlay"></label>
-            <div className="flex h-full min-h-screen flex-col justify-between bg-base-200 p-2 is-drawer-close:w-14 is-drawer-open:w-64 transition-all duration-300">
+            <div className="flex h-full min-h-screen flex-col justify-between bg-base-200 p-2 is-drawer-close:w-14 is-drawer-open:w-auto md:is-drawer-open:w-64 transition-all duration-300">
                 
                 {/* TOP SECTION */}
                 <div className="menu w-full flex-1 gap-3 p-0">
@@ -27,7 +27,7 @@ const Sidebar = () => {
                             }`
                         }>
                         <ImHome />
-                        <span className="is-drawer-close:hidden text-lg">Dashboard</span>
+                        <span className="is-drawer-close:hidden text-base md:text-lg">Dashboard</span>
                     </NavLink>
 
                     <NavLink to={"/admin/projects"}
@@ -36,7 +36,7 @@ const Sidebar = () => {
                             }`
                         }>
                         <GoProject />
-                        <span className="is-drawer-close:hidden text-lg">Projects</span>
+                        <span className="is-drawer-close:hidden text-base md:text-lg">Projects</span>
                     </NavLink>
 
                     <NavLink to={"/admin/skills"}
@@ -45,7 +45,7 @@ const Sidebar = () => {
                             }`
                         }>
                         <GoSkipFill />
-                        <span className="is-drawer-close:hidden text-lg">Skills</span>
+                        <span className="is-drawer-close:hidden text-base md:text-lg">Skills</span>
                     </NavLink>
 
                     <NavLink to={"/admin/blogs"}
@@ -54,7 +54,7 @@ const Sidebar = () => {
                             }`
                         }>
                         <ImBlog />
-                        <span className="is-drawer-close:hidden text-lg">Blogs</span>
+                        <span className="is-drawer-close:hidden text-base md:text-lg">Blogs</span>
                     </NavLink>
 
                     <NavLink to={"/admin/contacts"}
@@ -63,7 +63,7 @@ const Sidebar = () => {
                             }`
                         }>
                         <IoMdContacts />
-                        <span className="is-drawer-close:hidden text-lg">Contacts & Socials</span>
+                        <span className="is-drawer-close:hidden text-base md:text-lg">Contacts & Socials</span>
                     </NavLink>
 
                     <NavLink to={"/admin/settings"}
@@ -72,7 +72,7 @@ const Sidebar = () => {
                             }`
                         }>
                         <FiSettings />
-                        <span className="is-drawer-close:hidden text-lg">Settings</span>
+                        <span className="is-drawer-close:hidden text-base md:text-lg">Settings</span>
                     </NavLink>
                 </div>
 

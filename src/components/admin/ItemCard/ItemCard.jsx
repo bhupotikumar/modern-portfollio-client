@@ -8,13 +8,13 @@ const ItemCard = ({ title, description, updatedAt, onEdit, onDelete }) => {
             <div className="flex items-center justify-between shadow-md/20 border border-base-content/20 shadow-base-content rounded p-2 my-4">
 
                 {/* Title */}
-                <h1 className="w-1/2 lg:w-1/3 font-medium">
+                <h1 className="w-full md:w-1/2 lg:w-1/3 truncate font-medium text-sm md:text-base">
                     {title}
                 </h1>
 
                 {/* Description with tooltip */}
-                <div className="relative group w-xs">
-                    <p className="ml-4 truncate text-right text-primary">
+                <div className="relative group md:w-xs">
+                    <p className="hidden md:block ml-4 truncate text-right text-primary">
                         {description || ""}
                     </p>
 
