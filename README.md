@@ -39,5 +39,3 @@ A modern, responsive, and fully customizable portfolio web application (frontend
 - ⚡ Vite
 
 ---
-
-## 📁 Project Structure
